@@ -1,0 +1,1350 @@
+{
+  "name": "Annual Business Report",
+  "description": "A polished executive report template with a navy and gold palette. Ideal for board presentations, investor updates, and annual reviews.",
+  "category": "Business",
+  "tags": ["annual report", "executive", "business", "board", "corporate"],
+  "thumbnail_url": "",
+  "theme_name": "Slate Executive",
+  "is_active": true,
+  "metadata": {
+    "total_slides": 8,
+    "estimated_duration": 15,
+    "default_audience": "Board / Executives"
+  },
+  "slides": [
+    {
+      "slide_number": 1,
+      "title": "Cover",
+      "blocks": [
+        {
+          "id": "s1-bg",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 0, "y": 0, "w": 1280, "h": 720 },
+          "styling": { "background_color": "#0E1525" }
+        },
+        {
+          "id": "s1-gold-top",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 0, "y": 0, "w": 1280, "h": 5 },
+          "styling": { "background_color": "#C9A84C" }
+        },
+        {
+          "id": "s1-gold-bottom",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 0, "y": 715, "w": 1280, "h": 5 },
+          "styling": { "background_color": "#C9A84C" }
+        },
+        {
+          "id": "s1-side-panel",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 840, "y": 0, "w": 440, "h": 720 },
+          "styling": { "background_color": "#162038" }
+        },
+        {
+          "id": "s1-year",
+          "type": "text",
+          "content": "FY 2024",
+          "position": { "x": 840, "y": 240, "w": 440, "h": 60 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 14,
+            "font_weight": 700,
+            "color": "#C9A84C",
+            "text_align": "center",
+            "letter_spacing": "0.2em"
+          }
+        },
+        {
+          "id": "s1-report-title",
+          "type": "text",
+          "content": "Annual\nReport",
+          "position": { "x": 840, "y": 296, "w": 440, "h": 140 },
+          "styling": {
+            "font_family": "Georgia, serif",
+            "font_size": 52,
+            "font_weight": 700,
+            "color": "#EEF2F8",
+            "text_align": "center",
+            "line_height": 1.15
+          }
+        },
+        {
+          "id": "s1-divider",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 940, "y": 456, "w": 240, "h": 1 },
+          "styling": { "background_color": "#C9A84C" }
+        },
+        {
+          "id": "s1-company",
+          "type": "text",
+          "content": "Company Name",
+          "position": { "x": 840, "y": 468, "w": 440, "h": 36 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 15,
+            "font_weight": 500,
+            "color": "#5B6E92",
+            "text_align": "center",
+            "letter_spacing": "0.08em"
+          }
+        },
+        {
+          "id": "s1-left-headline",
+          "type": "text",
+          "content": "A Year of\nStrategic Growth",
+          "position": { "x": 64, "y": 240, "w": 700, "h": 180 },
+          "styling": {
+            "font_family": "Georgia, serif",
+            "font_size": 58,
+            "font_weight": 700,
+            "color": "#EEF2F8",
+            "text_align": "left",
+            "line_height": 1.1
+          }
+        },
+        {
+          "id": "s1-left-sub",
+          "type": "text",
+          "content": "Results, milestones, and the road ahead.",
+          "position": { "x": 64, "y": 440, "w": 700, "h": 40 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 18,
+            "font_weight": 400,
+            "color": "#5B6E92",
+            "text_align": "left"
+          }
+        }
+      ]
+    },
+    {
+      "slide_number": 2,
+      "title": "Executive Summary",
+      "blocks": [
+        {
+          "id": "s2-bg",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 0, "y": 0, "w": 1280, "h": 720 },
+          "styling": { "background_color": "#0E1525" }
+        },
+        {
+          "id": "s2-gold-bar",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 64, "y": 100, "w": 3, "h": 200 },
+          "styling": { "background_color": "#C9A84C" }
+        },
+        {
+          "id": "s2-section",
+          "type": "text",
+          "content": "EXECUTIVE SUMMARY",
+          "position": { "x": 64, "y": 56, "w": 500, "h": 28 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 11,
+            "font_weight": 700,
+            "color": "#C9A84C",
+            "text_align": "left",
+            "letter_spacing": "0.15em"
+          }
+        },
+        {
+          "id": "s2-title",
+          "type": "text",
+          "content": "Another year of\nexceptional results.",
+          "position": { "x": 82, "y": 108, "w": 680, "h": 180 },
+          "styling": {
+            "font_family": "Georgia, serif",
+            "font_size": 48,
+            "font_weight": 700,
+            "color": "#EEF2F8",
+            "text_align": "left",
+            "line_height": 1.15
+          }
+        },
+        {
+          "id": "s2-desc",
+          "type": "text",
+          "content": "A brief executive overview of the year — key achievements, challenges overcome, and the strategic direction that guided our decisions.",
+          "position": { "x": 82, "y": 316, "w": 580, "h": 80 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 17,
+            "font_weight": 400,
+            "color": "#8B9DC0",
+            "text_align": "left",
+            "line_height": 1.6
+          }
+        },
+        {
+          "id": "s2-kpi1",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 820, "y": 120, "w": 200, "h": 140 },
+          "styling": {
+            "background_color": "#162038",
+            "border": "1px solid #2C3E6B",
+            "border_radius": "8px"
+          }
+        },
+        {
+          "id": "s2-kpi1-val",
+          "type": "text",
+          "content": "+34%",
+          "position": { "x": 820, "y": 148, "w": 200, "h": 56 },
+          "styling": {
+            "font_family": "Georgia, serif",
+            "font_size": 40,
+            "font_weight": 700,
+            "color": "#C9A84C",
+            "text_align": "center"
+          }
+        },
+        {
+          "id": "s2-kpi1-lbl",
+          "type": "text",
+          "content": "Revenue Growth",
+          "position": { "x": 820, "y": 210, "w": 200, "h": 30 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 13,
+            "font_weight": 500,
+            "color": "#5B6E92",
+            "text_align": "center"
+          }
+        },
+        {
+          "id": "s2-kpi2",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 1040, "y": 120, "w": 200, "h": 140 },
+          "styling": {
+            "background_color": "#162038",
+            "border": "1px solid #2C3E6B",
+            "border_radius": "8px"
+          }
+        },
+        {
+          "id": "s2-kpi2-val",
+          "type": "text",
+          "content": "92%",
+          "position": { "x": 1040, "y": 148, "w": 200, "h": 56 },
+          "styling": {
+            "font_family": "Georgia, serif",
+            "font_size": 40,
+            "font_weight": 700,
+            "color": "#C9A84C",
+            "text_align": "center"
+          }
+        },
+        {
+          "id": "s2-kpi2-lbl",
+          "type": "text",
+          "content": "Customer Retention",
+          "position": { "x": 1040, "y": 210, "w": 200, "h": 30 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 13,
+            "font_weight": 500,
+            "color": "#5B6E92",
+            "text_align": "center"
+          }
+        },
+        {
+          "id": "s2-kpi3",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 820, "y": 300, "w": 200, "h": 140 },
+          "styling": {
+            "background_color": "#162038",
+            "border": "1px solid #2C3E6B",
+            "border_radius": "8px"
+          }
+        },
+        {
+          "id": "s2-kpi3-val",
+          "type": "text",
+          "content": "180+",
+          "position": { "x": 820, "y": 328, "w": 200, "h": 56 },
+          "styling": {
+            "font_family": "Georgia, serif",
+            "font_size": 40,
+            "font_weight": 700,
+            "color": "#EEF2F8",
+            "text_align": "center"
+          }
+        },
+        {
+          "id": "s2-kpi3-lbl",
+          "type": "text",
+          "content": "Enterprise Clients",
+          "position": { "x": 820, "y": 388, "w": 200, "h": 30 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 13,
+            "font_weight": 500,
+            "color": "#5B6E92",
+            "text_align": "center"
+          }
+        },
+        {
+          "id": "s2-kpi4",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 1040, "y": 300, "w": 200, "h": 140 },
+          "styling": {
+            "background_color": "#162038",
+            "border": "1px solid #2C3E6B",
+            "border_radius": "8px"
+          }
+        },
+        {
+          "id": "s2-kpi4-val",
+          "type": "text",
+          "content": "$48M",
+          "position": { "x": 1040, "y": 328, "w": 200, "h": 56 },
+          "styling": {
+            "font_family": "Georgia, serif",
+            "font_size": 40,
+            "font_weight": 700,
+            "color": "#EEF2F8",
+            "text_align": "center"
+          }
+        },
+        {
+          "id": "s2-kpi4-lbl",
+          "type": "text",
+          "content": "Annual Revenue",
+          "position": { "x": 1040, "y": 388, "w": 200, "h": 30 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 13,
+            "font_weight": 500,
+            "color": "#5B6E92",
+            "text_align": "center"
+          }
+        }
+      ]
+    },
+    {
+      "slide_number": 3,
+      "title": "Financial Performance",
+      "blocks": [
+        {
+          "id": "s3-bg",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 0, "y": 0, "w": 1280, "h": 720 },
+          "styling": { "background_color": "#0E1525" }
+        },
+        {
+          "id": "s3-section",
+          "type": "text",
+          "content": "FINANCIAL PERFORMANCE",
+          "position": { "x": 64, "y": 56, "w": 500, "h": 28 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 11,
+            "font_weight": 700,
+            "color": "#C9A84C",
+            "text_align": "left",
+            "letter_spacing": "0.15em"
+          }
+        },
+        {
+          "id": "s3-title",
+          "type": "text",
+          "content": "Revenue grew 34% year-over-year.",
+          "position": { "x": 64, "y": 100, "w": 800, "h": 60 },
+          "styling": {
+            "font_family": "Georgia, serif",
+            "font_size": 38,
+            "font_weight": 700,
+            "color": "#EEF2F8",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s3-chart-area",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 64, "y": 200, "w": 700, "h": 400 },
+          "styling": {
+            "background_color": "#162038",
+            "border": "1px solid #2C3E6B",
+            "border_radius": "12px"
+          }
+        },
+        {
+          "id": "s3-chart-label",
+          "type": "text",
+          "content": "Revenue Chart Placeholder\n(Q1–Q4 2024 vs 2023)",
+          "position": { "x": 64, "y": 360, "w": 700, "h": 80 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 16,
+            "font_weight": 400,
+            "color": "#2C3E6B",
+            "text_align": "center"
+          }
+        },
+        {
+          "id": "s3-summary1",
+          "type": "text",
+          "content": "Revenue",
+          "position": { "x": 820, "y": 210, "w": 400, "h": 28 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 12,
+            "font_weight": 600,
+            "color": "#5B6E92",
+            "text_align": "left",
+            "letter_spacing": "0.1em"
+          }
+        },
+        {
+          "id": "s3-summary1-val",
+          "type": "text",
+          "content": "$48.2M",
+          "position": { "x": 820, "y": 240, "w": 400, "h": 56 },
+          "styling": {
+            "font_family": "Georgia, serif",
+            "font_size": 44,
+            "font_weight": 700,
+            "color": "#C9A84C",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s3-summary2",
+          "type": "text",
+          "content": "Gross Margin",
+          "position": { "x": 820, "y": 340, "w": 400, "h": 28 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 12,
+            "font_weight": 600,
+            "color": "#5B6E92",
+            "text_align": "left",
+            "letter_spacing": "0.1em"
+          }
+        },
+        {
+          "id": "s3-summary2-val",
+          "type": "text",
+          "content": "68%",
+          "position": { "x": 820, "y": 370, "w": 400, "h": 56 },
+          "styling": {
+            "font_family": "Georgia, serif",
+            "font_size": 44,
+            "font_weight": 700,
+            "color": "#EEF2F8",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s3-summary3",
+          "type": "text",
+          "content": "EBITDA",
+          "position": { "x": 820, "y": 468, "w": 400, "h": 28 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 12,
+            "font_weight": 600,
+            "color": "#5B6E92",
+            "text_align": "left",
+            "letter_spacing": "0.1em"
+          }
+        },
+        {
+          "id": "s3-summary3-val",
+          "type": "text",
+          "content": "$9.1M",
+          "position": { "x": 820, "y": 498, "w": 400, "h": 56 },
+          "styling": {
+            "font_family": "Georgia, serif",
+            "font_size": 44,
+            "font_weight": 700,
+            "color": "#EEF2F8",
+            "text_align": "left"
+          }
+        }
+      ]
+    },
+    {
+      "slide_number": 4,
+      "title": "Strategic Milestones",
+      "blocks": [
+        {
+          "id": "s4-bg",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 0, "y": 0, "w": 1280, "h": 720 },
+          "styling": { "background_color": "#0E1525" }
+        },
+        {
+          "id": "s4-section",
+          "type": "text",
+          "content": "STRATEGIC MILESTONES",
+          "position": { "x": 64, "y": 56, "w": 500, "h": 28 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 11,
+            "font_weight": 700,
+            "color": "#C9A84C",
+            "text_align": "left",
+            "letter_spacing": "0.15em"
+          }
+        },
+        {
+          "id": "s4-title",
+          "type": "text",
+          "content": "Key achievements in FY 2024.",
+          "position": { "x": 64, "y": 100, "w": 800, "h": 60 },
+          "styling": {
+            "font_family": "Georgia, serif",
+            "font_size": 38,
+            "font_weight": 700,
+            "color": "#EEF2F8",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s4-line",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 124, "y": 220, "w": 2, "h": 400 },
+          "styling": { "background_color": "#2C3E6B" }
+        },
+        {
+          "id": "s4-dot1",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 112, "y": 230, "w": 24, "h": 24 },
+          "styling": { "background_color": "#C9A84C", "border_radius": "50%" }
+        },
+        {
+          "id": "s4-q1-label",
+          "type": "text",
+          "content": "Q1 2024",
+          "position": { "x": 160, "y": 228, "w": 120, "h": 28 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 12,
+            "font_weight": 700,
+            "color": "#C9A84C",
+            "text_align": "left",
+            "letter_spacing": "0.08em"
+          }
+        },
+        {
+          "id": "s4-q1-text",
+          "type": "text",
+          "content": "Launched V2 platform with AI-assisted features. Onboarded 40 enterprise clients in 90 days.",
+          "position": { "x": 160, "y": 258, "w": 480, "h": 52 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 16,
+            "font_weight": 400,
+            "color": "#8B9DC0",
+            "text_align": "left",
+            "line_height": 1.5
+          }
+        },
+        {
+          "id": "s4-dot2",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 112, "y": 338, "w": 24, "h": 24 },
+          "styling": { "background_color": "#C9A84C", "border_radius": "50%" }
+        },
+        {
+          "id": "s4-q2-label",
+          "type": "text",
+          "content": "Q2 2024",
+          "position": { "x": 160, "y": 336, "w": 120, "h": 28 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 12,
+            "font_weight": 700,
+            "color": "#C9A84C",
+            "text_align": "left",
+            "letter_spacing": "0.08em"
+          }
+        },
+        {
+          "id": "s4-q2-text",
+          "type": "text",
+          "content": "Closed Series A funding of $12M. Expanded to APAC with Singapore office opening.",
+          "position": { "x": 160, "y": 366, "w": 480, "h": 52 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 16,
+            "font_weight": 400,
+            "color": "#8B9DC0",
+            "text_align": "left",
+            "line_height": 1.5
+          }
+        },
+        {
+          "id": "s4-dot3",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 112, "y": 446, "w": 24, "h": 24 },
+          "styling": { "background_color": "#C9A84C", "border_radius": "50%" }
+        },
+        {
+          "id": "s4-q3-label",
+          "type": "text",
+          "content": "Q3 2024",
+          "position": { "x": 160, "y": 444, "w": 120, "h": 28 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 12,
+            "font_weight": 700,
+            "color": "#C9A84C",
+            "text_align": "left",
+            "letter_spacing": "0.08em"
+          }
+        },
+        {
+          "id": "s4-q3-text",
+          "type": "text",
+          "content": "Acquired TechCo for $8M. Integrated their IP to accelerate roadmap by 18 months.",
+          "position": { "x": 160, "y": 474, "w": 480, "h": 52 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 16,
+            "font_weight": 400,
+            "color": "#8B9DC0",
+            "text_align": "left",
+            "line_height": 1.5
+          }
+        },
+        {
+          "id": "s4-dot4",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 112, "y": 556, "w": 24, "h": 24 },
+          "styling": { "background_color": "#C9A84C", "border_radius": "50%" }
+        },
+        {
+          "id": "s4-q4-label",
+          "type": "text",
+          "content": "Q4 2024",
+          "position": { "x": 160, "y": 554, "w": 120, "h": 28 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 12,
+            "font_weight": 700,
+            "color": "#C9A84C",
+            "text_align": "left",
+            "letter_spacing": "0.08em"
+          }
+        },
+        {
+          "id": "s4-q4-text",
+          "type": "text",
+          "content": "Reached $48M ARR. Achieved SOC 2 Type II certification ahead of schedule.",
+          "position": { "x": 160, "y": 584, "w": 480, "h": 52 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 16,
+            "font_weight": 400,
+            "color": "#8B9DC0",
+            "text_align": "left",
+            "line_height": 1.5
+          }
+        },
+        {
+          "id": "s4-sidebar",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 760, "y": 200, "w": 456, "h": 440 },
+          "styling": {
+            "background_color": "#162038",
+            "border": "1px solid #2C3E6B",
+            "border_radius": "12px"
+          }
+        },
+        {
+          "id": "s4-sidebar-title",
+          "type": "text",
+          "content": "Awards & Recognition",
+          "position": { "x": 784, "y": 228, "w": 408, "h": 32 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 14,
+            "font_weight": 700,
+            "color": "#C9A84C",
+            "text_align": "left",
+            "letter_spacing": "0.08em"
+          }
+        },
+        {
+          "id": "s4-award1",
+          "type": "text",
+          "content": "Gartner Cool Vendor 2024",
+          "position": { "x": 784, "y": 276, "w": 408, "h": 28 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 15,
+            "font_weight": 500,
+            "color": "#EEF2F8",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s4-award2",
+          "type": "text",
+          "content": "Forbes Cloud 100 — #42",
+          "position": { "x": 784, "y": 316, "w": 408, "h": 28 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 15,
+            "font_weight": 500,
+            "color": "#EEF2F8",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s4-award3",
+          "type": "text",
+          "content": "Best Workplace — Inc. Magazine",
+          "position": { "x": 784, "y": 356, "w": 408, "h": 28 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 15,
+            "font_weight": 500,
+            "color": "#EEF2F8",
+            "text_align": "left"
+          }
+        }
+      ]
+    },
+    {
+      "slide_number": 5,
+      "title": "Customer Highlights",
+      "blocks": [
+        {
+          "id": "s5-bg",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 0, "y": 0, "w": 1280, "h": 720 },
+          "styling": { "background_color": "#0E1525" }
+        },
+        {
+          "id": "s5-section",
+          "type": "text",
+          "content": "CUSTOMER HIGHLIGHTS",
+          "position": { "x": 64, "y": 56, "w": 500, "h": 28 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 11,
+            "font_weight": 700,
+            "color": "#C9A84C",
+            "text_align": "left",
+            "letter_spacing": "0.15em"
+          }
+        },
+        {
+          "id": "s5-title",
+          "type": "text",
+          "content": "Customers who trust us.",
+          "position": { "x": 64, "y": 100, "w": 800, "h": 60 },
+          "styling": {
+            "font_family": "Georgia, serif",
+            "font_size": 38,
+            "font_weight": 700,
+            "color": "#EEF2F8",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s5-logo1",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 64, "y": 200, "w": 200, "h": 80 },
+          "styling": {
+            "background_color": "#162038",
+            "border": "1px solid #2C3E6B",
+            "border_radius": "8px"
+          }
+        },
+        {
+          "id": "s5-logo1-lbl",
+          "type": "text",
+          "content": "Client Logo",
+          "position": { "x": 64, "y": 228, "w": 200, "h": 28 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 14,
+            "font_weight": 400,
+            "color": "#2C3E6B",
+            "text_align": "center"
+          }
+        },
+        {
+          "id": "s5-logo2",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 290, "y": 200, "w": 200, "h": 80 },
+          "styling": {
+            "background_color": "#162038",
+            "border": "1px solid #2C3E6B",
+            "border_radius": "8px"
+          }
+        },
+        {
+          "id": "s5-logo2-lbl",
+          "type": "text",
+          "content": "Client Logo",
+          "position": { "x": 290, "y": 228, "w": 200, "h": 28 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 14,
+            "font_weight": 400,
+            "color": "#2C3E6B",
+            "text_align": "center"
+          }
+        },
+        {
+          "id": "s5-logo3",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 516, "y": 200, "w": 200, "h": 80 },
+          "styling": {
+            "background_color": "#162038",
+            "border": "1px solid #2C3E6B",
+            "border_radius": "8px"
+          }
+        },
+        {
+          "id": "s5-logo3-lbl",
+          "type": "text",
+          "content": "Client Logo",
+          "position": { "x": 516, "y": 228, "w": 200, "h": 28 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 14,
+            "font_weight": 400,
+            "color": "#2C3E6B",
+            "text_align": "center"
+          }
+        },
+        {
+          "id": "s5-logo4",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 742, "y": 200, "w": 200, "h": 80 },
+          "styling": {
+            "background_color": "#162038",
+            "border": "1px solid #2C3E6B",
+            "border_radius": "8px"
+          }
+        },
+        {
+          "id": "s5-logo4-lbl",
+          "type": "text",
+          "content": "Client Logo",
+          "position": { "x": 742, "y": 228, "w": 200, "h": 28 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 14,
+            "font_weight": 400,
+            "color": "#2C3E6B",
+            "text_align": "center"
+          }
+        },
+        {
+          "id": "s5-testimonial-box",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 64, "y": 340, "w": 1152, "h": 260 },
+          "styling": {
+            "background_color": "#162038",
+            "border": "1px solid #2C3E6B",
+            "border_left": "4px solid #C9A84C",
+            "border_radius": "12px"
+          }
+        },
+        {
+          "id": "s5-quote-mark",
+          "type": "text",
+          "content": "\"",
+          "position": { "x": 88, "y": 350, "w": 60, "h": 60 },
+          "styling": {
+            "font_family": "Georgia, serif",
+            "font_size": 80,
+            "font_weight": 700,
+            "color": "#C9A84C",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s5-quote-text",
+          "type": "text",
+          "content": "Working with this team transformed our operations. We reduced overhead by 40% and improved delivery speed by 3x within the first quarter.",
+          "position": { "x": 88, "y": 400, "w": 1000, "h": 80 },
+          "styling": {
+            "font_family": "Georgia, serif",
+            "font_size": 22,
+            "font_weight": 400,
+            "color": "#EEF2F8",
+            "text_align": "left",
+            "line_height": 1.5,
+            "font_style": "italic"
+          }
+        },
+        {
+          "id": "s5-quote-author",
+          "type": "text",
+          "content": "— CEO, Fortune 500 Client",
+          "position": { "x": 88, "y": 502, "w": 600, "h": 36 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 14,
+            "font_weight": 500,
+            "color": "#5B6E92",
+            "text_align": "left"
+          }
+        }
+      ]
+    },
+    {
+      "slide_number": 6,
+      "title": "Operational Excellence",
+      "blocks": [
+        {
+          "id": "s6-bg",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 0, "y": 0, "w": 1280, "h": 720 },
+          "styling": { "background_color": "#0E1525" }
+        },
+        {
+          "id": "s6-section",
+          "type": "text",
+          "content": "OPERATIONAL EXCELLENCE",
+          "position": { "x": 64, "y": 56, "w": 500, "h": 28 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 11,
+            "font_weight": 700,
+            "color": "#C9A84C",
+            "text_align": "left",
+            "letter_spacing": "0.15em"
+          }
+        },
+        {
+          "id": "s6-title",
+          "type": "text",
+          "content": "How we run a world-class operation.",
+          "position": { "x": 64, "y": 100, "w": 800, "h": 60 },
+          "styling": {
+            "font_family": "Georgia, serif",
+            "font_size": 38,
+            "font_weight": 700,
+            "color": "#EEF2F8",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s6-pillar1",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 64, "y": 210, "w": 340, "h": 380 },
+          "styling": {
+            "background_color": "#162038",
+            "border": "1px solid #2C3E6B",
+            "border_radius": "12px"
+          }
+        },
+        {
+          "id": "s6-pillar1-icon",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 140, "y": 250, "w": 56, "h": 56 },
+          "styling": {
+            "background_color": "#C9A84C",
+            "border_radius": "12px"
+          }
+        },
+        {
+          "id": "s6-pillar1-title",
+          "type": "text",
+          "content": "Team",
+          "position": { "x": 64, "y": 330, "w": 340, "h": 36 },
+          "styling": {
+            "font_family": "Georgia, serif",
+            "font_size": 22,
+            "font_weight": 700,
+            "color": "#EEF2F8",
+            "text_align": "center"
+          }
+        },
+        {
+          "id": "s6-pillar1-desc",
+          "type": "text",
+          "content": "580 employees across 12 countries. 94% employee satisfaction score. Named top employer in 3 regions.",
+          "position": { "x": 88, "y": 376, "w": 292, "h": 100 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 14,
+            "font_weight": 400,
+            "color": "#5B6E92",
+            "text_align": "center",
+            "line_height": 1.6
+          }
+        },
+        {
+          "id": "s6-pillar2",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 436, "y": 210, "w": 340, "h": 380 },
+          "styling": {
+            "background_color": "#162038",
+            "border": "1px solid #2C3E6B",
+            "border_radius": "12px"
+          }
+        },
+        {
+          "id": "s6-pillar2-icon",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 512, "y": 250, "w": 56, "h": 56 },
+          "styling": {
+            "background_color": "#C9A84C",
+            "border_radius": "12px"
+          }
+        },
+        {
+          "id": "s6-pillar2-title",
+          "type": "text",
+          "content": "Technology",
+          "position": { "x": 436, "y": 330, "w": 340, "h": 36 },
+          "styling": {
+            "font_family": "Georgia, serif",
+            "font_size": 22,
+            "font_weight": 700,
+            "color": "#EEF2F8",
+            "text_align": "center"
+          }
+        },
+        {
+          "id": "s6-pillar2-desc",
+          "type": "text",
+          "content": "99.97% uptime. Zero critical security incidents. Processing 2.4B API calls per month.",
+          "position": { "x": 460, "y": 376, "w": 292, "h": 100 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 14,
+            "font_weight": 400,
+            "color": "#5B6E92",
+            "text_align": "center",
+            "line_height": 1.6
+          }
+        },
+        {
+          "id": "s6-pillar3",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 808, "y": 210, "w": 408, "h": 380 },
+          "styling": {
+            "background_color": "#162038",
+            "border": "1px solid #2C3E6B",
+            "border_radius": "12px"
+          }
+        },
+        {
+          "id": "s6-pillar3-icon",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 908, "y": 250, "w": 56, "h": 56 },
+          "styling": {
+            "background_color": "#C9A84C",
+            "border_radius": "12px"
+          }
+        },
+        {
+          "id": "s6-pillar3-title",
+          "type": "text",
+          "content": "Compliance",
+          "position": { "x": 808, "y": 330, "w": 408, "h": 36 },
+          "styling": {
+            "font_family": "Georgia, serif",
+            "font_size": 22,
+            "font_weight": 700,
+            "color": "#EEF2F8",
+            "text_align": "center"
+          }
+        },
+        {
+          "id": "s6-pillar3-desc",
+          "type": "text",
+          "content": "SOC 2 Type II, ISO 27001, GDPR compliant. Passed all enterprise security audits in 2024.",
+          "position": { "x": 832, "y": 376, "w": 360, "h": 100 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 14,
+            "font_weight": 400,
+            "color": "#5B6E92",
+            "text_align": "center",
+            "line_height": 1.6
+          }
+        }
+      ]
+    },
+    {
+      "slide_number": 7,
+      "title": "2025 Outlook",
+      "blocks": [
+        {
+          "id": "s7-bg",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 0, "y": 0, "w": 1280, "h": 720 },
+          "styling": { "background_color": "#0E1525" }
+        },
+        {
+          "id": "s7-section",
+          "type": "text",
+          "content": "FY 2025 OUTLOOK",
+          "position": { "x": 64, "y": 56, "w": 500, "h": 28 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 11,
+            "font_weight": 700,
+            "color": "#C9A84C",
+            "text_align": "left",
+            "letter_spacing": "0.15em"
+          }
+        },
+        {
+          "id": "s7-title",
+          "type": "text",
+          "content": "Where we're going next.",
+          "position": { "x": 64, "y": 100, "w": 800, "h": 60 },
+          "styling": {
+            "font_family": "Georgia, serif",
+            "font_size": 38,
+            "font_weight": 700,
+            "color": "#EEF2F8",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s7-target1",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 64, "y": 210, "w": 540, "h": 120 },
+          "styling": {
+            "background_color": "#162038",
+            "border": "1px solid #2C3E6B",
+            "border_radius": "10px"
+          }
+        },
+        {
+          "id": "s7-target1-lbl",
+          "type": "text",
+          "content": "Revenue Target",
+          "position": { "x": 88, "y": 228, "w": 200, "h": 28 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 12,
+            "font_weight": 600,
+            "color": "#5B6E92",
+            "text_align": "left",
+            "letter_spacing": "0.08em"
+          }
+        },
+        {
+          "id": "s7-target1-val",
+          "type": "text",
+          "content": "$72M ARR",
+          "position": { "x": 88, "y": 258, "w": 400, "h": 52 },
+          "styling": {
+            "font_family": "Georgia, serif",
+            "font_size": 36,
+            "font_weight": 700,
+            "color": "#C9A84C",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s7-target2",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 636, "y": 210, "w": 580, "h": 120 },
+          "styling": {
+            "background_color": "#162038",
+            "border": "1px solid #2C3E6B",
+            "border_radius": "10px"
+          }
+        },
+        {
+          "id": "s7-target2-lbl",
+          "type": "text",
+          "content": "New Markets",
+          "position": { "x": 660, "y": 228, "w": 200, "h": 28 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 12,
+            "font_weight": 600,
+            "color": "#5B6E92",
+            "text_align": "left",
+            "letter_spacing": "0.08em"
+          }
+        },
+        {
+          "id": "s7-target2-val",
+          "type": "text",
+          "content": "Europe + LATAM",
+          "position": { "x": 660, "y": 258, "w": 500, "h": 52 },
+          "styling": {
+            "font_family": "Georgia, serif",
+            "font_size": 36,
+            "font_weight": 700,
+            "color": "#EEF2F8",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s7-init1",
+          "type": "text",
+          "content": "Initiative 1 — AI-powered product expansion\nLaunch next-gen AI features targeting enterprise automation.",
+          "position": { "x": 64, "y": 370, "w": 540, "h": 80 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 15,
+            "font_weight": 400,
+            "color": "#8B9DC0",
+            "text_align": "left",
+            "line_height": 1.6
+          }
+        },
+        {
+          "id": "s7-init2",
+          "type": "text",
+          "content": "Initiative 2 — Strategic partnership program\nSign 3 channel partners generating $8M in pipeline.",
+          "position": { "x": 636, "y": 370, "w": 580, "h": 80 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 15,
+            "font_weight": 400,
+            "color": "#8B9DC0",
+            "text_align": "left",
+            "line_height": 1.6
+          }
+        },
+        {
+          "id": "s7-init3",
+          "type": "text",
+          "content": "Initiative 3 — Talent acquisition\nGrow headcount by 120 engineers and GTM professionals.",
+          "position": { "x": 64, "y": 490, "w": 540, "h": 80 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 15,
+            "font_weight": 400,
+            "color": "#8B9DC0",
+            "text_align": "left",
+            "line_height": 1.6
+          }
+        },
+        {
+          "id": "s7-init4",
+          "type": "text",
+          "content": "Initiative 4 — Platform ecosystem\nLaunch developer marketplace with 50+ integrations.",
+          "position": { "x": 636, "y": 490, "w": 580, "h": 80 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 15,
+            "font_weight": 400,
+            "color": "#8B9DC0",
+            "text_align": "left",
+            "line_height": 1.6
+          }
+        }
+      ]
+    },
+    {
+      "slide_number": 8,
+      "title": "Thank You",
+      "blocks": [
+        {
+          "id": "s8-bg",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 0, "y": 0, "w": 1280, "h": 720 },
+          "styling": { "background_color": "#0E1525" }
+        },
+        {
+          "id": "s8-gold-top",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 0, "y": 0, "w": 1280, "h": 5 },
+          "styling": { "background_color": "#C9A84C" }
+        },
+        {
+          "id": "s8-gold-bottom",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 0, "y": 715, "w": 1280, "h": 5 },
+          "styling": { "background_color": "#C9A84C" }
+        },
+        {
+          "id": "s8-tagline",
+          "type": "text",
+          "content": "Thank You",
+          "position": { "x": 0, "y": 220, "w": 1280, "h": 100 },
+          "styling": {
+            "font_family": "Georgia, serif",
+            "font_size": 72,
+            "font_weight": 700,
+            "color": "#EEF2F8",
+            "text_align": "center"
+          }
+        },
+        {
+          "id": "s8-divider",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 540, "y": 338, "w": 200, "h": 1 },
+          "styling": { "background_color": "#C9A84C" }
+        },
+        {
+          "id": "s8-sub",
+          "type": "text",
+          "content": "Questions & Discussion",
+          "position": { "x": 0, "y": 356, "w": 1280, "h": 40 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 18,
+            "font_weight": 400,
+            "color": "#5B6E92",
+            "text_align": "center"
+          }
+        },
+        {
+          "id": "s8-contact",
+          "type": "text",
+          "content": "ceo@company.com  ·  ir@company.com  ·  company.com",
+          "position": { "x": 0, "y": 460, "w": 1280, "h": 36 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 15,
+            "font_weight": 400,
+            "color": "#C9A84C",
+            "text_align": "center"
+          }
+        }
+      ]
+    }
+  ]
+}

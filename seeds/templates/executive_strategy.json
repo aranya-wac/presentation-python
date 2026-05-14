@@ -1,0 +1,480 @@
+{
+  "name": "Executive Strategy",
+  "description": "A premium executive-level strategy presentation for board meetings, C-suite reviews, and high-stakes stakeholder briefings. AI generates all content — real metrics, sharp narratives, and data-backed insights.",
+  "category": "Strategy",
+  "tags": ["executive", "board", "strategy", "corporate", "c-suite", "annual", "kpi"],
+  "thumbnail_url": "",
+  "theme_name": "Corporate Excellence",
+  "is_active": true,
+  "metadata": {
+    "total_slides": 12,
+    "estimated_duration": 20,
+    "default_audience": "Board of Directors and C-Suite Executives"
+  },
+  "slides": [
+    {
+      "order": 1,
+      "type": "title",
+      "blocks": [
+        {
+          "id": "s1-eyebrow",
+          "type": "caption",
+          "content": "BOARD PRESENTATION · Q4 2025",
+          "position": {"x": 80, "y": 60, "w": 700, "h": 45},
+          "styling": {"font_family": "Calibri", "font_size": 18, "font_weight": 700, "color": "#C0932F", "background_color": "transparent", "text_align": "left"}
+        },
+        {
+          "id": "s1-title",
+          "type": "title",
+          "content": "Nexus Solutions\nAnnual Strategy Review",
+          "position": {"x": 120, "y": 320, "w": 1520, "h": 280},
+          "styling": {"font_family": "Georgia", "font_size": 72, "font_weight": 700, "color": "#FFFFFF", "background_color": "transparent", "text_align": "left"}
+        },
+        {
+          "id": "s1-subtitle",
+          "type": "subtitle",
+          "content": "Accelerating Growth · Delivering Value · Building the Future",
+          "position": {"x": 120, "y": 620, "w": 1200, "h": 70},
+          "styling": {"font_family": "Calibri", "font_size": 30, "font_weight": 300, "color": "#A8BFD4", "background_color": "transparent", "text_align": "left"}
+        },
+        {
+          "id": "s1-divider",
+          "type": "shape",
+          "content": "",
+          "position": {"x": 120, "y": 720, "w": 600, "h": 6},
+          "styling": {"background_color": "#C0932F", "font_family": "Calibri", "font_size": 12, "font_weight": 400, "color": "transparent", "text_align": "left"}
+        },
+        {
+          "id": "s1-presenter",
+          "type": "caption",
+          "content": "Presented by Sarah Mitchell, CEO  ·  October 2025",
+          "position": {"x": 120, "y": 760, "w": 900, "h": 40},
+          "styling": {"font_family": "Calibri", "font_size": 20, "font_weight": 400, "color": "#7A8FA6", "background_color": "transparent", "text_align": "left"}
+        }
+      ]
+    },
+    {
+      "order": 2,
+      "type": "agenda",
+      "blocks": [
+        {
+          "id": "s2-label",
+          "type": "caption",
+          "content": "TODAY'S AGENDA",
+          "position": {"x": 80, "y": 60, "w": 400, "h": 45},
+          "styling": {"font_family": "Calibri", "font_size": 18, "font_weight": 700, "color": "#C0932F", "background_color": "transparent", "text_align": "left"}
+        },
+        {
+          "id": "s2-title",
+          "type": "title",
+          "content": "What We'll Cover",
+          "position": {"x": 80, "y": 120, "w": 900, "h": 100},
+          "styling": {"font_family": "Georgia", "font_size": 52, "font_weight": 700, "color": "#0A2342", "background_color": "transparent", "text_align": "left"}
+        },
+        {
+          "id": "s2-items",
+          "type": "list",
+          "content": "01  Company Performance Overview\n02  Market Landscape & Competitive Position\n03  Financial Highlights & Projections\n04  Strategic Priorities for 2026\n05  Product Roadmap & Innovation\n06  Closing Remarks & Next Steps",
+          "position": {"x": 80, "y": 260, "w": 1560, "h": 620},
+          "styling": {"font_family": "Calibri", "font_size": 28, "font_weight": 400, "color": "#1C2B3A", "background_color": "transparent", "text_align": "left"}
+        }
+      ]
+    },
+    {
+      "order": 3,
+      "type": "stats",
+      "blocks": [
+        {
+          "id": "s3-label",
+          "type": "caption",
+          "content": "PERFORMANCE OVERVIEW",
+          "position": {"x": 80, "y": 60, "w": 600, "h": 45},
+          "styling": {"font_family": "Calibri", "font_size": 18, "font_weight": 700, "color": "#C0932F", "background_color": "transparent", "text_align": "left"}
+        },
+        {
+          "id": "s3-title",
+          "type": "title",
+          "content": "2025 by the Numbers",
+          "position": {"x": 80, "y": 120, "w": 1000, "h": 100},
+          "styling": {"font_family": "Georgia", "font_size": 52, "font_weight": 700, "color": "#FFFFFF", "background_color": "transparent", "text_align": "left"}
+        },
+        {
+          "id": "s3-stat1",
+          "type": "stat",
+          "content": "$12.4M\nARR",
+          "position": {"x": 80, "y": 280, "w": 340, "h": 260},
+          "styling": {"font_family": "Georgia", "font_size": 52, "font_weight": 700, "color": "#C0932F", "background_color": "#0A2342", "text_align": "center"}
+        },
+        {
+          "id": "s3-stat2",
+          "type": "stat",
+          "content": "127%\nYoY Growth",
+          "position": {"x": 460, "y": 280, "w": 340, "h": 260},
+          "styling": {"font_family": "Georgia", "font_size": 52, "font_weight": 700, "color": "#C0932F", "background_color": "#0A2342", "text_align": "center"}
+        },
+        {
+          "id": "s3-stat3",
+          "type": "stat",
+          "content": "45K\nActive Users",
+          "position": {"x": 840, "y": 280, "w": 340, "h": 260},
+          "styling": {"font_family": "Georgia", "font_size": 52, "font_weight": 700, "color": "#C0932F", "background_color": "#0A2342", "text_align": "center"}
+        },
+        {
+          "id": "s3-stat4",
+          "type": "stat",
+          "content": "94%\nRetention Rate",
+          "position": {"x": 1220, "y": 280, "w": 340, "h": 260},
+          "styling": {"font_family": "Georgia", "font_size": 52, "font_weight": 700, "color": "#C0932F", "background_color": "#0A2342", "text_align": "center"}
+        },
+        {
+          "id": "s3-footnote",
+          "type": "caption",
+          "content": "Data as of September 30, 2025 · All figures in USD",
+          "position": {"x": 80, "y": 900, "w": 1560, "h": 40},
+          "styling": {"font_family": "Calibri", "font_size": 16, "font_weight": 300, "color": "#7A8FA6", "background_color": "transparent", "text_align": "center"}
+        }
+      ]
+    },
+    {
+      "order": 4,
+      "type": "content",
+      "blocks": [
+        {
+          "id": "s4-label",
+          "type": "caption",
+          "content": "MARKET LANDSCAPE",
+          "position": {"x": 80, "y": 60, "w": 500, "h": 45},
+          "styling": {"font_family": "Calibri", "font_size": 18, "font_weight": 700, "color": "#C0932F", "background_color": "transparent", "text_align": "left"}
+        },
+        {
+          "id": "s4-title",
+          "type": "title",
+          "content": "Our Position in a $42B Market",
+          "position": {"x": 80, "y": 120, "w": 900, "h": 120},
+          "styling": {"font_family": "Georgia", "font_size": 48, "font_weight": 700, "color": "#0A2342", "background_color": "transparent", "text_align": "left"}
+        },
+        {
+          "id": "s4-body",
+          "type": "list",
+          "content": "▸  Total addressable market grew 34% YoY to $42B, driven by AI automation tailwinds\n▸  Nexus Solutions holds 2.1% market share — up from 0.9% in 2023\n▸  Top 3 competitive differentiators: proprietary ML engine, real-time analytics, 99.9% uptime SLA\n▸  Competitor X raised $60M Series C — signals market validation and urgency to accelerate\n▸  Net Promoter Score of 74 outperforms category average of 51 by 45%",
+          "position": {"x": 80, "y": 280, "w": 900, "h": 600},
+          "styling": {"font_family": "Calibri", "font_size": 24, "font_weight": 400, "color": "#1C2B3A", "background_color": "transparent", "text_align": "left"}
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "type": "two_column",
+      "blocks": [
+        {
+          "id": "s5-label",
+          "type": "caption",
+          "content": "COMPETITIVE ANALYSIS",
+          "position": {"x": 80, "y": 60, "w": 600, "h": 45},
+          "styling": {"font_family": "Calibri", "font_size": 18, "font_weight": 700, "color": "#C0932F", "background_color": "transparent", "text_align": "left"}
+        },
+        {
+          "id": "s5-title",
+          "type": "title",
+          "content": "Why Customers Choose Nexus",
+          "position": {"x": 80, "y": 120, "w": 1200, "h": 100},
+          "styling": {"font_family": "Georgia", "font_size": 48, "font_weight": 700, "color": "#0A2342", "background_color": "transparent", "text_align": "left"}
+        },
+        {
+          "id": "s5-col1-heading",
+          "type": "subtitle",
+          "content": "Our Strengths",
+          "position": {"x": 80, "y": 260, "w": 680, "h": 60},
+          "styling": {"font_family": "Georgia", "font_size": 28, "font_weight": 700, "color": "#0A2342", "background_color": "transparent", "text_align": "left"}
+        },
+        {
+          "id": "s5-col1-body",
+          "type": "list",
+          "content": "✓  AI-native platform — built for automation from day one\n✓  60% faster implementation vs. legacy competitors\n✓  Enterprise-grade security (SOC 2 Type II, ISO 27001)\n✓  Dedicated customer success with 4-hour SLA\n✓  Open API ecosystem with 120+ native integrations",
+          "position": {"x": 80, "y": 340, "w": 680, "h": 500},
+          "styling": {"font_family": "Calibri", "font_size": 22, "font_weight": 400, "color": "#1C2B3A", "background_color": "transparent", "text_align": "left"}
+        },
+        {
+          "id": "s5-col2-heading",
+          "type": "subtitle",
+          "content": "Market Gaps We Fill",
+          "position": {"x": 900, "y": 260, "w": 680, "h": 60},
+          "styling": {"font_family": "Georgia", "font_size": 28, "font_weight": 700, "color": "#0A2342", "background_color": "transparent", "text_align": "left"}
+        },
+        {
+          "id": "s5-col2-body",
+          "type": "list",
+          "content": "→  Legacy tools lack real-time ML inference at scale\n→  Competitors require 6-12 month implementation cycles\n→  No unified analytics + automation in a single pane\n→  Poor mobile and remote-work experience industry-wide\n→  Fragmented vendor ecosystems drive integration cost",
+          "position": {"x": 900, "y": 340, "w": 680, "h": 500},
+          "styling": {"font_family": "Calibri", "font_size": 22, "font_weight": 400, "color": "#1C2B3A", "background_color": "transparent", "text_align": "left"}
+        }
+      ]
+    },
+    {
+      "order": 6,
+      "type": "content",
+      "blocks": [
+        {
+          "id": "s6-label",
+          "type": "caption",
+          "content": "FINANCIAL HIGHLIGHTS",
+          "position": {"x": 80, "y": 60, "w": 600, "h": 45},
+          "styling": {"font_family": "Calibri", "font_size": 18, "font_weight": 700, "color": "#C0932F", "background_color": "transparent", "text_align": "left"}
+        },
+        {
+          "id": "s6-title",
+          "type": "title",
+          "content": "Strong Financials, Clear Path to Profitability",
+          "position": {"x": 80, "y": 120, "w": 1400, "h": 120},
+          "styling": {"font_family": "Georgia", "font_size": 44, "font_weight": 700, "color": "#0A2342", "background_color": "transparent", "text_align": "left"}
+        },
+        {
+          "id": "s6-body",
+          "type": "list",
+          "content": "▸  ARR reached $12.4M — 127% growth year-over-year, ahead of $10M target\n▸  Gross margin improved from 61% to 74% through infrastructure optimization\n▸  CAC reduced by 31% following ABM program overhaul in Q2 2025\n▸  LTV:CAC ratio now stands at 6.2x — up from 3.8x in 2024\n▸  Runway of 28 months; Series B raise of $25M targeted for Q1 2026\n▸  Path to EBITDA breakeven projected at $18M ARR (Q3 2026)",
+          "position": {"x": 80, "y": 280, "w": 1560, "h": 620},
+          "styling": {"font_family": "Calibri", "font_size": 24, "font_weight": 400, "color": "#1C2B3A", "background_color": "transparent", "text_align": "left"}
+        }
+      ]
+    },
+    {
+      "order": 7,
+      "type": "quote",
+      "blocks": [
+        {
+          "id": "s7-quote-mark",
+          "type": "caption",
+          "content": "“",
+          "position": {"x": 80, "y": 80, "w": 300, "h": 220},
+          "styling": {"font_family": "Georgia", "font_size": 180, "font_weight": 700, "color": "#C0932F", "background_color": "transparent", "text_align": "left"}
+        },
+        {
+          "id": "s7-quote",
+          "type": "quote",
+          "content": "NexusCore didn’t just automate our workflows — it fundamentally changed how our entire operations division makes decisions. We reduced overhead by 58% in under 90 days.",
+          "position": {"x": 120, "y": 260, "w": 1400, "h": 320},
+          "styling": {"font_family": "Georgia", "font_size": 32, "font_weight": 400, "color": "#FFFFFF", "background_color": "transparent", "text_align": "center"}
+        },
+        {
+          "id": "s7-attribution",
+          "type": "caption",
+          "content": "— Marcus Chen, COO · Vantage Global Inc. (Fortune 500)",
+          "position": {"x": 120, "y": 620, "w": 1400, "h": 50},
+          "styling": {"font_family": "Calibri", "font_size": 22, "font_weight": 700, "color": "#C0932F", "background_color": "transparent", "text_align": "center"}
+        }
+      ]
+    },
+    {
+      "order": 8,
+      "type": "content",
+      "blocks": [
+        {
+          "id": "s8-label",
+          "type": "caption",
+          "content": "STRATEGIC PRIORITIES",
+          "position": {"x": 80, "y": 60, "w": 600, "h": 45},
+          "styling": {"font_family": "Calibri", "font_size": 18, "font_weight": 700, "color": "#C0932F", "background_color": "transparent", "text_align": "left"}
+        },
+        {
+          "id": "s8-title",
+          "type": "title",
+          "content": "Four Pillars Driving 2026",
+          "position": {"x": 80, "y": 120, "w": 1000, "h": 100},
+          "styling": {"font_family": "Georgia", "font_size": 52, "font_weight": 700, "color": "#0A2342", "background_color": "transparent", "text_align": "left"}
+        },
+        {
+          "id": "s8-pillar1",
+          "type": "stat",
+          "content": "01\nEnterprise Expansion\nTarget 200 new enterprise logos",
+          "position": {"x": 80, "y": 270, "w": 680, "h": 260},
+          "styling": {"font_family": "Calibri", "font_size": 22, "font_weight": 400, "color": "#FFFFFF", "background_color": "#0A2342", "text_align": "left"}
+        },
+        {
+          "id": "s8-pillar2",
+          "type": "stat",
+          "content": "02\nProduct Innovation\nLaunch AI Copilot v2.0 in Q1",
+          "position": {"x": 900, "y": 270, "w": 680, "h": 260},
+          "styling": {"font_family": "Calibri", "font_size": 22, "font_weight": 400, "color": "#FFFFFF", "background_color": "#1B4F72", "text_align": "left"}
+        },
+        {
+          "id": "s8-pillar3",
+          "type": "stat",
+          "content": "03\nGlobal Expansion\nEnter EMEA & APAC markets",
+          "position": {"x": 80, "y": 570, "w": 680, "h": 260},
+          "styling": {"font_family": "Calibri", "font_size": 22, "font_weight": 400, "color": "#FFFFFF", "background_color": "#1B4F72", "text_align": "left"}
+        },
+        {
+          "id": "s8-pillar4",
+          "type": "stat",
+          "content": "04\nPartner Ecosystem\nOnboard 50 strategic channel partners",
+          "position": {"x": 900, "y": 570, "w": 680, "h": 260},
+          "styling": {"font_family": "Calibri", "font_size": 22, "font_weight": 400, "color": "#FFFFFF", "background_color": "#0A2342", "text_align": "left"}
+        }
+      ]
+    },
+    {
+      "order": 9,
+      "type": "timeline",
+      "blocks": [
+        {
+          "id": "s9-label",
+          "type": "caption",
+          "content": "PRODUCT ROADMAP",
+          "position": {"x": 80, "y": 60, "w": 500, "h": 45},
+          "styling": {"font_family": "Calibri", "font_size": 18, "font_weight": 700, "color": "#C0932F", "background_color": "transparent", "text_align": "left"}
+        },
+        {
+          "id": "s9-title",
+          "type": "title",
+          "content": "What's Shipping in 2026",
+          "position": {"x": 80, "y": 120, "w": 1000, "h": 100},
+          "styling": {"font_family": "Georgia", "font_size": 52, "font_weight": 700, "color": "#0A2342", "background_color": "transparent", "text_align": "left"}
+        },
+        {
+          "id": "s9-q1",
+          "type": "timeline_item",
+          "content": "Q1 2026\nAI Copilot v2.0\nNatural language workflow builder with GPT-4o integration",
+          "position": {"x": 80, "y": 270, "w": 340, "h": 280},
+          "styling": {"font_family": "Calibri", "font_size": 20, "font_weight": 400, "color": "#FFFFFF", "background_color": "#0A2342", "text_align": "left"}
+        },
+        {
+          "id": "s9-q2",
+          "type": "timeline_item",
+          "content": "Q2 2026\nEnterprise Analytics Suite\nReal-time BI dashboard with predictive forecasting",
+          "position": {"x": 460, "y": 270, "w": 340, "h": 280},
+          "styling": {"font_family": "Calibri", "font_size": 20, "font_weight": 400, "color": "#FFFFFF", "background_color": "#1B4F72", "text_align": "left"}
+        },
+        {
+          "id": "s9-q3",
+          "type": "timeline_item",
+          "content": "Q3 2026\nGlobal Infrastructure\nMulti-region deployment: EU & APAC data residency",
+          "position": {"x": 840, "y": 270, "w": 340, "h": 280},
+          "styling": {"font_family": "Calibri", "font_size": 20, "font_weight": 400, "color": "#FFFFFF", "background_color": "#1B4F72", "text_align": "left"}
+        },
+        {
+          "id": "s9-q4",
+          "type": "timeline_item",
+          "content": "Q4 2026\nNexus Marketplace\nPartner app store with 200+ certified integrations",
+          "position": {"x": 1220, "y": 270, "w": 340, "h": 280},
+          "styling": {"font_family": "Calibri", "font_size": 20, "font_weight": 400, "color": "#FFFFFF", "background_color": "#0A2342", "text_align": "left"}
+        }
+      ]
+    },
+    {
+      "order": 10,
+      "type": "team",
+      "blocks": [
+        {
+          "id": "s10-label",
+          "type": "caption",
+          "content": "LEADERSHIP TEAM",
+          "position": {"x": 80, "y": 60, "w": 500, "h": 45},
+          "styling": {"font_family": "Calibri", "font_size": 18, "font_weight": 700, "color": "#C0932F", "background_color": "transparent", "text_align": "left"}
+        },
+        {
+          "id": "s10-title",
+          "type": "title",
+          "content": "The People Behind the Vision",
+          "position": {"x": 80, "y": 120, "w": 1200, "h": 100},
+          "styling": {"font_family": "Georgia", "font_size": 52, "font_weight": 700, "color": "#0A2342", "background_color": "transparent", "text_align": "left"}
+        },
+        {
+          "id": "s10-m1",
+          "type": "team_member",
+          "content": "Sarah Mitchell\nCEO & Co-Founder\n15 yrs enterprise SaaS · Ex-Salesforce VP",
+          "position": {"x": 80, "y": 270, "w": 320, "h": 260},
+          "styling": {"font_family": "Calibri", "font_size": 20, "font_weight": 400, "color": "#1C2B3A", "background_color": "#EEF2F7", "text_align": "center"}
+        },
+        {
+          "id": "s10-m2",
+          "type": "team_member",
+          "content": "James Carter\nCTO & Co-Founder\n12 yrs ML/AI engineering · Ex-Google Brain",
+          "position": {"x": 440, "y": 270, "w": 320, "h": 260},
+          "styling": {"font_family": "Calibri", "font_size": 20, "font_weight": 400, "color": "#1C2B3A", "background_color": "#EEF2F7", "text_align": "center"}
+        },
+        {
+          "id": "s10-m3",
+          "type": "team_member",
+          "content": "Priya Nair\nCFO\n18 yrs finance · Ex-Goldman Sachs MD",
+          "position": {"x": 800, "y": 270, "w": 320, "h": 260},
+          "styling": {"font_family": "Calibri", "font_size": 20, "font_weight": 400, "color": "#1C2B3A", "background_color": "#EEF2F7", "text_align": "center"}
+        },
+        {
+          "id": "s10-m4",
+          "type": "team_member",
+          "content": "Daniel Osei\nCRO\n10 yrs enterprise sales · Built $0–$50M ARR",
+          "position": {"x": 1160, "y": 270, "w": 320, "h": 260},
+          "styling": {"font_family": "Calibri", "font_size": 20, "font_weight": 400, "color": "#1C2B3A", "background_color": "#EEF2F7", "text_align": "center"}
+        }
+      ]
+    },
+    {
+      "order": 11,
+      "type": "content",
+      "blocks": [
+        {
+          "id": "s11-label",
+          "type": "caption",
+          "content": "2026 OUTLOOK",
+          "position": {"x": 80, "y": 60, "w": 400, "h": 45},
+          "styling": {"font_family": "Calibri", "font_size": 18, "font_weight": 700, "color": "#C0932F", "background_color": "transparent", "text_align": "left"}
+        },
+        {
+          "id": "s11-title",
+          "type": "title",
+          "content": "Targets & Commitments",
+          "position": {"x": 80, "y": 120, "w": 1000, "h": 100},
+          "styling": {"font_family": "Georgia", "font_size": 52, "font_weight": 700, "color": "#0A2342", "background_color": "transparent", "text_align": "left"}
+        },
+        {
+          "id": "s11-body",
+          "type": "list",
+          "content": "▸  Revenue target: $28M ARR (126% growth) — supported by 35-person sales expansion\n▸  Headcount growth from 87 to 140 FTEs — engineering and customer success priority hires\n▸  Series B close ($25M) — led by existing investor Apex Ventures with new strategic co-investor\n▸  Achieve SOC 2 Type II re-certification and ISO 27001 compliance for EMEA market entry\n▸  Launch Nexus Academy: customer education platform targeting 10,000 certified users\n▸  Net Revenue Retention target: 118% (up from current 109%)",
+          "position": {"x": 80, "y": 260, "w": 1560, "h": 640},
+          "styling": {"font_family": "Calibri", "font_size": 24, "font_weight": 400, "color": "#1C2B3A", "background_color": "transparent", "text_align": "left"}
+        }
+      ]
+    },
+    {
+      "order": 12,
+      "type": "closing",
+      "blocks": [
+        {
+          "id": "s12-title",
+          "type": "title",
+          "content": "The Best Is Yet to Come",
+          "position": {"x": 120, "y": 280, "w": 1420, "h": 220},
+          "styling": {"font_family": "Georgia", "font_size": 72, "font_weight": 700, "color": "#FFFFFF", "background_color": "transparent", "text_align": "center"}
+        },
+        {
+          "id": "s12-subtitle",
+          "type": "subtitle",
+          "content": "Together, we are building the operating system for the modern enterprise.",
+          "position": {"x": 120, "y": 520, "w": 1420, "h": 80},
+          "styling": {"font_family": "Calibri", "font_size": 28, "font_weight": 300, "color": "#A8BFD4", "background_color": "transparent", "text_align": "center"}
+        },
+        {
+          "id": "s12-divider",
+          "type": "shape",
+          "content": "",
+          "position": {"x": 560, "y": 630, "w": 560, "h": 4},
+          "styling": {"background_color": "#C0932F", "font_family": "Calibri", "font_size": 12, "font_weight": 400, "color": "transparent", "text_align": "center"}
+        },
+        {
+          "id": "s12-cta",
+          "type": "caption",
+          "content": "hello@nexussolutions.io  ·  nexussolutions.io  ·  +1 (415) 867-5309",
+          "position": {"x": 120, "y": 680, "w": 1420, "h": 45},
+          "styling": {"font_family": "Calibri", "font_size": 20, "font_weight": 400, "color": "#7A8FA6", "background_color": "transparent", "text_align": "center"}
+        },
+        {
+          "id": "s12-brand",
+          "type": "caption",
+          "content": "Nexus Solutions · Confidential · Board Presentation Q4 2025",
+          "position": {"x": 120, "y": 900, "w": 1420, "h": 40},
+          "styling": {"font_family": "Calibri", "font_size": 16, "font_weight": 300, "color": "#3A5068", "background_color": "transparent", "text_align": "center"}
+        }
+      ]
+    }
+  ]
+}

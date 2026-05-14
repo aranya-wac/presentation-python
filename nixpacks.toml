@@ -1,0 +1,28 @@
+# Nixpacks build config — adds native libs Railway's Python auto-provider
+# doesn't include by default (WeasyPrint PDFs, pytesseract OCR, aiomysql).
+# Don't override [phases.install] or [start] — let nixpacks' Python provider
+# create the venv (NIXPACKS_PATH) and pick the start cmd from railway.json.
+
+[phases.setup]
+# Append to whatever the Python provider already set up.
+# Nix package names (not apt). Found via https://search.nixos.org/packages
+nixPkgs = [
+  "python311",
+  "gcc",
+  "pkg-config",
+  # WeasyPrint runtime
+  "pango",
+  "cairo",
+  "gdk-pixbuf",
+  "libffi",
+  "shared-mime-info",
+  "fontconfig",
+  "freetype",
+  # Fallback fonts so PDFs aren't blank
+  "liberation_ttf",
+  "dejavu_fonts",
+  # OCR
+  "tesseract",
+  # MySQL client libs
+  "libmysqlclient",
+]

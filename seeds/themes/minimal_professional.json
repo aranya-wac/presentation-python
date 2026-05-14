@@ -1,0 +1,17 @@
+{
+  "name": "Minimal Professional",
+  "colors": {
+    "primary":    "#0F172A",
+    "secondary":  "#1E293B",
+    "accent":     "#6366F1",
+    "background": "#F8FAFC",
+    "text":       "#0F172A",
+    "surface":    "#E2E8F0",
+    "muted":      "#64748B"
+  },
+  "fonts": {
+    "heading": { "family": "Inter, sans-serif", "size": 52, "weight": 800 },
+    "body":    { "family": "Inter, sans-serif", "size": 22, "weight": 400 },
+    "caption": { "family": "Inter, sans-serif", "size": 16, "weight": 300 }
+  }
+}

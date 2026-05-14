@@ -1,0 +1,17 @@
+{
+  "name": "Creative Bold",
+  "colors": {
+    "primary":    "#0A2540",
+    "secondary":  "#0D3B6E",
+    "accent":     "#00C9A7",
+    "background": "#F0FAFA",
+    "text":       "#0A2540",
+    "surface":    "#D6F0EE",
+    "muted":      "#4A8C88"
+  },
+  "fonts": {
+    "heading": { "family": "Inter, sans-serif", "size": 52, "weight": 800 },
+    "body":    { "family": "Inter, sans-serif", "size": 22, "weight": 400 },
+    "caption": { "family": "Inter, sans-serif", "size": 16, "weight": 300 }
+  }
+}

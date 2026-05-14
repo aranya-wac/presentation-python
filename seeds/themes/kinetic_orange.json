@@ -1,0 +1,17 @@
+{
+  "name": "Kinetic Orange",
+  "colors": {
+    "primary":    "#EA4C1B",
+    "secondary":  "#C73E12",
+    "accent":     "#F9A825",
+    "background": "#FFFFFF",
+    "text":       "#1A1410",
+    "surface":    "#FFF7F5",
+    "muted":      "#9E8880"
+  },
+  "fonts": {
+    "heading": { "family": "Inter, sans-serif", "size": 50, "weight": 800 },
+    "body":    { "family": "Inter, sans-serif", "size": 19, "weight": 400 },
+    "caption": { "family": "Inter, sans-serif", "size": 12, "weight": 600 }
+  }
+}

@@ -1,0 +1,1053 @@
+{
+  "name": "Creative Portfolio",
+  "description": "A sophisticated noir portfolio for designers, photographers, and creative directors. Dark canvas with gold accents lets your work speak loudly.",
+  "category": "Creative",
+  "tags": ["portfolio", "creative", "design", "photography", "agency"],
+  "thumbnail_url": "",
+  "theme_name": "Noir Creative",
+  "is_active": true,
+  "metadata": {
+    "total_slides": 8,
+    "estimated_duration": 8,
+    "default_audience": "Clients & Collaborators"
+  },
+  "slides": [
+    {
+      "slide_number": 1,
+      "title": "Cover",
+      "blocks": [
+        {
+          "id": "s1-bg",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 0, "y": 0, "w": 1280, "h": 720 },
+          "styling": { "background_color": "#0D0D0D" }
+        },
+        {
+          "id": "s1-gold-line",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 64, "y": 360, "w": 520, "h": 1 },
+          "styling": { "background_color": "#D4A843" }
+        },
+        {
+          "id": "s1-name",
+          "type": "text",
+          "content": "STUDIO NAME",
+          "position": { "x": 64, "y": 200, "w": 700, "h": 44 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 13,
+            "font_weight": 700,
+            "color": "#D4A843",
+            "text_align": "left",
+            "letter_spacing": "0.3em"
+          }
+        },
+        {
+          "id": "s1-title",
+          "type": "text",
+          "content": "Selected\nWork",
+          "position": { "x": 64, "y": 256, "w": 680, "h": 180 },
+          "styling": {
+            "font_family": "Georgia, serif",
+            "font_size": 96,
+            "font_weight": 700,
+            "color": "#F5F0E8",
+            "text_align": "left",
+            "line_height": 1.0
+          }
+        },
+        {
+          "id": "s1-year",
+          "type": "text",
+          "content": "2024 — 2025",
+          "position": { "x": 64, "y": 380, "w": 400, "h": 36 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 16,
+            "font_weight": 300,
+            "color": "#5A5550",
+            "text_align": "left",
+            "letter_spacing": "0.08em"
+          }
+        },
+        {
+          "id": "s1-image-box",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 780, "y": 0, "w": 500, "h": 720 },
+          "styling": {
+            "background_color": "#181818",
+            "border_left": "1px solid #2A2A2A"
+          }
+        },
+        {
+          "id": "s1-image-label",
+          "type": "text",
+          "content": "Hero Image\nor Featured Work",
+          "position": { "x": 780, "y": 310, "w": 500, "h": 100 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 18,
+            "font_weight": 300,
+            "color": "#2A2A2A",
+            "text_align": "center"
+          }
+        },
+        {
+          "id": "s1-tagline",
+          "type": "text",
+          "content": "Brand  ·  Identity  ·  Experience",
+          "position": { "x": 64, "y": 650, "w": 500, "h": 32 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 13,
+            "font_weight": 300,
+            "color": "#5A5550",
+            "text_align": "left",
+            "letter_spacing": "0.1em"
+          }
+        }
+      ]
+    },
+    {
+      "slide_number": 2,
+      "title": "About",
+      "blocks": [
+        {
+          "id": "s2-bg",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 0, "y": 0, "w": 1280, "h": 720 },
+          "styling": { "background_color": "#0D0D0D" }
+        },
+        {
+          "id": "s2-section",
+          "type": "text",
+          "content": "ABOUT",
+          "position": { "x": 64, "y": 56, "w": 300, "h": 28 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 11,
+            "font_weight": 700,
+            "color": "#D4A843",
+            "text_align": "left",
+            "letter_spacing": "0.2em"
+          }
+        },
+        {
+          "id": "s2-intro",
+          "type": "text",
+          "content": "We create work that\nmakes people stop.",
+          "position": { "x": 64, "y": 120, "w": 700, "h": 160 },
+          "styling": {
+            "font_family": "Georgia, serif",
+            "font_size": 52,
+            "font_weight": 700,
+            "color": "#F5F0E8",
+            "text_align": "left",
+            "line_height": 1.15
+          }
+        },
+        {
+          "id": "s2-bio",
+          "type": "text",
+          "content": "A multidisciplinary studio built on the belief that every great brand starts with a clear story. We translate complex ideas into visual languages that people feel before they understand.",
+          "position": { "x": 64, "y": 320, "w": 600, "h": 100 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 17,
+            "font_weight": 300,
+            "color": "#8A8580",
+            "text_align": "left",
+            "line_height": 1.7
+          }
+        },
+        {
+          "id": "s2-stats-divider",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 64, "y": 460, "w": 600, "h": 1 },
+          "styling": { "background_color": "#2A2A2A" }
+        },
+        {
+          "id": "s2-stat1",
+          "type": "text",
+          "content": "12+\nYears",
+          "position": { "x": 64, "y": 480, "w": 140, "h": 80 },
+          "styling": {
+            "font_family": "Georgia, serif",
+            "font_size": 36,
+            "font_weight": 700,
+            "color": "#D4A843",
+            "text_align": "left",
+            "line_height": 1.3
+          }
+        },
+        {
+          "id": "s2-stat2",
+          "type": "text",
+          "content": "200+\nProjects",
+          "position": { "x": 240, "y": 480, "w": 160, "h": 80 },
+          "styling": {
+            "font_family": "Georgia, serif",
+            "font_size": 36,
+            "font_weight": 700,
+            "color": "#F5F0E8",
+            "text_align": "left",
+            "line_height": 1.3
+          }
+        },
+        {
+          "id": "s2-stat3",
+          "type": "text",
+          "content": "40+\nAwards",
+          "position": { "x": 440, "y": 480, "w": 160, "h": 80 },
+          "styling": {
+            "font_family": "Georgia, serif",
+            "font_size": 36,
+            "font_weight": 700,
+            "color": "#F5F0E8",
+            "text_align": "left",
+            "line_height": 1.3
+          }
+        },
+        {
+          "id": "s2-portrait",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 800, "y": 80, "w": 420, "h": 560 },
+          "styling": {
+            "background_color": "#181818",
+            "border": "1px solid #2A2A2A"
+          }
+        },
+        {
+          "id": "s2-portrait-label",
+          "type": "text",
+          "content": "Portrait or\nStudio Photo",
+          "position": { "x": 800, "y": 320, "w": 420, "h": 80 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 16,
+            "font_weight": 300,
+            "color": "#2A2A2A",
+            "text_align": "center"
+          }
+        }
+      ]
+    },
+    {
+      "slide_number": 3,
+      "title": "Project 01",
+      "blocks": [
+        {
+          "id": "s3-bg",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 0, "y": 0, "w": 1280, "h": 720 },
+          "styling": { "background_color": "#0D0D0D" }
+        },
+        {
+          "id": "s3-img",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 0, "y": 0, "w": 700, "h": 720 },
+          "styling": { "background_color": "#181818" }
+        },
+        {
+          "id": "s3-img-label",
+          "type": "text",
+          "content": "Project Image",
+          "position": { "x": 0, "y": 334, "w": 700, "h": 52 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 18,
+            "font_weight": 300,
+            "color": "#2A2A2A",
+            "text_align": "center"
+          }
+        },
+        {
+          "id": "s3-project-num",
+          "type": "text",
+          "content": "01",
+          "position": { "x": 740, "y": 80, "w": 100, "h": 60 },
+          "styling": {
+            "font_family": "Georgia, serif",
+            "font_size": 40,
+            "font_weight": 700,
+            "color": "#D4A843",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s3-client",
+          "type": "text",
+          "content": "CLIENT NAME",
+          "position": { "x": 740, "y": 156, "w": 480, "h": 28 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 11,
+            "font_weight": 700,
+            "color": "#5A5550",
+            "text_align": "left",
+            "letter_spacing": "0.15em"
+          }
+        },
+        {
+          "id": "s3-project-title",
+          "type": "text",
+          "content": "Brand Identity\nRedesign",
+          "position": { "x": 740, "y": 192, "w": 480, "h": 140 },
+          "styling": {
+            "font_family": "Georgia, serif",
+            "font_size": 48,
+            "font_weight": 700,
+            "color": "#F5F0E8",
+            "text_align": "left",
+            "line_height": 1.15
+          }
+        },
+        {
+          "id": "s3-desc",
+          "type": "text",
+          "content": "A complete visual identity overhaul for a legacy brand entering new markets. Included logo, color system, typography, and brand guidelines.",
+          "position": { "x": 740, "y": 356, "w": 480, "h": 100 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 16,
+            "font_weight": 300,
+            "color": "#8A8580",
+            "text_align": "left",
+            "line_height": 1.7
+          }
+        },
+        {
+          "id": "s3-tags",
+          "type": "text",
+          "content": "Branding  ·  Identity  ·  Guidelines  ·  2024",
+          "position": { "x": 740, "y": 488, "w": 480, "h": 32 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 13,
+            "font_weight": 400,
+            "color": "#D4A843",
+            "text_align": "left",
+            "letter_spacing": "0.05em"
+          }
+        }
+      ]
+    },
+    {
+      "slide_number": 4,
+      "title": "Project 02",
+      "blocks": [
+        {
+          "id": "s4-bg",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 0, "y": 0, "w": 1280, "h": 720 },
+          "styling": { "background_color": "#0D0D0D" }
+        },
+        {
+          "id": "s4-project-num",
+          "type": "text",
+          "content": "02",
+          "position": { "x": 64, "y": 80, "w": 100, "h": 60 },
+          "styling": {
+            "font_family": "Georgia, serif",
+            "font_size": 40,
+            "font_weight": 700,
+            "color": "#D4A843",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s4-client",
+          "type": "text",
+          "content": "CLIENT NAME",
+          "position": { "x": 64, "y": 156, "w": 480, "h": 28 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 11,
+            "font_weight": 700,
+            "color": "#5A5550",
+            "text_align": "left",
+            "letter_spacing": "0.15em"
+          }
+        },
+        {
+          "id": "s4-project-title",
+          "type": "text",
+          "content": "Campaign\nDesign",
+          "position": { "x": 64, "y": 192, "w": 480, "h": 140 },
+          "styling": {
+            "font_family": "Georgia, serif",
+            "font_size": 48,
+            "font_weight": 700,
+            "color": "#F5F0E8",
+            "text_align": "left",
+            "line_height": 1.15
+          }
+        },
+        {
+          "id": "s4-desc",
+          "type": "text",
+          "content": "A full-campaign visual system spanning OOH, digital, and social. Delivered across 8 markets simultaneously.",
+          "position": { "x": 64, "y": 356, "w": 480, "h": 100 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 16,
+            "font_weight": 300,
+            "color": "#8A8580",
+            "text_align": "left",
+            "line_height": 1.7
+          }
+        },
+        {
+          "id": "s4-tags",
+          "type": "text",
+          "content": "Campaign  ·  OOH  ·  Digital  ·  2024",
+          "position": { "x": 64, "y": 488, "w": 480, "h": 32 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 13,
+            "font_weight": 400,
+            "color": "#D4A843",
+            "text_align": "left",
+            "letter_spacing": "0.05em"
+          }
+        },
+        {
+          "id": "s4-img",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 580, "y": 0, "w": 700, "h": 720 },
+          "styling": { "background_color": "#181818" }
+        },
+        {
+          "id": "s4-img-label",
+          "type": "text",
+          "content": "Project Image",
+          "position": { "x": 580, "y": 334, "w": 700, "h": 52 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 18,
+            "font_weight": 300,
+            "color": "#2A2A2A",
+            "text_align": "center"
+          }
+        }
+      ]
+    },
+    {
+      "slide_number": 5,
+      "title": "Project Grid",
+      "blocks": [
+        {
+          "id": "s5-bg",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 0, "y": 0, "w": 1280, "h": 720 },
+          "styling": { "background_color": "#0D0D0D" }
+        },
+        {
+          "id": "s5-section",
+          "type": "text",
+          "content": "MORE WORK",
+          "position": { "x": 64, "y": 56, "w": 400, "h": 28 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 11,
+            "font_weight": 700,
+            "color": "#D4A843",
+            "text_align": "left",
+            "letter_spacing": "0.2em"
+          }
+        },
+        {
+          "id": "s5-img1",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 64, "y": 120, "w": 352, "h": 240 },
+          "styling": { "background_color": "#181818" }
+        },
+        {
+          "id": "s5-img1-lbl",
+          "type": "text",
+          "content": "Project 03",
+          "position": { "x": 64, "y": 372, "w": 352, "h": 28 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 14,
+            "font_weight": 500,
+            "color": "#F5F0E8",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s5-img1-cat",
+          "type": "text",
+          "content": "Digital Product",
+          "position": { "x": 64, "y": 402, "w": 352, "h": 24 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 12,
+            "font_weight": 300,
+            "color": "#5A5550",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s5-img2",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 464, "y": 120, "w": 352, "h": 240 },
+          "styling": { "background_color": "#181818" }
+        },
+        {
+          "id": "s5-img2-lbl",
+          "type": "text",
+          "content": "Project 04",
+          "position": { "x": 464, "y": 372, "w": 352, "h": 28 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 14,
+            "font_weight": 500,
+            "color": "#F5F0E8",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s5-img2-cat",
+          "type": "text",
+          "content": "Packaging",
+          "position": { "x": 464, "y": 402, "w": 352, "h": 24 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 12,
+            "font_weight": 300,
+            "color": "#5A5550",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s5-img3",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 864, "y": 120, "w": 352, "h": 240 },
+          "styling": { "background_color": "#181818" }
+        },
+        {
+          "id": "s5-img3-lbl",
+          "type": "text",
+          "content": "Project 05",
+          "position": { "x": 864, "y": 372, "w": 352, "h": 28 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 14,
+            "font_weight": 500,
+            "color": "#F5F0E8",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s5-img3-cat",
+          "type": "text",
+          "content": "Motion",
+          "position": { "x": 864, "y": 402, "w": 352, "h": 24 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 12,
+            "font_weight": 300,
+            "color": "#5A5550",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s5-img4",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 64, "y": 460, "w": 560, "h": 190 },
+          "styling": { "background_color": "#181818" }
+        },
+        {
+          "id": "s5-img4-lbl",
+          "type": "text",
+          "content": "Project 06  ·  Editorial Design",
+          "position": { "x": 64, "y": 662, "w": 560, "h": 28 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 13,
+            "font_weight": 400,
+            "color": "#5A5550",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s5-img5",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 656, "y": 460, "w": 560, "h": 190 },
+          "styling": { "background_color": "#181818" }
+        },
+        {
+          "id": "s5-img5-lbl",
+          "type": "text",
+          "content": "Project 07  ·  Environmental",
+          "position": { "x": 656, "y": 662, "w": 560, "h": 28 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 13,
+            "font_weight": 400,
+            "color": "#5A5550",
+            "text_align": "left"
+          }
+        }
+      ]
+    },
+    {
+      "slide_number": 6,
+      "title": "Process",
+      "blocks": [
+        {
+          "id": "s6-bg",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 0, "y": 0, "w": 1280, "h": 720 },
+          "styling": { "background_color": "#0D0D0D" }
+        },
+        {
+          "id": "s6-section",
+          "type": "text",
+          "content": "PROCESS",
+          "position": { "x": 64, "y": 56, "w": 400, "h": 28 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 11,
+            "font_weight": 700,
+            "color": "#D4A843",
+            "text_align": "left",
+            "letter_spacing": "0.2em"
+          }
+        },
+        {
+          "id": "s6-title",
+          "type": "text",
+          "content": "How we work.",
+          "position": { "x": 64, "y": 100, "w": 700, "h": 80 },
+          "styling": {
+            "font_family": "Georgia, serif",
+            "font_size": 56,
+            "font_weight": 700,
+            "color": "#F5F0E8",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s6-step1",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 64, "y": 240, "w": 260, "h": 360 },
+          "styling": {
+            "background_color": "#181818",
+            "border_top": "2px solid #D4A843"
+          }
+        },
+        {
+          "id": "s6-step1-num",
+          "type": "text",
+          "content": "01",
+          "position": { "x": 64, "y": 264, "w": 260, "h": 52 },
+          "styling": {
+            "font_family": "Georgia, serif",
+            "font_size": 36,
+            "font_weight": 700,
+            "color": "#D4A843",
+            "text_align": "left",
+            "padding_left": 20
+          }
+        },
+        {
+          "id": "s6-step1-title",
+          "type": "text",
+          "content": "Discover",
+          "position": { "x": 84, "y": 328, "w": 220, "h": 40 },
+          "styling": {
+            "font_family": "Georgia, serif",
+            "font_size": 24,
+            "font_weight": 700,
+            "color": "#F5F0E8",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s6-step1-desc",
+          "type": "text",
+          "content": "Deep briefing, stakeholder interviews, market research, and competitive analysis.",
+          "position": { "x": 84, "y": 378, "w": 220, "h": 100 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 14,
+            "font_weight": 300,
+            "color": "#5A5550",
+            "text_align": "left",
+            "line_height": 1.6
+          }
+        },
+        {
+          "id": "s6-step2",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 348, "y": 240, "w": 260, "h": 360 },
+          "styling": {
+            "background_color": "#181818",
+            "border_top": "2px solid #D4A843"
+          }
+        },
+        {
+          "id": "s6-step2-num",
+          "type": "text",
+          "content": "02",
+          "position": { "x": 348, "y": 264, "w": 260, "h": 52 },
+          "styling": {
+            "font_family": "Georgia, serif",
+            "font_size": 36,
+            "font_weight": 700,
+            "color": "#D4A843",
+            "text_align": "left",
+            "padding_left": 20
+          }
+        },
+        {
+          "id": "s6-step2-title",
+          "type": "text",
+          "content": "Define",
+          "position": { "x": 368, "y": 328, "w": 220, "h": 40 },
+          "styling": {
+            "font_family": "Georgia, serif",
+            "font_size": 24,
+            "font_weight": 700,
+            "color": "#F5F0E8",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s6-step2-desc",
+          "type": "text",
+          "content": "Strategy, positioning, creative brief, and agreed-upon success criteria.",
+          "position": { "x": 368, "y": 378, "w": 220, "h": 100 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 14,
+            "font_weight": 300,
+            "color": "#5A5550",
+            "text_align": "left",
+            "line_height": 1.6
+          }
+        },
+        {
+          "id": "s6-step3",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 632, "y": 240, "w": 260, "h": 360 },
+          "styling": {
+            "background_color": "#181818",
+            "border_top": "2px solid #D4A843"
+          }
+        },
+        {
+          "id": "s6-step3-num",
+          "type": "text",
+          "content": "03",
+          "position": { "x": 632, "y": 264, "w": 260, "h": 52 },
+          "styling": {
+            "font_family": "Georgia, serif",
+            "font_size": 36,
+            "font_weight": 700,
+            "color": "#D4A843",
+            "text_align": "left",
+            "padding_left": 20
+          }
+        },
+        {
+          "id": "s6-step3-title",
+          "type": "text",
+          "content": "Create",
+          "position": { "x": 652, "y": 328, "w": 220, "h": 40 },
+          "styling": {
+            "font_family": "Georgia, serif",
+            "font_size": 24,
+            "font_weight": 700,
+            "color": "#F5F0E8",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s6-step3-desc",
+          "type": "text",
+          "content": "Concepts, iterations, feedback loops, and craft until we get it right.",
+          "position": { "x": 652, "y": 378, "w": 220, "h": 100 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 14,
+            "font_weight": 300,
+            "color": "#5A5550",
+            "text_align": "left",
+            "line_height": 1.6
+          }
+        },
+        {
+          "id": "s6-step4",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 916, "y": 240, "w": 300, "h": 360 },
+          "styling": {
+            "background_color": "#181818",
+            "border_top": "2px solid #D4A843"
+          }
+        },
+        {
+          "id": "s6-step4-num",
+          "type": "text",
+          "content": "04",
+          "position": { "x": 916, "y": 264, "w": 300, "h": 52 },
+          "styling": {
+            "font_family": "Georgia, serif",
+            "font_size": 36,
+            "font_weight": 700,
+            "color": "#D4A843",
+            "text_align": "left",
+            "padding_left": 20
+          }
+        },
+        {
+          "id": "s6-step4-title",
+          "type": "text",
+          "content": "Deliver",
+          "position": { "x": 936, "y": 328, "w": 260, "h": 40 },
+          "styling": {
+            "font_family": "Georgia, serif",
+            "font_size": 24,
+            "font_weight": 700,
+            "color": "#F5F0E8",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s6-step4-desc",
+          "type": "text",
+          "content": "Handoff with full documentation, brand guidelines, and ongoing support.",
+          "position": { "x": 936, "y": 378, "w": 260, "h": 100 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 14,
+            "font_weight": 300,
+            "color": "#5A5550",
+            "text_align": "left",
+            "line_height": 1.6
+          }
+        }
+      ]
+    },
+    {
+      "slide_number": 7,
+      "title": "Clients & Awards",
+      "blocks": [
+        {
+          "id": "s7-bg",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 0, "y": 0, "w": 1280, "h": 720 },
+          "styling": { "background_color": "#0D0D0D" }
+        },
+        {
+          "id": "s7-section",
+          "type": "text",
+          "content": "CLIENTS & RECOGNITION",
+          "position": { "x": 64, "y": 56, "w": 500, "h": 28 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 11,
+            "font_weight": 700,
+            "color": "#D4A843",
+            "text_align": "left",
+            "letter_spacing": "0.2em"
+          }
+        },
+        {
+          "id": "s7-title",
+          "type": "text",
+          "content": "Trusted by exceptional brands.",
+          "position": { "x": 64, "y": 100, "w": 800, "h": 70 },
+          "styling": {
+            "font_family": "Georgia, serif",
+            "font_size": 48,
+            "font_weight": 700,
+            "color": "#F5F0E8",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s7-logos-grid",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 64, "y": 220, "w": 700, "h": 300 },
+          "styling": {
+            "background_color": "#181818",
+            "border": "1px solid #2A2A2A",
+            "border_radius": "8px"
+          }
+        },
+        {
+          "id": "s7-logos-placeholder",
+          "type": "text",
+          "content": "Client Logos\n(3×3 grid)",
+          "position": { "x": 64, "y": 340, "w": 700, "h": 80 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 18,
+            "font_weight": 300,
+            "color": "#2A2A2A",
+            "text_align": "center"
+          }
+        },
+        {
+          "id": "s7-award-title",
+          "type": "text",
+          "content": "AWARDS",
+          "position": { "x": 820, "y": 220, "w": 400, "h": 28 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 11,
+            "font_weight": 700,
+            "color": "#5A5550",
+            "text_align": "left",
+            "letter_spacing": "0.15em"
+          }
+        },
+        {
+          "id": "s7-award1",
+          "type": "text",
+          "content": "Cannes Lions — Silver, 2024",
+          "position": { "x": 820, "y": 260, "w": 400, "h": 36 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 17,
+            "font_weight": 400,
+            "color": "#F5F0E8",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s7-award2",
+          "type": "text",
+          "content": "D&AD Pencil — Branding, 2024",
+          "position": { "x": 820, "y": 308, "w": 400, "h": 36 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 17,
+            "font_weight": 400,
+            "color": "#F5F0E8",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s7-award3",
+          "type": "text",
+          "content": "The Webby Awards — Best Design",
+          "position": { "x": 820, "y": 356, "w": 400, "h": 36 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 17,
+            "font_weight": 400,
+            "color": "#F5F0E8",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s7-award4",
+          "type": "text",
+          "content": "Communication Arts — Typography",
+          "position": { "x": 820, "y": 404, "w": 400, "h": 36 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 17,
+            "font_weight": 400,
+            "color": "#F5F0E8",
+            "text_align": "left"
+          }
+        }
+      ]
+    },
+    {
+      "slide_number": 8,
+      "title": "Contact",
+      "blocks": [
+        {
+          "id": "s8-bg",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 0, "y": 0, "w": 1280, "h": 720 },
+          "styling": { "background_color": "#0D0D0D" }
+        },
+        {
+          "id": "s8-gold-line",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 64, "y": 380, "w": 640, "h": 1 },
+          "styling": { "background_color": "#D4A843" }
+        },
+        {
+          "id": "s8-cta",
+          "type": "text",
+          "content": "Let's create\nsomething\nremarkable.",
+          "position": { "x": 64, "y": 140, "w": 800, "h": 280 },
+          "styling": {
+            "font_family": "Georgia, serif",
+            "font_size": 72,
+            "font_weight": 700,
+            "color": "#F5F0E8",
+            "text_align": "left",
+            "line_height": 1.1
+          }
+        },
+        {
+          "id": "s8-email",
+          "type": "text",
+          "content": "hello@studio.com",
+          "position": { "x": 64, "y": 400, "w": 500, "h": 52 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 28,
+            "font_weight": 300,
+            "color": "#D4A843",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s8-website",
+          "type": "text",
+          "content": "studio.com  ·  @studioname",
+          "position": { "x": 64, "y": 466, "w": 500, "h": 36 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 16,
+            "font_weight": 300,
+            "color": "#5A5550",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s8-img",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 780, "y": 0, "w": 500, "h": 720 },
+          "styling": { "background_color": "#181818" }
+        }
+      ]
+    }
+  ]
+}

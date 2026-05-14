@@ -1,0 +1,515 @@
+{
+  "name": "Business Pitch",
+  "description": "A compelling pitch deck for presenting your business idea to investors and stakeholders.",
+  "category": "Business",
+  "tags": ["pitch", "investor", "startup", "funding"],
+  "thumbnail_url": "",
+  "theme_name": "Minimal Professional",
+  "is_active": true,
+  "metadata": {
+    "total_slides": 12,
+    "estimated_duration": 15,
+    "default_audience": "Investors and stakeholders"
+  },
+  "slides": [
+    {
+      "order": 1,
+      "type": "title",
+      "blocks": [
+        {
+          "id": "s1-logo",
+          "type": "image",
+          "content": "[LOGO_PLACEHOLDER]",
+          "position": {"x": 80, "y": 60, "w": 200, "h": 80},
+          "styling": {"font_family": "Inter", "font_size": 16, "font_weight": 400, "color": "#1A1A2E", "background_color": "transparent", "text_align": "left"}
+        },
+        {
+          "id": "s1-title",
+          "type": "title",
+          "content": "[PLACEHOLDER: Company Name]",
+          "position": {"x": 160, "y": 380, "w": 1600, "h": 150},
+          "styling": {"font_family": "Inter", "font_size": 80, "font_weight": 700, "color": "#1A1A2E", "background_color": "transparent", "text_align": "center"}
+        },
+        {
+          "id": "s1-subtitle",
+          "type": "subtitle",
+          "content": "[PLACEHOLDER: One-line value proposition]",
+          "position": {"x": 160, "y": 560, "w": 1600, "h": 80},
+          "styling": {"font_family": "Inter", "font_size": 36, "font_weight": 300, "color": "#0F3460", "background_color": "transparent", "text_align": "center"}
+        },
+        {
+          "id": "s1-date",
+          "type": "caption",
+          "content": "[PLACEHOLDER: Month Year]",
+          "position": {"x": 160, "y": 980, "w": 1600, "h": 40},
+          "styling": {"font_family": "Inter", "font_size": 20, "font_weight": 300, "color": "#16213E", "background_color": "transparent", "text_align": "center"}
+        }
+      ]
+    },
+    {
+      "order": 2,
+      "type": "problem",
+      "blocks": [
+        {
+          "id": "s2-label",
+          "type": "caption",
+          "content": "THE PROBLEM",
+          "position": {"x": 80, "y": 60, "w": 400, "h": 50},
+          "styling": {"font_family": "Inter", "font_size": 22, "font_weight": 700, "color": "#0F3460", "background_color": "transparent", "text_align": "left"}
+        },
+        {
+          "id": "s2-heading",
+          "type": "heading",
+          "content": "[PLACEHOLDER: Problem Statement Headline]",
+          "position": {"x": 80, "y": 140, "w": 900, "h": 120},
+          "styling": {"font_family": "Inter", "font_size": 56, "font_weight": 700, "color": "#1A1A2E", "background_color": "transparent", "text_align": "left"}
+        },
+        {
+          "id": "s2-desc",
+          "type": "text",
+          "content": "[PLACEHOLDER: Describe the pain point your customers experience. Be specific and emotional.]",
+          "position": {"x": 80, "y": 300, "w": 900, "h": 200},
+          "styling": {"font_family": "Inter", "font_size": 28, "font_weight": 400, "color": "#1A1A2E", "background_color": "transparent", "text_align": "left"}
+        },
+        {
+          "id": "s2-stat1",
+          "type": "stat",
+          "content": "[PLACEHOLDER: Key Statistic 1]",
+          "position": {"x": 1060, "y": 200, "w": 780, "h": 200},
+          "styling": {"font_family": "Inter", "font_size": 72, "font_weight": 800, "color": "#0F3460", "background_color": "#F5F5F5", "text_align": "center"}
+        },
+        {
+          "id": "s2-stat2",
+          "type": "stat",
+          "content": "[PLACEHOLDER: Key Statistic 2]",
+          "position": {"x": 1060, "y": 430, "w": 780, "h": 200},
+          "styling": {"font_family": "Inter", "font_size": 72, "font_weight": 800, "color": "#0F3460", "background_color": "#F5F5F5", "text_align": "center"}
+        }
+      ]
+    },
+    {
+      "order": 3,
+      "type": "solution",
+      "blocks": [
+        {
+          "id": "s3-label",
+          "type": "caption",
+          "content": "OUR SOLUTION",
+          "position": {"x": 80, "y": 60, "w": 400, "h": 50},
+          "styling": {"font_family": "Inter", "font_size": 22, "font_weight": 700, "color": "#0F3460", "background_color": "transparent", "text_align": "left"}
+        },
+        {
+          "id": "s3-heading",
+          "type": "heading",
+          "content": "[PLACEHOLDER: Solution Headline]",
+          "position": {"x": 80, "y": 140, "w": 1760, "h": 120},
+          "styling": {"font_family": "Inter", "font_size": 56, "font_weight": 700, "color": "#1A1A2E", "background_color": "transparent", "text_align": "center"}
+        },
+        {
+          "id": "s3-feat1",
+          "type": "feature",
+          "content": "[PLACEHOLDER: Feature 1 — Short description]",
+          "position": {"x": 80, "y": 340, "w": 540, "h": 300},
+          "styling": {"font_family": "Inter", "font_size": 26, "font_weight": 400, "color": "#1A1A2E", "background_color": "#F5F5F5", "text_align": "center"}
+        },
+        {
+          "id": "s3-feat2",
+          "type": "feature",
+          "content": "[PLACEHOLDER: Feature 2 — Short description]",
+          "position": {"x": 700, "y": 340, "w": 540, "h": 300},
+          "styling": {"font_family": "Inter", "font_size": 26, "font_weight": 400, "color": "#1A1A2E", "background_color": "#F5F5F5", "text_align": "center"}
+        },
+        {
+          "id": "s3-feat3",
+          "type": "feature",
+          "content": "[PLACEHOLDER: Feature 3 — Short description]",
+          "position": {"x": 1320, "y": 340, "w": 540, "h": 300},
+          "styling": {"font_family": "Inter", "font_size": 26, "font_weight": 400, "color": "#1A1A2E", "background_color": "#F5F5F5", "text_align": "center"}
+        }
+      ]
+    },
+    {
+      "order": 4,
+      "type": "market",
+      "blocks": [
+        {
+          "id": "s4-label",
+          "type": "caption",
+          "content": "MARKET OPPORTUNITY",
+          "position": {"x": 80, "y": 60, "w": 500, "h": 50},
+          "styling": {"font_family": "Inter", "font_size": 22, "font_weight": 700, "color": "#0F3460", "background_color": "transparent", "text_align": "left"}
+        },
+        {
+          "id": "s4-heading",
+          "type": "heading",
+          "content": "[PLACEHOLDER: Market Size Headline]",
+          "position": {"x": 80, "y": 140, "w": 900, "h": 120},
+          "styling": {"font_family": "Inter", "font_size": 52, "font_weight": 700, "color": "#1A1A2E", "background_color": "transparent", "text_align": "left"}
+        },
+        {
+          "id": "s4-tam",
+          "type": "stat",
+          "content": "[PLACEHOLDER: TAM — $XXB]",
+          "position": {"x": 80, "y": 340, "w": 500, "h": 240},
+          "styling": {"font_family": "Inter", "font_size": 48, "font_weight": 800, "color": "#FFFFFF", "background_color": "#1A1A2E", "text_align": "center"}
+        },
+        {
+          "id": "s4-sam",
+          "type": "stat",
+          "content": "[PLACEHOLDER: SAM — $XXB]",
+          "position": {"x": 660, "y": 340, "w": 500, "h": 240},
+          "styling": {"font_family": "Inter", "font_size": 48, "font_weight": 800, "color": "#FFFFFF", "background_color": "#16213E", "text_align": "center"}
+        },
+        {
+          "id": "s4-som",
+          "type": "stat",
+          "content": "[PLACEHOLDER: SOM — $XXM]",
+          "position": {"x": 1240, "y": 340, "w": 500, "h": 240},
+          "styling": {"font_family": "Inter", "font_size": 48, "font_weight": 800, "color": "#FFFFFF", "background_color": "#0F3460", "text_align": "center"}
+        },
+        {
+          "id": "s4-growth",
+          "type": "text",
+          "content": "[PLACEHOLDER: Market growth rate and key trends]",
+          "position": {"x": 80, "y": 640, "w": 1760, "h": 80},
+          "styling": {"font_family": "Inter", "font_size": 26, "font_weight": 400, "color": "#16213E", "background_color": "transparent", "text_align": "center"}
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "type": "product",
+      "blocks": [
+        {
+          "id": "s5-label",
+          "type": "caption",
+          "content": "PRODUCT",
+          "position": {"x": 80, "y": 60, "w": 300, "h": 50},
+          "styling": {"font_family": "Inter", "font_size": 22, "font_weight": 700, "color": "#0F3460", "background_color": "transparent", "text_align": "left"}
+        },
+        {
+          "id": "s5-heading",
+          "type": "heading",
+          "content": "[PLACEHOLDER: How It Works]",
+          "position": {"x": 80, "y": 140, "w": 1760, "h": 100},
+          "styling": {"font_family": "Inter", "font_size": 52, "font_weight": 700, "color": "#1A1A2E", "background_color": "transparent", "text_align": "center"}
+        },
+        {
+          "id": "s5-step1",
+          "type": "step",
+          "content": "1. [PLACEHOLDER: Step 1]",
+          "position": {"x": 80, "y": 300, "w": 380, "h": 400},
+          "styling": {"font_family": "Inter", "font_size": 28, "font_weight": 400, "color": "#FFFFFF", "background_color": "#1A1A2E", "text_align": "center"}
+        },
+        {
+          "id": "s5-step2",
+          "type": "step",
+          "content": "2. [PLACEHOLDER: Step 2]",
+          "position": {"x": 580, "y": 300, "w": 380, "h": 400},
+          "styling": {"font_family": "Inter", "font_size": 28, "font_weight": 400, "color": "#FFFFFF", "background_color": "#16213E", "text_align": "center"}
+        },
+        {
+          "id": "s5-step3",
+          "type": "step",
+          "content": "3. [PLACEHOLDER: Step 3]",
+          "position": {"x": 1080, "y": 300, "w": 380, "h": 400},
+          "styling": {"font_family": "Inter", "font_size": 28, "font_weight": 400, "color": "#FFFFFF", "background_color": "#0F3460", "text_align": "center"}
+        },
+        {
+          "id": "s5-step4",
+          "type": "step",
+          "content": "4. [PLACEHOLDER: Step 4]",
+          "position": {"x": 1560, "y": 300, "w": 280, "h": 400},
+          "styling": {"font_family": "Inter", "font_size": 24, "font_weight": 400, "color": "#1A1A2E", "background_color": "#F0F0F0", "text_align": "center"}
+        }
+      ]
+    },
+    {
+      "order": 6,
+      "type": "traction",
+      "blocks": [
+        {
+          "id": "s6-label",
+          "type": "caption",
+          "content": "TRACTION",
+          "position": {"x": 80, "y": 60, "w": 300, "h": 50},
+          "styling": {"font_family": "Inter", "font_size": 22, "font_weight": 700, "color": "#0F3460", "background_color": "transparent", "text_align": "left"}
+        },
+        {
+          "id": "s6-heading",
+          "type": "heading",
+          "content": "[PLACEHOLDER: Key Milestones Achieved]",
+          "position": {"x": 80, "y": 140, "w": 1760, "h": 100},
+          "styling": {"font_family": "Inter", "font_size": 52, "font_weight": 700, "color": "#1A1A2E", "background_color": "transparent", "text_align": "center"}
+        },
+        {
+          "id": "s6-metric1",
+          "type": "metric",
+          "content": "[PLACEHOLDER: Metric 1\nXXX Users]",
+          "position": {"x": 80, "y": 300, "w": 400, "h": 200},
+          "styling": {"font_family": "Inter", "font_size": 48, "font_weight": 800, "color": "#1A1A2E", "background_color": "#F5F5F5", "text_align": "center"}
+        },
+        {
+          "id": "s6-metric2",
+          "type": "metric",
+          "content": "[PLACEHOLDER: Metric 2\n$XXK MRR]",
+          "position": {"x": 560, "y": 300, "w": 400, "h": 200},
+          "styling": {"font_family": "Inter", "font_size": 48, "font_weight": 800, "color": "#1A1A2E", "background_color": "#F5F5F5", "text_align": "center"}
+        },
+        {
+          "id": "s6-metric3",
+          "type": "metric",
+          "content": "[PLACEHOLDER: Metric 3\nXX% MoM Growth]",
+          "position": {"x": 1040, "y": 300, "w": 400, "h": 200},
+          "styling": {"font_family": "Inter", "font_size": 48, "font_weight": 800, "color": "#1A1A2E", "background_color": "#F5F5F5", "text_align": "center"}
+        },
+        {
+          "id": "s6-metric4",
+          "type": "metric",
+          "content": "[PLACEHOLDER: Metric 4\nXX Partnerships]",
+          "position": {"x": 1520, "y": 300, "w": 320, "h": 200},
+          "styling": {"font_family": "Inter", "font_size": 40, "font_weight": 800, "color": "#1A1A2E", "background_color": "#F5F5F5", "text_align": "center"}
+        }
+      ]
+    },
+    {
+      "order": 7,
+      "type": "business_model",
+      "blocks": [
+        {
+          "id": "s7-label",
+          "type": "caption",
+          "content": "BUSINESS MODEL",
+          "position": {"x": 80, "y": 60, "w": 400, "h": 50},
+          "styling": {"font_family": "Inter", "font_size": 22, "font_weight": 700, "color": "#0F3460", "background_color": "transparent", "text_align": "left"}
+        },
+        {
+          "id": "s7-heading",
+          "type": "heading",
+          "content": "[PLACEHOLDER: Revenue Model]",
+          "position": {"x": 80, "y": 140, "w": 1760, "h": 100},
+          "styling": {"font_family": "Inter", "font_size": 52, "font_weight": 700, "color": "#1A1A2E", "background_color": "transparent", "text_align": "center"}
+        },
+        {
+          "id": "s7-stream1",
+          "type": "revenue_stream",
+          "content": "[PLACEHOLDER: Revenue Stream 1 — Description and pricing]",
+          "position": {"x": 80, "y": 300, "w": 800, "h": 200},
+          "styling": {"font_family": "Inter", "font_size": 28, "font_weight": 400, "color": "#FFFFFF", "background_color": "#1A1A2E", "text_align": "left"}
+        },
+        {
+          "id": "s7-stream2",
+          "type": "revenue_stream",
+          "content": "[PLACEHOLDER: Revenue Stream 2 — Description and pricing]",
+          "position": {"x": 960, "y": 300, "w": 880, "h": 200},
+          "styling": {"font_family": "Inter", "font_size": 28, "font_weight": 400, "color": "#FFFFFF", "background_color": "#0F3460", "text_align": "left"}
+        },
+        {
+          "id": "s7-unit-econ",
+          "type": "text",
+          "content": "[PLACEHOLDER: Unit economics — LTV, CAC, Payback Period]",
+          "position": {"x": 80, "y": 560, "w": 1760, "h": 100},
+          "styling": {"font_family": "Inter", "font_size": 28, "font_weight": 400, "color": "#1A1A2E", "background_color": "#F0F0F0", "text_align": "center"}
+        }
+      ]
+    },
+    {
+      "order": 8,
+      "type": "competition",
+      "blocks": [
+        {
+          "id": "s8-label",
+          "type": "caption",
+          "content": "COMPETITIVE LANDSCAPE",
+          "position": {"x": 80, "y": 60, "w": 600, "h": 50},
+          "styling": {"font_family": "Inter", "font_size": 22, "font_weight": 700, "color": "#0F3460", "background_color": "transparent", "text_align": "left"}
+        },
+        {
+          "id": "s8-heading",
+          "type": "heading",
+          "content": "[PLACEHOLDER: Why We Win]",
+          "position": {"x": 80, "y": 140, "w": 900, "h": 100},
+          "styling": {"font_family": "Inter", "font_size": 52, "font_weight": 700, "color": "#1A1A2E", "background_color": "transparent", "text_align": "left"}
+        },
+        {
+          "id": "s8-differentiator",
+          "type": "text",
+          "content": "[PLACEHOLDER: Key differentiators vs. competition]",
+          "position": {"x": 80, "y": 280, "w": 900, "h": 500},
+          "styling": {"font_family": "Inter", "font_size": 28, "font_weight": 400, "color": "#1A1A2E", "background_color": "transparent", "text_align": "left"}
+        },
+        {
+          "id": "s8-matrix",
+          "type": "table",
+          "content": "[PLACEHOLDER: Competitor comparison matrix]",
+          "position": {"x": 1040, "y": 160, "w": 800, "h": 600},
+          "styling": {"font_family": "Inter", "font_size": 24, "font_weight": 400, "color": "#1A1A2E", "background_color": "#F5F5F5", "text_align": "left"}
+        }
+      ]
+    },
+    {
+      "order": 9,
+      "type": "team",
+      "blocks": [
+        {
+          "id": "s9-label",
+          "type": "caption",
+          "content": "THE TEAM",
+          "position": {"x": 80, "y": 60, "w": 300, "h": 50},
+          "styling": {"font_family": "Inter", "font_size": 22, "font_weight": 700, "color": "#0F3460", "background_color": "transparent", "text_align": "left"}
+        },
+        {
+          "id": "s9-heading",
+          "type": "heading",
+          "content": "[PLACEHOLDER: Meet the Founders]",
+          "position": {"x": 80, "y": 140, "w": 1760, "h": 100},
+          "styling": {"font_family": "Inter", "font_size": 52, "font_weight": 700, "color": "#1A1A2E", "background_color": "transparent", "text_align": "center"}
+        },
+        {
+          "id": "s9-member1",
+          "type": "team_member",
+          "content": "[PLACEHOLDER: Name 1\nTitle\nBackground]",
+          "position": {"x": 80, "y": 300, "w": 540, "h": 500},
+          "styling": {"font_family": "Inter", "font_size": 26, "font_weight": 400, "color": "#1A1A2E", "background_color": "#F5F5F5", "text_align": "center"}
+        },
+        {
+          "id": "s9-member2",
+          "type": "team_member",
+          "content": "[PLACEHOLDER: Name 2\nTitle\nBackground]",
+          "position": {"x": 700, "y": 300, "w": 540, "h": 500},
+          "styling": {"font_family": "Inter", "font_size": 26, "font_weight": 400, "color": "#1A1A2E", "background_color": "#F5F5F5", "text_align": "center"}
+        },
+        {
+          "id": "s9-member3",
+          "type": "team_member",
+          "content": "[PLACEHOLDER: Name 3\nTitle\nBackground]",
+          "position": {"x": 1320, "y": 300, "w": 540, "h": 500},
+          "styling": {"font_family": "Inter", "font_size": 26, "font_weight": 400, "color": "#1A1A2E", "background_color": "#F5F5F5", "text_align": "center"}
+        }
+      ]
+    },
+    {
+      "order": 10,
+      "type": "roadmap",
+      "blocks": [
+        {
+          "id": "s10-label",
+          "type": "caption",
+          "content": "ROADMAP",
+          "position": {"x": 80, "y": 60, "w": 300, "h": 50},
+          "styling": {"font_family": "Inter", "font_size": 22, "font_weight": 700, "color": "#0F3460", "background_color": "transparent", "text_align": "left"}
+        },
+        {
+          "id": "s10-heading",
+          "type": "heading",
+          "content": "[PLACEHOLDER: 18-Month Plan]",
+          "position": {"x": 80, "y": 140, "w": 1760, "h": 100},
+          "styling": {"font_family": "Inter", "font_size": 52, "font_weight": 700, "color": "#1A1A2E", "background_color": "transparent", "text_align": "center"}
+        },
+        {
+          "id": "s10-q1",
+          "type": "roadmap_item",
+          "content": "Q1\n[PLACEHOLDER: Milestone 1]",
+          "position": {"x": 80, "y": 300, "w": 380, "h": 400},
+          "styling": {"font_family": "Inter", "font_size": 26, "font_weight": 400, "color": "#FFFFFF", "background_color": "#1A1A2E", "text_align": "center"}
+        },
+        {
+          "id": "s10-q2",
+          "type": "roadmap_item",
+          "content": "Q2\n[PLACEHOLDER: Milestone 2]",
+          "position": {"x": 540, "y": 300, "w": 380, "h": 400},
+          "styling": {"font_family": "Inter", "font_size": 26, "font_weight": 400, "color": "#FFFFFF", "background_color": "#16213E", "text_align": "center"}
+        },
+        {
+          "id": "s10-q3",
+          "type": "roadmap_item",
+          "content": "Q3\n[PLACEHOLDER: Milestone 3]",
+          "position": {"x": 1000, "y": 300, "w": 380, "h": 400},
+          "styling": {"font_family": "Inter", "font_size": 26, "font_weight": 400, "color": "#FFFFFF", "background_color": "#0F3460", "text_align": "center"}
+        },
+        {
+          "id": "s10-q4",
+          "type": "roadmap_item",
+          "content": "Q4+\n[PLACEHOLDER: Milestone 4]",
+          "position": {"x": 1460, "y": 300, "w": 380, "h": 400},
+          "styling": {"font_family": "Inter", "font_size": 26, "font_weight": 400, "color": "#1A1A2E", "background_color": "#E8EAF6", "text_align": "center"}
+        }
+      ]
+    },
+    {
+      "order": 11,
+      "type": "financials",
+      "blocks": [
+        {
+          "id": "s11-label",
+          "type": "caption",
+          "content": "FINANCIALS & THE ASK",
+          "position": {"x": 80, "y": 60, "w": 500, "h": 50},
+          "styling": {"font_family": "Inter", "font_size": 22, "font_weight": 700, "color": "#0F3460", "background_color": "transparent", "text_align": "left"}
+        },
+        {
+          "id": "s11-heading",
+          "type": "heading",
+          "content": "[PLACEHOLDER: Fundraising Round]",
+          "position": {"x": 80, "y": 140, "w": 1760, "h": 100},
+          "styling": {"font_family": "Inter", "font_size": 52, "font_weight": 700, "color": "#1A1A2E", "background_color": "transparent", "text_align": "center"}
+        },
+        {
+          "id": "s11-ask",
+          "type": "stat",
+          "content": "[PLACEHOLDER: Raise Amount e.g. $2M Seed]",
+          "position": {"x": 580, "y": 280, "w": 760, "h": 180},
+          "styling": {"font_family": "Inter", "font_size": 64, "font_weight": 800, "color": "#FFFFFF", "background_color": "#1A1A2E", "text_align": "center"}
+        },
+        {
+          "id": "s11-use1",
+          "type": "use_of_funds",
+          "content": "[PLACEHOLDER: Use of Funds 1 — XX%]",
+          "position": {"x": 80, "y": 520, "w": 540, "h": 120},
+          "styling": {"font_family": "Inter", "font_size": 26, "font_weight": 400, "color": "#1A1A2E", "background_color": "#F5F5F5", "text_align": "center"}
+        },
+        {
+          "id": "s11-use2",
+          "type": "use_of_funds",
+          "content": "[PLACEHOLDER: Use of Funds 2 — XX%]",
+          "position": {"x": 700, "y": 520, "w": 540, "h": 120},
+          "styling": {"font_family": "Inter", "font_size": 26, "font_weight": 400, "color": "#1A1A2E", "background_color": "#F5F5F5", "text_align": "center"}
+        },
+        {
+          "id": "s11-use3",
+          "type": "use_of_funds",
+          "content": "[PLACEHOLDER: Use of Funds 3 — XX%]",
+          "position": {"x": 1320, "y": 520, "w": 520, "h": 120},
+          "styling": {"font_family": "Inter", "font_size": 26, "font_weight": 400, "color": "#1A1A2E", "background_color": "#F5F5F5", "text_align": "center"}
+        }
+      ]
+    },
+    {
+      "order": 12,
+      "type": "closing",
+      "blocks": [
+        {
+          "id": "s12-logo",
+          "type": "image",
+          "content": "[LOGO_PLACEHOLDER]",
+          "position": {"x": 760, "y": 200, "w": 400, "h": 160},
+          "styling": {"font_family": "Inter", "font_size": 16, "font_weight": 400, "color": "#1A1A2E", "background_color": "transparent", "text_align": "center"}
+        },
+        {
+          "id": "s12-cta",
+          "type": "heading",
+          "content": "[PLACEHOLDER: Call to Action — e.g. Let's Build Together]",
+          "position": {"x": 160, "y": 420, "w": 1600, "h": 120},
+          "styling": {"font_family": "Inter", "font_size": 64, "font_weight": 700, "color": "#1A1A2E", "background_color": "transparent", "text_align": "center"}
+        },
+        {
+          "id": "s12-contact",
+          "type": "text",
+          "content": "[PLACEHOLDER: contact@company.com | www.company.com]",
+          "position": {"x": 160, "y": 580, "w": 1600, "h": 60},
+          "styling": {"font_family": "Inter", "font_size": 28, "font_weight": 300, "color": "#0F3460", "background_color": "transparent", "text_align": "center"}
+        }
+      ]
+    }
+  ]
+}

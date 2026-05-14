@@ -1,0 +1,17 @@
+{
+  "name": "Elegant Classic",
+  "colors": {
+    "primary":    "#1C3144",
+    "secondary":  "#2E4A6A",
+    "accent":     "#C9A84C",
+    "background": "#FAF8F2",
+    "text":       "#1C3144",
+    "surface":    "#EDE8DE",
+    "muted":      "#7A8FA6"
+  },
+  "fonts": {
+    "heading": { "family": "Georgia, serif",      "size": 52, "weight": 700 },
+    "body":    { "family": "Inter, sans-serif",    "size": 22, "weight": 400 },
+    "caption": { "family": "Inter, sans-serif",    "size": 16, "weight": 300 }
+  }
+}

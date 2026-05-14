@@ -1,0 +1,119 @@
+{
+  "name": "Sales Presentation",
+  "description": "Persuasive sales deck to convert prospects into customers by showcasing value and ROI.",
+  "category": "Sales",
+  "tags": ["sales", "prospect", "demo", "roi", "conversion"],
+  "thumbnail_url": "",
+  "theme_name": "Startup Energy",
+  "is_active": true,
+  "metadata": {
+    "total_slides": 9,
+    "estimated_duration": 20,
+    "default_audience": "Prospects, decision makers, buyers"
+  },
+  "slides": [
+    {
+      "order": 1,
+      "type": "title",
+      "blocks": [
+        {"id": "s1-logo", "type": "image", "content": "[LOGO_PLACEHOLDER]", "position": {"x": 80, "y": 60, "w": 200, "h": 80}, "styling": {"font_family": "Nunito", "font_size": 16, "font_weight": 400, "color": "#2D2D2D", "background_color": "transparent", "text_align": "left"}},
+        {"id": "s1-greeting", "type": "caption", "content": "PRESENTED TO [PLACEHOLDER: PROSPECT NAME]", "position": {"x": 160, "y": 300, "w": 1600, "h": 60}, "styling": {"font_family": "Nunito", "font_size": 24, "font_weight": 700, "color": "#6C63FF", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s1-title", "type": "title", "content": "[PLACEHOLDER: How Company Name Helps You Achieve Goal]", "position": {"x": 160, "y": 380, "w": 1600, "h": 200}, "styling": {"font_family": "Nunito", "font_size": 72, "font_weight": 800, "color": "#2D2D2D", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s1-rep", "type": "text", "content": "[PLACEHOLDER: Sales Rep Name | Account Executive | email@company.com]", "position": {"x": 160, "y": 620, "w": 1600, "h": 60}, "styling": {"font_family": "Nunito", "font_size": 24, "font_weight": 400, "color": "#6C63FF", "background_color": "transparent", "text_align": "center"}}
+      ]
+    },
+    {
+      "order": 2,
+      "type": "agenda",
+      "blocks": [
+        {"id": "s2-label", "type": "caption", "content": "TODAY'S AGENDA", "position": {"x": 80, "y": 60, "w": 400, "h": 50}, "styling": {"font_family": "Nunito", "font_size": 22, "font_weight": 700, "color": "#6C63FF", "background_color": "transparent", "text_align": "left"}},
+        {"id": "s2-heading", "type": "heading", "content": "[PLACEHOLDER: What We'll Cover]", "position": {"x": 80, "y": 140, "w": 1760, "h": 100}, "styling": {"font_family": "Nunito", "font_size": 52, "font_weight": 800, "color": "#2D2D2D", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s2-item1", "type": "agenda_item", "content": "01  [PLACEHOLDER: About Us — 5 min]", "position": {"x": 200, "y": 310, "w": 1520, "h": 100}, "styling": {"font_family": "Nunito", "font_size": 36, "font_weight": 700, "color": "#2D2D2D", "background_color": "#F0EDFF", "text_align": "left"}},
+        {"id": "s2-item2", "type": "agenda_item", "content": "02  [PLACEHOLDER: Understanding Your Needs — 10 min]", "position": {"x": 200, "y": 450, "w": 1520, "h": 100}, "styling": {"font_family": "Nunito", "font_size": 36, "font_weight": 700, "color": "#2D2D2D", "background_color": "#FFF0F3", "text_align": "left"}},
+        {"id": "s2-item3", "type": "agenda_item", "content": "03  [PLACEHOLDER: Our Solution — 10 min]", "position": {"x": 200, "y": 590, "w": 1520, "h": 100}, "styling": {"font_family": "Nunito", "font_size": 36, "font_weight": 700, "color": "#2D2D2D", "background_color": "#EDFFF9", "text_align": "left"}},
+        {"id": "s2-item4", "type": "agenda_item", "content": "04  [PLACEHOLDER: Next Steps — 5 min]", "position": {"x": 200, "y": 730, "w": 1520, "h": 100}, "styling": {"font_family": "Nunito", "font_size": 36, "font_weight": 700, "color": "#2D2D2D", "background_color": "#F0EDFF", "text_align": "left"}}
+      ]
+    },
+    {
+      "order": 3,
+      "type": "about",
+      "blocks": [
+        {"id": "s3-label", "type": "caption", "content": "ABOUT US", "position": {"x": 80, "y": 60, "w": 300, "h": 50}, "styling": {"font_family": "Nunito", "font_size": 22, "font_weight": 700, "color": "#6C63FF", "background_color": "transparent", "text_align": "left"}},
+        {"id": "s3-heading", "type": "heading", "content": "[PLACEHOLDER: Why We're Different]", "position": {"x": 80, "y": 140, "w": 1760, "h": 100}, "styling": {"font_family": "Nunito", "font_size": 52, "font_weight": 800, "color": "#2D2D2D", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s3-creds1", "type": "credential", "content": "[PLACEHOLDER: XX,XXX+]\nCustomers", "position": {"x": 80, "y": 320, "w": 380, "h": 280}, "styling": {"font_family": "Nunito", "font_size": 52, "font_weight": 800, "color": "#6C63FF", "background_color": "#F0EDFF", "text_align": "center"}},
+        {"id": "s3-creds2", "type": "credential", "content": "[PLACEHOLDER: XX] Countries", "position": {"x": 540, "y": 320, "w": 380, "h": 280}, "styling": {"font_family": "Nunito", "font_size": 52, "font_weight": 800, "color": "#FF6584", "background_color": "#FFF0F3", "text_align": "center"}},
+        {"id": "s3-creds3", "type": "credential", "content": "[PLACEHOLDER: XX] Years", "position": {"x": 1000, "y": 320, "w": 380, "h": 280}, "styling": {"font_family": "Nunito", "font_size": 52, "font_weight": 800, "color": "#43D9AD", "background_color": "#EDFFF9", "text_align": "center"}},
+        {"id": "s3-creds4", "type": "credential", "content": "[PLACEHOLDER: #1 Rated]\nin Category", "position": {"x": 1460, "y": 320, "w": 380, "h": 280}, "styling": {"font_family": "Nunito", "font_size": 40, "font_weight": 800, "color": "#2D2D2D", "background_color": "#FAFAFA", "text_align": "center"}},
+        {"id": "s3-logos", "type": "text", "content": "[PLACEHOLDER: Used by leading companies including...]", "position": {"x": 80, "y": 660, "w": 1760, "h": 80}, "styling": {"font_family": "Nunito", "font_size": 24, "font_weight": 400, "color": "#6C63FF", "background_color": "transparent", "text_align": "center"}}
+      ]
+    },
+    {
+      "order": 4,
+      "type": "pain_points",
+      "blocks": [
+        {"id": "s4-label", "type": "caption", "content": "WE UNDERSTAND YOUR CHALLENGES", "position": {"x": 80, "y": 60, "w": 700, "h": 50}, "styling": {"font_family": "Nunito", "font_size": 22, "font_weight": 700, "color": "#6C63FF", "background_color": "transparent", "text_align": "left"}},
+        {"id": "s4-heading", "type": "heading", "content": "[PLACEHOLDER: Does This Sound Familiar?]", "position": {"x": 80, "y": 140, "w": 1760, "h": 100}, "styling": {"font_family": "Nunito", "font_size": 52, "font_weight": 800, "color": "#2D2D2D", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s4-pain1", "type": "pain_point", "content": "[PLACEHOLDER: Pain point 1 that resonates with prospect]", "position": {"x": 80, "y": 310, "w": 800, "h": 140}, "styling": {"font_family": "Nunito", "font_size": 30, "font_weight": 600, "color": "#2D2D2D", "background_color": "#FFF0F3", "text_align": "left"}},
+        {"id": "s4-pain2", "type": "pain_point", "content": "[PLACEHOLDER: Pain point 2 that resonates with prospect]", "position": {"x": 80, "y": 490, "w": 800, "h": 140}, "styling": {"font_family": "Nunito", "font_size": 30, "font_weight": 600, "color": "#2D2D2D", "background_color": "#FFF0F3", "text_align": "left"}},
+        {"id": "s4-pain3", "type": "pain_point", "content": "[PLACEHOLDER: Pain point 3 that resonates with prospect]", "position": {"x": 80, "y": 670, "w": 800, "h": 140}, "styling": {"font_family": "Nunito", "font_size": 30, "font_weight": 600, "color": "#2D2D2D", "background_color": "#FFF0F3", "text_align": "left"}},
+        {"id": "s4-cost", "type": "stat", "content": "Cost of Inaction\n[PLACEHOLDER: $XX per year]", "position": {"x": 1060, "y": 310, "w": 780, "h": 500}, "styling": {"font_family": "Nunito", "font_size": 48, "font_weight": 800, "color": "#FFFFFF", "background_color": "#FF6584", "text_align": "center"}}
+      ]
+    },
+    {
+      "order": 5,
+      "type": "solution",
+      "blocks": [
+        {"id": "s5-label", "type": "caption", "content": "OUR SOLUTION", "position": {"x": 80, "y": 60, "w": 400, "h": 50}, "styling": {"font_family": "Nunito", "font_size": 22, "font_weight": 700, "color": "#43D9AD", "background_color": "transparent", "text_align": "left"}},
+        {"id": "s5-heading", "type": "heading", "content": "[PLACEHOLDER: Product Name] for [PLACEHOLDER: Company Name]", "position": {"x": 80, "y": 140, "w": 1760, "h": 100}, "styling": {"font_family": "Nunito", "font_size": 48, "font_weight": 800, "color": "#2D2D2D", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s5-capability1", "type": "capability", "content": "[PLACEHOLDER: Capability 1 addresses Pain 1]", "position": {"x": 80, "y": 310, "w": 540, "h": 180}, "styling": {"font_family": "Nunito", "font_size": 28, "font_weight": 400, "color": "#FFFFFF", "background_color": "#6C63FF", "text_align": "center"}},
+        {"id": "s5-capability2", "type": "capability", "content": "[PLACEHOLDER: Capability 2 addresses Pain 2]", "position": {"x": 700, "y": 310, "w": 540, "h": 180}, "styling": {"font_family": "Nunito", "font_size": 28, "font_weight": 400, "color": "#FFFFFF", "background_color": "#FF6584", "text_align": "center"}},
+        {"id": "s5-capability3", "type": "capability", "content": "[PLACEHOLDER: Capability 3 addresses Pain 3]", "position": {"x": 1320, "y": 310, "w": 520, "h": 180}, "styling": {"font_family": "Nunito", "font_size": 28, "font_weight": 400, "color": "#FFFFFF", "background_color": "#43D9AD", "text_align": "center"}},
+        {"id": "s5-screenshot", "type": "image", "content": "[PLACEHOLDER: Product screenshot or demo]", "position": {"x": 200, "y": 540, "w": 1520, "h": 360}, "styling": {"font_family": "Nunito", "font_size": 16, "font_weight": 400, "color": "#2D2D2D", "background_color": "#F5F5F5", "text_align": "center"}}
+      ]
+    },
+    {
+      "order": 6,
+      "type": "roi",
+      "blocks": [
+        {"id": "s6-label", "type": "caption", "content": "YOUR ROI", "position": {"x": 80, "y": 60, "w": 300, "h": 50}, "styling": {"font_family": "Nunito", "font_size": 22, "font_weight": 700, "color": "#43D9AD", "background_color": "transparent", "text_align": "left"}},
+        {"id": "s6-heading", "type": "heading", "content": "[PLACEHOLDER: Expected Results for Company Name]", "position": {"x": 80, "y": 140, "w": 1760, "h": 100}, "styling": {"font_family": "Nunito", "font_size": 48, "font_weight": 800, "color": "#2D2D2D", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s6-roi1", "type": "roi_item", "content": "[PLACEHOLDER: XX% reduction in X]", "position": {"x": 80, "y": 310, "w": 540, "h": 200}, "styling": {"font_family": "Nunito", "font_size": 36, "font_weight": 800, "color": "#6C63FF", "background_color": "#F0EDFF", "text_align": "center"}},
+        {"id": "s6-roi2", "type": "roi_item", "content": "[PLACEHOLDER: $XX,XXX saved per year]", "position": {"x": 700, "y": 310, "w": 540, "h": 200}, "styling": {"font_family": "Nunito", "font_size": 36, "font_weight": 800, "color": "#FF6584", "background_color": "#FFF0F3", "text_align": "center"}},
+        {"id": "s6-roi3", "type": "roi_item", "content": "[PLACEHOLDER: XX hours saved per week]", "position": {"x": 1320, "y": 310, "w": 520, "h": 200}, "styling": {"font_family": "Nunito", "font_size": 36, "font_weight": 800, "color": "#43D9AD", "background_color": "#EDFFF9", "text_align": "center"}},
+        {"id": "s6-payback", "type": "text", "content": "[PLACEHOLDER: Payback period: X months. Based on customer averages.]", "position": {"x": 80, "y": 580, "w": 1760, "h": 100}, "styling": {"font_family": "Nunito", "font_size": 28, "font_weight": 400, "color": "#2D2D2D", "background_color": "transparent", "text_align": "center"}}
+      ]
+    },
+    {
+      "order": 7,
+      "type": "social_proof",
+      "blocks": [
+        {"id": "s7-label", "type": "caption", "content": "CUSTOMER SUCCESS", "position": {"x": 80, "y": 60, "w": 500, "h": 50}, "styling": {"font_family": "Nunito", "font_size": 22, "font_weight": 700, "color": "#6C63FF", "background_color": "transparent", "text_align": "left"}},
+        {"id": "s7-heading", "type": "heading", "content": "[PLACEHOLDER: Results Our Customers Achieve]", "position": {"x": 80, "y": 140, "w": 1760, "h": 100}, "styling": {"font_family": "Nunito", "font_size": 48, "font_weight": 800, "color": "#2D2D2D", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s7-case1", "type": "case_study", "content": "[PLACEHOLDER: Customer 1]\n[PLACEHOLDER: Industry]\n\n\"[PLACEHOLDER: Quote]\"\n\nResult: [PLACEHOLDER: Specific measurable outcome]", "position": {"x": 80, "y": 310, "w": 840, "h": 480}, "styling": {"font_family": "Nunito", "font_size": 26, "font_weight": 400, "color": "#2D2D2D", "background_color": "#F0EDFF", "text_align": "left"}},
+        {"id": "s7-case2", "type": "case_study", "content": "[PLACEHOLDER: Customer 2]\n[PLACEHOLDER: Industry]\n\n\"[PLACEHOLDER: Quote]\"\n\nResult: [PLACEHOLDER: Specific measurable outcome]", "position": {"x": 1000, "y": 310, "w": 840, "h": 480}, "styling": {"font_family": "Nunito", "font_size": 26, "font_weight": 400, "color": "#2D2D2D", "background_color": "#EDFFF9", "text_align": "left"}}
+      ]
+    },
+    {
+      "order": 8,
+      "type": "pricing",
+      "blocks": [
+        {"id": "s8-label", "type": "caption", "content": "INVESTMENT", "position": {"x": 80, "y": 60, "w": 300, "h": 50}, "styling": {"font_family": "Nunito", "font_size": 22, "font_weight": 700, "color": "#6C63FF", "background_color": "transparent", "text_align": "left"}},
+        {"id": "s8-heading", "type": "heading", "content": "[PLACEHOLDER: Tailored for Company Name]", "position": {"x": 80, "y": 140, "w": 1760, "h": 100}, "styling": {"font_family": "Nunito", "font_size": 52, "font_weight": 800, "color": "#2D2D2D", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s8-package", "type": "pricing_tier", "content": "[PLACEHOLDER: Package Name]\n$[PLACEHOLDER: Price/mo]\n\n[PLACEHOLDER: Key inclusions\nline by line]", "position": {"x": 480, "y": 310, "w": 960, "h": 500}, "styling": {"font_family": "Nunito", "font_size": 30, "font_weight": 600, "color": "#FFFFFF", "background_color": "#6C63FF", "text_align": "center"}},
+        {"id": "s8-onboarding", "type": "text", "content": "[PLACEHOLDER: Onboarding and implementation details]", "position": {"x": 80, "y": 870, "w": 1760, "h": 80}, "styling": {"font_family": "Nunito", "font_size": 24, "font_weight": 400, "color": "#6C63FF", "background_color": "transparent", "text_align": "center"}}
+      ]
+    },
+    {
+      "order": 9,
+      "type": "next_steps",
+      "blocks": [
+        {"id": "s9-logo", "type": "image", "content": "[LOGO_PLACEHOLDER]", "position": {"x": 80, "y": 60, "w": 200, "h": 80}, "styling": {"font_family": "Nunito", "font_size": 16, "font_weight": 400, "color": "#2D2D2D", "background_color": "transparent", "text_align": "left"}},
+        {"id": "s9-heading", "type": "heading", "content": "[PLACEHOLDER: Ready to Get Started?]", "position": {"x": 80, "y": 200, "w": 1760, "h": 120}, "styling": {"font_family": "Nunito", "font_size": 60, "font_weight": 800, "color": "#6C63FF", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s9-step1", "type": "next_step", "content": "1. [PLACEHOLDER: Schedule a technical demo — this week]", "position": {"x": 160, "y": 400, "w": 1600, "h": 100}, "styling": {"font_family": "Nunito", "font_size": 32, "font_weight": 600, "color": "#2D2D2D", "background_color": "#F0EDFF", "text_align": "left"}},
+        {"id": "s9-step2", "type": "next_step", "content": "2. [PLACEHOLDER: Trial agreement — 2 days]", "position": {"x": 160, "y": 540, "w": 1600, "h": 100}, "styling": {"font_family": "Nunito", "font_size": 32, "font_weight": 600, "color": "#2D2D2D", "background_color": "#EDFFF9", "text_align": "left"}},
+        {"id": "s9-step3", "type": "next_step", "content": "3. [PLACEHOLDER: Kickoff and onboarding — week 1]", "position": {"x": 160, "y": 680, "w": 1600, "h": 100}, "styling": {"font_family": "Nunito", "font_size": 32, "font_weight": 600, "color": "#2D2D2D", "background_color": "#FFF0F3", "text_align": "left"}},
+        {"id": "s9-contact", "type": "text", "content": "[PLACEHOLDER: rep@company.com | +1 (XXX) XXX-XXXX]", "position": {"x": 160, "y": 830, "w": 1600, "h": 60}, "styling": {"font_family": "Nunito", "font_size": 28, "font_weight": 400, "color": "#6C63FF", "background_color": "transparent", "text_align": "center"}}
+      ]
+    }
+  ]
+}

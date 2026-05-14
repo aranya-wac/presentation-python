@@ -1,0 +1,17 @@
+{
+  "name": "Startup Energy",
+  "colors": {
+    "primary":    "#1A0533",
+    "secondary":  "#2D0A5A",
+    "accent":     "#A855F7",
+    "background": "#FAF5FF",
+    "text":       "#1A0533",
+    "surface":    "#EDE9F6",
+    "muted":      "#7C3AED"
+  },
+  "fonts": {
+    "heading": { "family": "Inter, sans-serif", "size": 52, "weight": 800 },
+    "body":    { "family": "Inter, sans-serif", "size": 22, "weight": 400 },
+    "caption": { "family": "Inter, sans-serif", "size": 16, "weight": 300 }
+  }
+}

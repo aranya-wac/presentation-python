@@ -1,0 +1,17 @@
+{
+  "name": "Venture Dark",
+  "colors": {
+    "primary":    "#7C3AED",
+    "secondary":  "#1E1B4B",
+    "accent":     "#06B6D4",
+    "background": "#0C0A1A",
+    "text":       "#F1F5F9",
+    "surface":    "#1A1730",
+    "muted":      "#64748B"
+  },
+  "fonts": {
+    "heading": { "family": "Inter, sans-serif", "size": 52, "weight": 800 },
+    "body":    { "family": "Inter, sans-serif", "size": 20, "weight": 400 },
+    "caption": { "family": "Inter, sans-serif", "size": 13, "weight": 500 }
+  }
+}

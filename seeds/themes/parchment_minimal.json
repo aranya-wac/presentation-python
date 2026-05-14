@@ -1,0 +1,17 @@
+{
+  "name": "Parchment Minimal",
+  "colors": {
+    "primary":    "#1A1814",
+    "secondary":  "#3A3530",
+    "accent":     "#8B7355",
+    "background": "#F9F7F4",
+    "text":       "#1A1814",
+    "surface":    "#F2EFE9",
+    "muted":      "#9E9890"
+  },
+  "fonts": {
+    "heading": { "family": "Georgia, serif", "size": 48, "weight": 700 },
+    "body":    { "family": "Inter, sans-serif", "size": 18, "weight": 400 },
+    "caption": { "family": "Inter, sans-serif", "size": 12, "weight": 400 }
+  }
+}

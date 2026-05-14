@@ -1,0 +1,1554 @@
+{
+  "name": "Go-To-Market Strategy",
+  "description": "A high-energy, action-oriented GTM strategy deck. Bold orange palette drives urgency. Perfect for product launches, marketing kicks, and sales enablement.",
+  "category": "Marketing",
+  "tags": ["go-to-market", "marketing", "strategy", "product launch", "sales"],
+  "thumbnail_url": "",
+  "theme_name": "Kinetic Orange",
+  "is_active": true,
+  "metadata": {
+    "total_slides": 8,
+    "estimated_duration": 12,
+    "default_audience": "Sales & Marketing Teams"
+  },
+  "slides": [
+    {
+      "slide_number": 1,
+      "title": "Cover",
+      "blocks": [
+        {
+          "id": "s1-bg",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 0, "y": 0, "w": 1280, "h": 720 },
+          "styling": { "background_color": "#FFFFFF" }
+        },
+        {
+          "id": "s1-orange-fill",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 0, "y": 0, "w": 560, "h": 720 },
+          "styling": { "background_color": "#EA4C1B" }
+        },
+        {
+          "id": "s1-date",
+          "type": "text",
+          "content": "Q1 2025 LAUNCH",
+          "position": { "x": 48, "y": 200, "w": 460, "h": 28 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 12,
+            "font_weight": 700,
+            "color": "#FFCDB8",
+            "text_align": "left",
+            "letter_spacing": "0.15em"
+          }
+        },
+        {
+          "id": "s1-title",
+          "type": "text",
+          "content": "Go-To-Market\nStrategy",
+          "position": { "x": 48, "y": 240, "w": 480, "h": 200 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 62,
+            "font_weight": 800,
+            "color": "#FFFFFF",
+            "text_align": "left",
+            "line_height": 1.1
+          }
+        },
+        {
+          "id": "s1-product",
+          "type": "text",
+          "content": "Product Name v2.0",
+          "position": { "x": 48, "y": 460, "w": 460, "h": 40 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 22,
+            "font_weight": 600,
+            "color": "#FFCDB8",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s1-divider",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 48, "y": 512, "w": 200, "h": 2 },
+          "styling": { "background_color": "#FFCDB8" }
+        },
+        {
+          "id": "s1-team",
+          "type": "text",
+          "content": "Marketing & Sales\nPresented by Team Name",
+          "position": { "x": 48, "y": 524, "w": 460, "h": 60 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 15,
+            "font_weight": 400,
+            "color": "#FFCDB8",
+            "text_align": "left",
+            "line_height": 1.6
+          }
+        },
+        {
+          "id": "s1-right-headline",
+          "type": "text",
+          "content": "Our plan to win\nthe market.",
+          "position": { "x": 608, "y": 280, "w": 600, "h": 180 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 44,
+            "font_weight": 800,
+            "color": "#1A1410",
+            "text_align": "left",
+            "line_height": 1.15
+          }
+        },
+        {
+          "id": "s1-right-sub",
+          "type": "text",
+          "content": "From awareness to activation in 90 days.",
+          "position": { "x": 608, "y": 472, "w": 600, "h": 40 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 18,
+            "font_weight": 400,
+            "color": "#9E8880",
+            "text_align": "left"
+          }
+        }
+      ]
+    },
+    {
+      "slide_number": 2,
+      "title": "Market Opportunity",
+      "blocks": [
+        {
+          "id": "s2-bg",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 0, "y": 0, "w": 1280, "h": 720 },
+          "styling": { "background_color": "#FFFFFF" }
+        },
+        {
+          "id": "s2-accent-top",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 0, "y": 0, "w": 1280, "h": 6 },
+          "styling": { "background_color": "#EA4C1B" }
+        },
+        {
+          "id": "s2-section",
+          "type": "text",
+          "content": "MARKET OPPORTUNITY",
+          "position": { "x": 64, "y": 56, "w": 400, "h": 28 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 11,
+            "font_weight": 700,
+            "color": "#EA4C1B",
+            "text_align": "left",
+            "letter_spacing": "0.15em"
+          }
+        },
+        {
+          "id": "s2-title",
+          "type": "text",
+          "content": "The window is open. Here's why now.",
+          "position": { "x": 64, "y": 100, "w": 800, "h": 60 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 38,
+            "font_weight": 800,
+            "color": "#1A1410",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s2-stat1-bg",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 64, "y": 210, "w": 280, "h": 180 },
+          "styling": {
+            "background_color": "#EA4C1B",
+            "border_radius": "12px"
+          }
+        },
+        {
+          "id": "s2-stat1-val",
+          "type": "text",
+          "content": "$86B",
+          "position": { "x": 64, "y": 250, "w": 280, "h": 72 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 52,
+            "font_weight": 800,
+            "color": "#FFFFFF",
+            "text_align": "center"
+          }
+        },
+        {
+          "id": "s2-stat1-lbl",
+          "type": "text",
+          "content": "Total Addressable Market",
+          "position": { "x": 64, "y": 326, "w": 280, "h": 36 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 13,
+            "font_weight": 600,
+            "color": "#FFCDB8",
+            "text_align": "center"
+          }
+        },
+        {
+          "id": "s2-stat2-bg",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 376, "y": 210, "w": 280, "h": 180 },
+          "styling": {
+            "background_color": "#FFF7F5",
+            "border": "2px solid #EA4C1B",
+            "border_radius": "12px"
+          }
+        },
+        {
+          "id": "s2-stat2-val",
+          "type": "text",
+          "content": "28%",
+          "position": { "x": 376, "y": 250, "w": 280, "h": 72 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 52,
+            "font_weight": 800,
+            "color": "#EA4C1B",
+            "text_align": "center"
+          }
+        },
+        {
+          "id": "s2-stat2-lbl",
+          "type": "text",
+          "content": "Annual Growth Rate (CAGR)",
+          "position": { "x": 376, "y": 326, "w": 280, "h": 36 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 13,
+            "font_weight": 600,
+            "color": "#9E8880",
+            "text_align": "center"
+          }
+        },
+        {
+          "id": "s2-stat3-bg",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 688, "y": 210, "w": 280, "h": 180 },
+          "styling": {
+            "background_color": "#FFF7F5",
+            "border": "2px solid #EA4C1B",
+            "border_radius": "12px"
+          }
+        },
+        {
+          "id": "s2-stat3-val",
+          "type": "text",
+          "content": "3.2M",
+          "position": { "x": 688, "y": 250, "w": 280, "h": 72 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 52,
+            "font_weight": 800,
+            "color": "#EA4C1B",
+            "text_align": "center"
+          }
+        },
+        {
+          "id": "s2-stat3-lbl",
+          "type": "text",
+          "content": "Target ICP Accounts",
+          "position": { "x": 688, "y": 326, "w": 280, "h": 36 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 13,
+            "font_weight": 600,
+            "color": "#9E8880",
+            "text_align": "center"
+          }
+        },
+        {
+          "id": "s2-insight",
+          "type": "text",
+          "content": "Key tailwind: Legacy solutions are losing share fast. Buyers are actively evaluating alternatives — our timing is perfect.",
+          "position": { "x": 64, "y": 450, "w": 1000, "h": 60 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 18,
+            "font_weight": 400,
+            "color": "#4A3A34",
+            "text_align": "left",
+            "line_height": 1.5
+          }
+        }
+      ]
+    },
+    {
+      "slide_number": 3,
+      "title": "ICP & Segmentation",
+      "blocks": [
+        {
+          "id": "s3-bg",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 0, "y": 0, "w": 1280, "h": 720 },
+          "styling": { "background_color": "#FFFFFF" }
+        },
+        {
+          "id": "s3-accent",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 0, "y": 0, "w": 1280, "h": 6 },
+          "styling": { "background_color": "#EA4C1B" }
+        },
+        {
+          "id": "s3-section",
+          "type": "text",
+          "content": "IDEAL CUSTOMER PROFILE",
+          "position": { "x": 64, "y": 56, "w": 500, "h": 28 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 11,
+            "font_weight": 700,
+            "color": "#EA4C1B",
+            "text_align": "left",
+            "letter_spacing": "0.15em"
+          }
+        },
+        {
+          "id": "s3-title",
+          "type": "text",
+          "content": "We know exactly who we're selling to.",
+          "position": { "x": 64, "y": 100, "w": 900, "h": 60 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 38,
+            "font_weight": 800,
+            "color": "#1A1410",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s3-persona-box",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 64, "y": 200, "w": 500, "h": 420 },
+          "styling": {
+            "background_color": "#FFF7F5",
+            "border": "2px solid #EA4C1B",
+            "border_radius": "16px"
+          }
+        },
+        {
+          "id": "s3-persona-tag",
+          "type": "text",
+          "content": "PRIMARY PERSONA",
+          "position": { "x": 88, "y": 228, "w": 250, "h": 24 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 10,
+            "font_weight": 700,
+            "color": "#EA4C1B",
+            "text_align": "left",
+            "letter_spacing": "0.12em"
+          }
+        },
+        {
+          "id": "s3-persona-name",
+          "type": "text",
+          "content": "Head of Marketing",
+          "position": { "x": 88, "y": 258, "w": 452, "h": 44 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 30,
+            "font_weight": 800,
+            "color": "#1A1410",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s3-persona-co",
+          "type": "text",
+          "content": "B2B SaaS, 50–500 employees, $5M–$50M ARR",
+          "position": { "x": 88, "y": 308, "w": 452, "h": 36 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 15,
+            "font_weight": 400,
+            "color": "#9E8880",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s3-persona-pain-lbl",
+          "type": "text",
+          "content": "PAIN POINTS",
+          "position": { "x": 88, "y": 368, "w": 200, "h": 24 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 10,
+            "font_weight": 700,
+            "color": "#9E8880",
+            "text_align": "left",
+            "letter_spacing": "0.1em"
+          }
+        },
+        {
+          "id": "s3-persona-pain",
+          "type": "text",
+          "content": "Too many disconnected tools\nCan't prove ROI to the board\nTeam wastes 40% time on manual work",
+          "position": { "x": 88, "y": 398, "w": 452, "h": 100 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 15,
+            "font_weight": 400,
+            "color": "#4A3A34",
+            "text_align": "left",
+            "line_height": 1.7
+          }
+        },
+        {
+          "id": "s3-persona-goal-lbl",
+          "type": "text",
+          "content": "GOALS",
+          "position": { "x": 88, "y": 514, "w": 200, "h": 24 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 10,
+            "font_weight": 700,
+            "color": "#9E8880",
+            "text_align": "left",
+            "letter_spacing": "0.1em"
+          }
+        },
+        {
+          "id": "s3-persona-goal",
+          "type": "text",
+          "content": "Scale pipeline 3x without headcount",
+          "position": { "x": 88, "y": 544, "w": 452, "h": 36 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 15,
+            "font_weight": 400,
+            "color": "#4A3A34",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s3-seg1",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 600, "y": 200, "w": 620, "h": 130 },
+          "styling": {
+            "background_color": "#FFF7F5",
+            "border": "1px solid #F0C8B8",
+            "border_radius": "12px"
+          }
+        },
+        {
+          "id": "s3-seg1-lbl",
+          "type": "text",
+          "content": "SEGMENT A — SMB",
+          "position": { "x": 624, "y": 220, "w": 400, "h": 24 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 11,
+            "font_weight": 700,
+            "color": "#EA4C1B",
+            "text_align": "left",
+            "letter_spacing": "0.1em"
+          }
+        },
+        {
+          "id": "s3-seg1-val",
+          "type": "text",
+          "content": "1.8M accounts  ·  $39/mo ACV  ·  PLG motion",
+          "position": { "x": 624, "y": 252, "w": 572, "h": 36 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 16,
+            "font_weight": 500,
+            "color": "#1A1410",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s3-seg2",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 600, "y": 350, "w": 620, "h": 130 },
+          "styling": {
+            "background_color": "#FFF7F5",
+            "border": "1px solid #F0C8B8",
+            "border_radius": "12px"
+          }
+        },
+        {
+          "id": "s3-seg2-lbl",
+          "type": "text",
+          "content": "SEGMENT B — MID-MARKET",
+          "position": { "x": 624, "y": 370, "w": 400, "h": 24 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 11,
+            "font_weight": 700,
+            "color": "#EA4C1B",
+            "text_align": "left",
+            "letter_spacing": "0.1em"
+          }
+        },
+        {
+          "id": "s3-seg2-val",
+          "type": "text",
+          "content": "320K accounts  ·  $499/mo ACV  ·  Inside sales",
+          "position": { "x": 624, "y": 402, "w": 572, "h": 36 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 16,
+            "font_weight": 500,
+            "color": "#1A1410",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s3-seg3",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 600, "y": 500, "w": 620, "h": 130 },
+          "styling": {
+            "background_color": "#EA4C1B",
+            "border_radius": "12px"
+          }
+        },
+        {
+          "id": "s3-seg3-lbl",
+          "type": "text",
+          "content": "SEGMENT C — ENTERPRISE",
+          "position": { "x": 624, "y": 520, "w": 400, "h": 24 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 11,
+            "font_weight": 700,
+            "color": "#FFCDB8",
+            "text_align": "left",
+            "letter_spacing": "0.1em"
+          }
+        },
+        {
+          "id": "s3-seg3-val",
+          "type": "text",
+          "content": "12K accounts  ·  $3,500/mo ACV  ·  Field sales",
+          "position": { "x": 624, "y": 552, "w": 572, "h": 36 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 16,
+            "font_weight": 500,
+            "color": "#FFFFFF",
+            "text_align": "left"
+          }
+        }
+      ]
+    },
+    {
+      "slide_number": 4,
+      "title": "Channels & Acquisition",
+      "blocks": [
+        {
+          "id": "s4-bg",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 0, "y": 0, "w": 1280, "h": 720 },
+          "styling": { "background_color": "#FFFFFF" }
+        },
+        {
+          "id": "s4-accent",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 0, "y": 0, "w": 1280, "h": 6 },
+          "styling": { "background_color": "#EA4C1B" }
+        },
+        {
+          "id": "s4-section",
+          "type": "text",
+          "content": "CHANNELS & ACQUISITION",
+          "position": { "x": 64, "y": 56, "w": 500, "h": 28 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 11,
+            "font_weight": 700,
+            "color": "#EA4C1B",
+            "text_align": "left",
+            "letter_spacing": "0.15em"
+          }
+        },
+        {
+          "id": "s4-title",
+          "type": "text",
+          "content": "How we will acquire customers.",
+          "position": { "x": 64, "y": 100, "w": 800, "h": 60 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 38,
+            "font_weight": 800,
+            "color": "#1A1410",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s4-ch1",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 64, "y": 210, "w": 276, "h": 380 },
+          "styling": {
+            "background_color": "#FFF7F5",
+            "border": "1px solid #F0C8B8",
+            "border_radius": "12px"
+          }
+        },
+        {
+          "id": "s4-ch1-pct",
+          "type": "text",
+          "content": "40%",
+          "position": { "x": 64, "y": 248, "w": 276, "h": 64 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 48,
+            "font_weight": 800,
+            "color": "#EA4C1B",
+            "text_align": "center"
+          }
+        },
+        {
+          "id": "s4-ch1-name",
+          "type": "text",
+          "content": "Content & SEO",
+          "position": { "x": 64, "y": 320, "w": 276, "h": 36 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 18,
+            "font_weight": 700,
+            "color": "#1A1410",
+            "text_align": "center"
+          }
+        },
+        {
+          "id": "s4-ch1-desc",
+          "type": "text",
+          "content": "Blog, SEO, YouTube. Target 50K organic visits/mo by Q3.",
+          "position": { "x": 80, "y": 364, "w": 244, "h": 80 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 14,
+            "font_weight": 400,
+            "color": "#9E8880",
+            "text_align": "center",
+            "line_height": 1.6
+          }
+        },
+        {
+          "id": "s4-ch2",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 356, "y": 210, "w": 276, "h": 380 },
+          "styling": {
+            "background_color": "#EA4C1B",
+            "border_radius": "12px"
+          }
+        },
+        {
+          "id": "s4-ch2-pct",
+          "type": "text",
+          "content": "30%",
+          "position": { "x": 356, "y": 248, "w": 276, "h": 64 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 48,
+            "font_weight": 800,
+            "color": "#FFFFFF",
+            "text_align": "center"
+          }
+        },
+        {
+          "id": "s4-ch2-name",
+          "type": "text",
+          "content": "Paid Acquisition",
+          "position": { "x": 356, "y": 320, "w": 276, "h": 36 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 18,
+            "font_weight": 700,
+            "color": "#FFFFFF",
+            "text_align": "center"
+          }
+        },
+        {
+          "id": "s4-ch2-desc",
+          "type": "text",
+          "content": "Google Ads + LinkedIn. $60K/mo budget. Target $12 CAC.",
+          "position": { "x": 372, "y": 364, "w": 244, "h": 80 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 14,
+            "font_weight": 400,
+            "color": "#FFCDB8",
+            "text_align": "center",
+            "line_height": 1.6
+          }
+        },
+        {
+          "id": "s4-ch3",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 648, "y": 210, "w": 276, "h": 380 },
+          "styling": {
+            "background_color": "#FFF7F5",
+            "border": "1px solid #F0C8B8",
+            "border_radius": "12px"
+          }
+        },
+        {
+          "id": "s4-ch3-pct",
+          "type": "text",
+          "content": "20%",
+          "position": { "x": 648, "y": 248, "w": 276, "h": 64 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 48,
+            "font_weight": 800,
+            "color": "#EA4C1B",
+            "text_align": "center"
+          }
+        },
+        {
+          "id": "s4-ch3-name",
+          "type": "text",
+          "content": "Partnerships",
+          "position": { "x": 648, "y": 320, "w": 276, "h": 36 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 18,
+            "font_weight": 700,
+            "color": "#1A1410",
+            "text_align": "center"
+          }
+        },
+        {
+          "id": "s4-ch3-desc",
+          "type": "text",
+          "content": "Agency partners + tech alliances. 15 partners signed.",
+          "position": { "x": 664, "y": 364, "w": 244, "h": 80 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 14,
+            "font_weight": 400,
+            "color": "#9E8880",
+            "text_align": "center",
+            "line_height": 1.6
+          }
+        },
+        {
+          "id": "s4-ch4",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 940, "y": 210, "w": 276, "h": 380 },
+          "styling": {
+            "background_color": "#FFF7F5",
+            "border": "1px solid #F0C8B8",
+            "border_radius": "12px"
+          }
+        },
+        {
+          "id": "s4-ch4-pct",
+          "type": "text",
+          "content": "10%",
+          "position": { "x": 940, "y": 248, "w": 276, "h": 64 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 48,
+            "font_weight": 800,
+            "color": "#EA4C1B",
+            "text_align": "center"
+          }
+        },
+        {
+          "id": "s4-ch4-name",
+          "type": "text",
+          "content": "Community",
+          "position": { "x": 940, "y": 320, "w": 276, "h": 36 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 18,
+            "font_weight": 700,
+            "color": "#1A1410",
+            "text_align": "center"
+          }
+        },
+        {
+          "id": "s4-ch4-desc",
+          "type": "text",
+          "content": "Slack community, webinars, user conferences.",
+          "position": { "x": 956, "y": 364, "w": 244, "h": 80 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 14,
+            "font_weight": 400,
+            "color": "#9E8880",
+            "text_align": "center",
+            "line_height": 1.6
+          }
+        }
+      ]
+    },
+    {
+      "slide_number": 5,
+      "title": "Messaging & Positioning",
+      "blocks": [
+        {
+          "id": "s5-bg",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 0, "y": 0, "w": 1280, "h": 720 },
+          "styling": { "background_color": "#FFFFFF" }
+        },
+        {
+          "id": "s5-accent",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 0, "y": 0, "w": 1280, "h": 6 },
+          "styling": { "background_color": "#EA4C1B" }
+        },
+        {
+          "id": "s5-section",
+          "type": "text",
+          "content": "MESSAGING & POSITIONING",
+          "position": { "x": 64, "y": 56, "w": 500, "h": 28 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 11,
+            "font_weight": 700,
+            "color": "#EA4C1B",
+            "text_align": "left",
+            "letter_spacing": "0.15em"
+          }
+        },
+        {
+          "id": "s5-title",
+          "type": "text",
+          "content": "One message. Everywhere.",
+          "position": { "x": 64, "y": 100, "w": 800, "h": 60 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 38,
+            "font_weight": 800,
+            "color": "#1A1410",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s5-tagline-box",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 64, "y": 200, "w": 1152, "h": 120 },
+          "styling": {
+            "background_color": "#EA4C1B",
+            "border_radius": "16px"
+          }
+        },
+        {
+          "id": "s5-tagline",
+          "type": "text",
+          "content": "\"[Product] is the only [category] built for [ICP] that [unique benefit] without [key objection].\"",
+          "position": { "x": 88, "y": 236, "w": 1104, "h": 56 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 24,
+            "font_weight": 700,
+            "color": "#FFFFFF",
+            "text_align": "center",
+            "line_height": 1.3
+          }
+        },
+        {
+          "id": "s5-pillar1",
+          "type": "text",
+          "content": "PILLAR 1 — SPEED\nGet to value in under 5 minutes. Zero onboarding required.",
+          "position": { "x": 64, "y": 368, "w": 360, "h": 80 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 16,
+            "font_weight": 400,
+            "color": "#4A3A34",
+            "text_align": "left",
+            "line_height": 1.5
+          }
+        },
+        {
+          "id": "s5-pillar2",
+          "type": "text",
+          "content": "PILLAR 2 — RESULTS\nCustomers see measurable ROI in 30 days or they don't pay.",
+          "position": { "x": 464, "y": 368, "w": 360, "h": 80 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 16,
+            "font_weight": 400,
+            "color": "#4A3A34",
+            "text_align": "left",
+            "line_height": 1.5
+          }
+        },
+        {
+          "id": "s5-pillar3",
+          "type": "text",
+          "content": "PILLAR 3 — TRUST\nUsed by 2,400+ teams. 4.8 stars across review platforms.",
+          "position": { "x": 864, "y": 368, "w": 352, "h": 80 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 16,
+            "font_weight": 400,
+            "color": "#4A3A34",
+            "text_align": "left",
+            "line_height": 1.5
+          }
+        },
+        {
+          "id": "s5-vs-table-title",
+          "type": "text",
+          "content": "COMPETITIVE DIFFERENTIATION",
+          "position": { "x": 64, "y": 490, "w": 500, "h": 24 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 10,
+            "font_weight": 700,
+            "color": "#9E8880",
+            "text_align": "left",
+            "letter_spacing": "0.12em"
+          }
+        },
+        {
+          "id": "s5-vs-row",
+          "type": "text",
+          "content": "Ease of setup  ·  Time-to-value  ·  Pricing  ·  Support — All superior to Category Leader",
+          "position": { "x": 64, "y": 524, "w": 1000, "h": 36 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 15,
+            "font_weight": 400,
+            "color": "#9E8880",
+            "text_align": "left"
+          }
+        }
+      ]
+    },
+    {
+      "slide_number": 6,
+      "title": "90-Day Launch Plan",
+      "blocks": [
+        {
+          "id": "s6-bg",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 0, "y": 0, "w": 1280, "h": 720 },
+          "styling": { "background_color": "#FFFFFF" }
+        },
+        {
+          "id": "s6-accent",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 0, "y": 0, "w": 1280, "h": 6 },
+          "styling": { "background_color": "#EA4C1B" }
+        },
+        {
+          "id": "s6-section",
+          "type": "text",
+          "content": "90-DAY LAUNCH PLAN",
+          "position": { "x": 64, "y": 56, "w": 500, "h": 28 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 11,
+            "font_weight": 700,
+            "color": "#EA4C1B",
+            "text_align": "left",
+            "letter_spacing": "0.15em"
+          }
+        },
+        {
+          "id": "s6-title",
+          "type": "text",
+          "content": "From zero to traction in 90 days.",
+          "position": { "x": 64, "y": 100, "w": 800, "h": 60 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 38,
+            "font_weight": 800,
+            "color": "#1A1410",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s6-month1-bg",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 64, "y": 210, "w": 360, "h": 400 },
+          "styling": {
+            "background_color": "#EA4C1B",
+            "border_radius": "14px"
+          }
+        },
+        {
+          "id": "s6-month1-num",
+          "type": "text",
+          "content": "Month 1",
+          "position": { "x": 64, "y": 240, "w": 360, "h": 36 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 14,
+            "font_weight": 700,
+            "color": "#FFCDB8",
+            "text_align": "center",
+            "letter_spacing": "0.1em"
+          }
+        },
+        {
+          "id": "s6-month1-title",
+          "type": "text",
+          "content": "Foundation",
+          "position": { "x": 64, "y": 280, "w": 360, "h": 44 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 28,
+            "font_weight": 800,
+            "color": "#FFFFFF",
+            "text_align": "center"
+          }
+        },
+        {
+          "id": "s6-month1-tasks",
+          "type": "text",
+          "content": "Website launch\nContent pipeline live\nFirst 100 beta signups\nPartner outreach begins",
+          "position": { "x": 88, "y": 344, "w": 312, "h": 160 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 15,
+            "font_weight": 400,
+            "color": "#FFE8DC",
+            "text_align": "center",
+            "line_height": 1.8
+          }
+        },
+        {
+          "id": "s6-month2-bg",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 460, "y": 210, "w": 360, "h": 400 },
+          "styling": {
+            "background_color": "#FFF7F5",
+            "border": "2px solid #EA4C1B",
+            "border_radius": "14px"
+          }
+        },
+        {
+          "id": "s6-month2-num",
+          "type": "text",
+          "content": "Month 2",
+          "position": { "x": 460, "y": 240, "w": 360, "h": 36 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 14,
+            "font_weight": 700,
+            "color": "#EA4C1B",
+            "text_align": "center",
+            "letter_spacing": "0.1em"
+          }
+        },
+        {
+          "id": "s6-month2-title",
+          "type": "text",
+          "content": "Amplify",
+          "position": { "x": 460, "y": 280, "w": 360, "h": 44 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 28,
+            "font_weight": 800,
+            "color": "#1A1410",
+            "text_align": "center"
+          }
+        },
+        {
+          "id": "s6-month2-tasks",
+          "type": "text",
+          "content": "PR & media blitz\nPaid campaigns live\n500 active users\nFirst case studies",
+          "position": { "x": 484, "y": 344, "w": 312, "h": 160 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 15,
+            "font_weight": 400,
+            "color": "#4A3A34",
+            "text_align": "center",
+            "line_height": 1.8
+          }
+        },
+        {
+          "id": "s6-month3-bg",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 856, "y": 210, "w": 360, "h": 400 },
+          "styling": {
+            "background_color": "#FFF7F5",
+            "border": "2px solid #EA4C1B",
+            "border_radius": "14px"
+          }
+        },
+        {
+          "id": "s6-month3-num",
+          "type": "text",
+          "content": "Month 3",
+          "position": { "x": 856, "y": 240, "w": 360, "h": 36 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 14,
+            "font_weight": 700,
+            "color": "#EA4C1B",
+            "text_align": "center",
+            "letter_spacing": "0.1em"
+          }
+        },
+        {
+          "id": "s6-month3-title",
+          "type": "text",
+          "content": "Scale",
+          "position": { "x": 856, "y": 280, "w": 360, "h": 44 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 28,
+            "font_weight": 800,
+            "color": "#1A1410",
+            "text_align": "center"
+          }
+        },
+        {
+          "id": "s6-month3-tasks",
+          "type": "text",
+          "content": "2,000 users target\nFirst $10K MRR\nConference presence\nQ2 planning begins",
+          "position": { "x": 880, "y": 344, "w": 312, "h": 160 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 15,
+            "font_weight": 400,
+            "color": "#4A3A34",
+            "text_align": "center",
+            "line_height": 1.8
+          }
+        }
+      ]
+    },
+    {
+      "slide_number": 7,
+      "title": "Success Metrics",
+      "blocks": [
+        {
+          "id": "s7-bg",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 0, "y": 0, "w": 1280, "h": 720 },
+          "styling": { "background_color": "#FFFFFF" }
+        },
+        {
+          "id": "s7-accent",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 0, "y": 0, "w": 1280, "h": 6 },
+          "styling": { "background_color": "#EA4C1B" }
+        },
+        {
+          "id": "s7-section",
+          "type": "text",
+          "content": "SUCCESS METRICS",
+          "position": { "x": 64, "y": 56, "w": 400, "h": 28 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 11,
+            "font_weight": 700,
+            "color": "#EA4C1B",
+            "text_align": "left",
+            "letter_spacing": "0.15em"
+          }
+        },
+        {
+          "id": "s7-title",
+          "type": "text",
+          "content": "How we measure winning.",
+          "position": { "x": 64, "y": 100, "w": 800, "h": 60 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 38,
+            "font_weight": 800,
+            "color": "#1A1410",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s7-m1",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 64, "y": 210, "w": 540, "h": 110 },
+          "styling": {
+            "background_color": "#FFF7F5",
+            "border_left": "4px solid #EA4C1B",
+            "border_radius": "0 10px 10px 0"
+          }
+        },
+        {
+          "id": "s7-m1-label",
+          "type": "text",
+          "content": "Month 3 Target",
+          "position": { "x": 88, "y": 228, "w": 200, "h": 24 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 11,
+            "font_weight": 600,
+            "color": "#9E8880",
+            "text_align": "left",
+            "letter_spacing": "0.08em"
+          }
+        },
+        {
+          "id": "s7-m1-val",
+          "type": "text",
+          "content": "2,000 Active Users",
+          "position": { "x": 88, "y": 254, "w": 492, "h": 44 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 30,
+            "font_weight": 800,
+            "color": "#1A1410",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s7-m2",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 636, "y": 210, "w": 580, "h": 110 },
+          "styling": {
+            "background_color": "#FFF7F5",
+            "border_left": "4px solid #EA4C1B",
+            "border_radius": "0 10px 10px 0"
+          }
+        },
+        {
+          "id": "s7-m2-label",
+          "type": "text",
+          "content": "Month 3 Target",
+          "position": { "x": 660, "y": 228, "w": 200, "h": 24 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 11,
+            "font_weight": 600,
+            "color": "#9E8880",
+            "text_align": "left",
+            "letter_spacing": "0.08em"
+          }
+        },
+        {
+          "id": "s7-m2-val",
+          "type": "text",
+          "content": "$10,000 MRR",
+          "position": { "x": 660, "y": 254, "w": 532, "h": 44 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 30,
+            "font_weight": 800,
+            "color": "#1A1410",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s7-m3",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 64, "y": 350, "w": 540, "h": 110 },
+          "styling": {
+            "background_color": "#FFF7F5",
+            "border_left": "4px solid #F9A825",
+            "border_radius": "0 10px 10px 0"
+          }
+        },
+        {
+          "id": "s7-m3-label",
+          "type": "text",
+          "content": "North Star Metric",
+          "position": { "x": 88, "y": 368, "w": 200, "h": 24 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 11,
+            "font_weight": 600,
+            "color": "#9E8880",
+            "text_align": "left",
+            "letter_spacing": "0.08em"
+          }
+        },
+        {
+          "id": "s7-m3-val",
+          "type": "text",
+          "content": "Weekly Active Users (WAU)",
+          "position": { "x": 88, "y": 394, "w": 492, "h": 44 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 28,
+            "font_weight": 800,
+            "color": "#1A1410",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s7-m4",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 636, "y": 350, "w": 580, "h": 110 },
+          "styling": {
+            "background_color": "#FFF7F5",
+            "border_left": "4px solid #F9A825",
+            "border_radius": "0 10px 10px 0"
+          }
+        },
+        {
+          "id": "s7-m4-label",
+          "type": "text",
+          "content": "Quality Metric",
+          "position": { "x": 660, "y": 368, "w": 200, "h": 24 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 11,
+            "font_weight": 600,
+            "color": "#9E8880",
+            "text_align": "left",
+            "letter_spacing": "0.08em"
+          }
+        },
+        {
+          "id": "s7-m4-val",
+          "type": "text",
+          "content": "NPS ≥ 50",
+          "position": { "x": 660, "y": 394, "w": 532, "h": 44 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 28,
+            "font_weight": 800,
+            "color": "#1A1410",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s7-caveat",
+          "type": "text",
+          "content": "We review these weekly. If any metric lags 20%+ behind target for two consecutive weeks, we run a war-room sprint.",
+          "position": { "x": 64, "y": 520, "w": 1000, "h": 52 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 15,
+            "font_weight": 400,
+            "color": "#9E8880",
+            "text_align": "left",
+            "line_height": 1.6
+          }
+        }
+      ]
+    },
+    {
+      "slide_number": 8,
+      "title": "Budget & Resources",
+      "blocks": [
+        {
+          "id": "s8-bg",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 0, "y": 0, "w": 1280, "h": 720 },
+          "styling": { "background_color": "#EA4C1B" }
+        },
+        {
+          "id": "s8-title",
+          "type": "text",
+          "content": "Budget & Resources",
+          "position": { "x": 64, "y": 100, "w": 900, "h": 72 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 52,
+            "font_weight": 800,
+            "color": "#FFFFFF",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s8-total",
+          "type": "text",
+          "content": "Total 90-Day Budget: $240,000",
+          "position": { "x": 64, "y": 196, "w": 700, "h": 44 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 24,
+            "font_weight": 600,
+            "color": "#FFCDB8",
+            "text_align": "left"
+          }
+        },
+        {
+          "id": "s8-b1",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 64, "y": 290, "w": 276, "h": 280 },
+          "styling": {
+            "background_color": "rgba(255,255,255,0.12)",
+            "border_radius": "14px"
+          }
+        },
+        {
+          "id": "s8-b1-val",
+          "type": "text",
+          "content": "$96K",
+          "position": { "x": 64, "y": 328, "w": 276, "h": 64 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 48,
+            "font_weight": 800,
+            "color": "#FFFFFF",
+            "text_align": "center"
+          }
+        },
+        {
+          "id": "s8-b1-lbl",
+          "type": "text",
+          "content": "Paid Acquisition\n40% of budget",
+          "position": { "x": 64, "y": 400, "w": 276, "h": 60 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 14,
+            "font_weight": 500,
+            "color": "#FFCDB8",
+            "text_align": "center",
+            "line_height": 1.6
+          }
+        },
+        {
+          "id": "s8-b2",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 356, "y": 290, "w": 276, "h": 280 },
+          "styling": {
+            "background_color": "rgba(255,255,255,0.12)",
+            "border_radius": "14px"
+          }
+        },
+        {
+          "id": "s8-b2-val",
+          "type": "text",
+          "content": "$72K",
+          "position": { "x": 356, "y": 328, "w": 276, "h": 64 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 48,
+            "font_weight": 800,
+            "color": "#FFFFFF",
+            "text_align": "center"
+          }
+        },
+        {
+          "id": "s8-b2-lbl",
+          "type": "text",
+          "content": "Content & Brand\n30% of budget",
+          "position": { "x": 356, "y": 400, "w": 276, "h": 60 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 14,
+            "font_weight": 500,
+            "color": "#FFCDB8",
+            "text_align": "center",
+            "line_height": 1.6
+          }
+        },
+        {
+          "id": "s8-b3",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 648, "y": 290, "w": 276, "h": 280 },
+          "styling": {
+            "background_color": "rgba(255,255,255,0.12)",
+            "border_radius": "14px"
+          }
+        },
+        {
+          "id": "s8-b3-val",
+          "type": "text",
+          "content": "$48K",
+          "position": { "x": 648, "y": 328, "w": 276, "h": 64 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 48,
+            "font_weight": 800,
+            "color": "#FFFFFF",
+            "text_align": "center"
+          }
+        },
+        {
+          "id": "s8-b3-lbl",
+          "type": "text",
+          "content": "Events & PR\n20% of budget",
+          "position": { "x": 648, "y": 400, "w": 276, "h": 60 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 14,
+            "font_weight": 500,
+            "color": "#FFCDB8",
+            "text_align": "center",
+            "line_height": 1.6
+          }
+        },
+        {
+          "id": "s8-b4",
+          "type": "shape",
+          "content": "",
+          "position": { "x": 940, "y": 290, "w": 276, "h": 280 },
+          "styling": {
+            "background_color": "rgba(255,255,255,0.12)",
+            "border_radius": "14px"
+          }
+        },
+        {
+          "id": "s8-b4-val",
+          "type": "text",
+          "content": "$24K",
+          "position": { "x": 940, "y": 328, "w": 276, "h": 64 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 48,
+            "font_weight": 800,
+            "color": "#FFFFFF",
+            "text_align": "center"
+          }
+        },
+        {
+          "id": "s8-b4-lbl",
+          "type": "text",
+          "content": "Tools & Ops\n10% of budget",
+          "position": { "x": 940, "y": 400, "w": 276, "h": 60 },
+          "styling": {
+            "font_family": "Inter, sans-serif",
+            "font_size": 14,
+            "font_weight": 500,
+            "color": "#FFCDB8",
+            "text_align": "center",
+            "line_height": 1.6
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "name": "Training Module",
+  "description": "Structured training presentation for onboarding, skill development, or knowledge transfer.",
+  "category": "Education",
+  "tags": ["training", "learning", "onboarding", "education", "workshop"],
+  "thumbnail_url": "",
+  "theme_name": "Tech Modern",
+  "is_active": true,
+  "metadata": {
+    "total_slides": 12,
+    "estimated_duration": 45,
+    "default_audience": "Employees, trainees, workshop participants"
+  },
+  "slides": [
+    {
+      "order": 1,
+      "type": "title",
+      "blocks": [
+        {"id": "s1-logo", "type": "image", "content": "[LOGO_PLACEHOLDER]", "position": {"x": 80, "y": 60, "w": 200, "h": 80}, "styling": {"font_family": "JetBrains Mono", "font_size": 16, "font_weight": 400, "color": "#E8E8E8", "background_color": "transparent", "text_align": "left"}},
+        {"id": "s1-module", "type": "caption", "content": "MODULE [PLACEHOLDER: XX] — [PLACEHOLDER: CATEGORY]", "position": {"x": 160, "y": 280, "w": 1600, "h": 60}, "styling": {"font_family": "Roboto", "font_size": 24, "font_weight": 400, "color": "#00D4FF", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s1-title", "type": "title", "content": "[PLACEHOLDER: Training Module Title]", "position": {"x": 160, "y": 360, "w": 1600, "h": 200}, "styling": {"font_family": "JetBrains Mono", "font_size": 72, "font_weight": 700, "color": "#E8E8E8", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s1-trainer", "type": "text", "content": "[PLACEHOLDER: Trainer: Name | Duration: XX minutes]", "position": {"x": 160, "y": 600, "w": 1600, "h": 60}, "styling": {"font_family": "Roboto", "font_size": 24, "font_weight": 300, "color": "#7B2FBE", "background_color": "transparent", "text_align": "center"}}
+      ]
+    },
+    {
+      "order": 2,
+      "type": "objectives",
+      "blocks": [
+        {"id": "s2-label", "type": "caption", "content": "LEARNING OBJECTIVES", "position": {"x": 80, "y": 60, "w": 500, "h": 50}, "styling": {"font_family": "Roboto", "font_size": 22, "font_weight": 700, "color": "#00D4FF", "background_color": "transparent", "text_align": "left"}},
+        {"id": "s2-heading", "type": "heading", "content": "[PLACEHOLDER: What You'll Learn]", "position": {"x": 80, "y": 140, "w": 1760, "h": 100}, "styling": {"font_family": "JetBrains Mono", "font_size": 52, "font_weight": 700, "color": "#E8E8E8", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s2-obj1", "type": "objective", "content": "01  [PLACEHOLDER: Learning objective 1]", "position": {"x": 80, "y": 310, "w": 1760, "h": 90}, "styling": {"font_family": "Roboto", "font_size": 30, "font_weight": 400, "color": "#E8E8E8", "background_color": "#1A1A2A", "text_align": "left"}},
+        {"id": "s2-obj2", "type": "objective", "content": "02  [PLACEHOLDER: Learning objective 2]", "position": {"x": 80, "y": 440, "w": 1760, "h": 90}, "styling": {"font_family": "Roboto", "font_size": 30, "font_weight": 400, "color": "#E8E8E8", "background_color": "#1A1A2A", "text_align": "left"}},
+        {"id": "s2-obj3", "type": "objective", "content": "03  [PLACEHOLDER: Learning objective 3]", "position": {"x": 80, "y": 570, "w": 1760, "h": 90}, "styling": {"font_family": "Roboto", "font_size": 30, "font_weight": 400, "color": "#E8E8E8", "background_color": "#1A1A2A", "text_align": "left"}},
+        {"id": "s2-obj4", "type": "objective", "content": "04  [PLACEHOLDER: Learning objective 4]", "position": {"x": 80, "y": 700, "w": 1760, "h": 90}, "styling": {"font_family": "Roboto", "font_size": 30, "font_weight": 400, "color": "#E8E8E8", "background_color": "#1A1A2A", "text_align": "left"}}
+      ]
+    },
+    {
+      "order": 3,
+      "type": "agenda",
+      "blocks": [
+        {"id": "s3-label", "type": "caption", "content": "AGENDA", "position": {"x": 80, "y": 60, "w": 300, "h": 50}, "styling": {"font_family": "Roboto", "font_size": 22, "font_weight": 700, "color": "#00D4FF", "background_color": "transparent", "text_align": "left"}},
+        {"id": "s3-heading", "type": "heading", "content": "[PLACEHOLDER: Session Overview]", "position": {"x": 80, "y": 140, "w": 1760, "h": 100}, "styling": {"font_family": "JetBrains Mono", "font_size": 52, "font_weight": 700, "color": "#E8E8E8", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s3-block1", "type": "agenda_item", "content": "[PLACEHOLDER: Module 1 — Topic — XX min]", "position": {"x": 80, "y": 310, "w": 800, "h": 120}, "styling": {"font_family": "Roboto", "font_size": 28, "font_weight": 400, "color": "#0D0D0D", "background_color": "#00D4FF", "text_align": "center"}},
+        {"id": "s3-block2", "type": "agenda_item", "content": "[PLACEHOLDER: Module 2 — Topic — XX min]", "position": {"x": 80, "y": 480, "w": 800, "h": 120}, "styling": {"font_family": "Roboto", "font_size": 28, "font_weight": 400, "color": "#E8E8E8", "background_color": "#7B2FBE", "text_align": "center"}},
+        {"id": "s3-block3", "type": "agenda_item", "content": "[PLACEHOLDER: Module 3 — Topic — XX min]", "position": {"x": 80, "y": 650, "w": 800, "h": 120}, "styling": {"font_family": "Roboto", "font_size": 28, "font_weight": 400, "color": "#0D0D0D", "background_color": "#39FF14", "text_align": "center"}},
+        {"id": "s3-break", "type": "text", "content": "[PLACEHOLDER: Q&A and assessment — XX min]", "position": {"x": 1060, "y": 310, "w": 780, "h": 460}, "styling": {"font_family": "Roboto", "font_size": 28, "font_weight": 400, "color": "#E8E8E8", "background_color": "#1A1A2A", "text_align": "center"}}
+      ]
+    },
+    {
+      "order": 4,
+      "type": "concept",
+      "blocks": [
+        {"id": "s4-section", "type": "caption", "content": "SECTION 1: [PLACEHOLDER: TOPIC NAME]", "position": {"x": 80, "y": 60, "w": 700, "h": 50}, "styling": {"font_family": "Roboto", "font_size": 22, "font_weight": 700, "color": "#00D4FF", "background_color": "transparent", "text_align": "left"}},
+        {"id": "s4-heading", "type": "heading", "content": "[PLACEHOLDER: Core Concept Title]", "position": {"x": 80, "y": 140, "w": 1760, "h": 100}, "styling": {"font_family": "JetBrains Mono", "font_size": 52, "font_weight": 700, "color": "#E8E8E8", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s4-definition", "type": "text", "content": "[PLACEHOLDER: Clear definition or explanation of the core concept]", "position": {"x": 200, "y": 300, "w": 1520, "h": 160}, "styling": {"font_family": "Roboto", "font_size": 30, "font_weight": 400, "color": "#E8E8E8", "background_color": "#1A1A2A", "text_align": "center"}},
+        {"id": "s4-key1", "type": "key_point", "content": "[PLACEHOLDER: Key point 1]", "position": {"x": 80, "y": 530, "w": 540, "h": 220}, "styling": {"font_family": "Roboto", "font_size": 26, "font_weight": 400, "color": "#0D0D0D", "background_color": "#00D4FF", "text_align": "center"}},
+        {"id": "s4-key2", "type": "key_point", "content": "[PLACEHOLDER: Key point 2]", "position": {"x": 700, "y": 530, "w": 540, "h": 220}, "styling": {"font_family": "Roboto", "font_size": 26, "font_weight": 400, "color": "#E8E8E8", "background_color": "#7B2FBE", "text_align": "center"}},
+        {"id": "s4-key3", "type": "key_point", "content": "[PLACEHOLDER: Key point 3]", "position": {"x": 1320, "y": 530, "w": 520, "h": 220}, "styling": {"font_family": "Roboto", "font_size": 26, "font_weight": 400, "color": "#0D0D0D", "background_color": "#39FF14", "text_align": "center"}}
+      ]
+    },
+    {
+      "order": 5,
+      "type": "deep_dive",
+      "blocks": [
+        {"id": "s5-label", "type": "caption", "content": "DEEP DIVE", "position": {"x": 80, "y": 60, "w": 300, "h": 50}, "styling": {"font_family": "Roboto", "font_size": 22, "font_weight": 700, "color": "#00D4FF", "background_color": "transparent", "text_align": "left"}},
+        {"id": "s5-heading", "type": "heading", "content": "[PLACEHOLDER: How It Works]", "position": {"x": 80, "y": 140, "w": 1760, "h": 100}, "styling": {"font_family": "JetBrains Mono", "font_size": 52, "font_weight": 700, "color": "#E8E8E8", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s5-step1", "type": "step", "content": "Step 1\n[PLACEHOLDER: First step explanation]", "position": {"x": 80, "y": 310, "w": 380, "h": 440}, "styling": {"font_family": "Roboto", "font_size": 24, "font_weight": 400, "color": "#0D0D0D", "background_color": "#00D4FF", "text_align": "center"}},
+        {"id": "s5-step2", "type": "step", "content": "Step 2\n[PLACEHOLDER: Second step explanation]", "position": {"x": 540, "y": 310, "w": 380, "h": 440}, "styling": {"font_family": "Roboto", "font_size": 24, "font_weight": 400, "color": "#E8E8E8", "background_color": "#7B2FBE", "text_align": "center"}},
+        {"id": "s5-step3", "type": "step", "content": "Step 3\n[PLACEHOLDER: Third step explanation]", "position": {"x": 1000, "y": 310, "w": 380, "h": 440}, "styling": {"font_family": "Roboto", "font_size": 24, "font_weight": 400, "color": "#0D0D0D", "background_color": "#39FF14", "text_align": "center"}},
+        {"id": "s5-step4", "type": "step", "content": "Step 4\n[PLACEHOLDER: Fourth step explanation]", "position": {"x": 1460, "y": 310, "w": 380, "h": 440}, "styling": {"font_family": "Roboto", "font_size": 24, "font_weight": 400, "color": "#E8E8E8", "background_color": "#1A1A2A", "text_align": "center"}}
+      ]
+    },
+    {
+      "order": 6,
+      "type": "example",
+      "blocks": [
+        {"id": "s6-label", "type": "caption", "content": "WORKED EXAMPLE", "position": {"x": 80, "y": 60, "w": 400, "h": 50}, "styling": {"font_family": "Roboto", "font_size": 22, "font_weight": 700, "color": "#00D4FF", "background_color": "transparent", "text_align": "left"}},
+        {"id": "s6-heading", "type": "heading", "content": "[PLACEHOLDER: Example Title]", "position": {"x": 80, "y": 140, "w": 1760, "h": 100}, "styling": {"font_family": "JetBrains Mono", "font_size": 52, "font_weight": 700, "color": "#E8E8E8", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s6-scenario", "type": "text", "content": "Scenario: [PLACEHOLDER: Real-world scenario description]", "position": {"x": 80, "y": 310, "w": 1760, "h": 120}, "styling": {"font_family": "Roboto", "font_size": 28, "font_weight": 400, "color": "#E8E8E8", "background_color": "#1A1A2A", "text_align": "left"}},
+        {"id": "s6-solution", "type": "text", "content": "Solution: [PLACEHOLDER: How to apply the concept to solve the scenario]", "position": {"x": 80, "y": 480, "w": 1760, "h": 120}, "styling": {"font_family": "Roboto", "font_size": 28, "font_weight": 400, "color": "#0D0D0D", "background_color": "#00D4FF", "text_align": "left"}},
+        {"id": "s6-outcome", "type": "text", "content": "Outcome: [PLACEHOLDER: Expected results and takeaways]", "position": {"x": 80, "y": 650, "w": 1760, "h": 120}, "styling": {"font_family": "Roboto", "font_size": 28, "font_weight": 400, "color": "#0D0D0D", "background_color": "#39FF14", "text_align": "left"}}
+      ]
+    },
+    {
+      "order": 7,
+      "type": "concept2",
+      "blocks": [
+        {"id": "s7-section", "type": "caption", "content": "SECTION 2: [PLACEHOLDER: TOPIC NAME]", "position": {"x": 80, "y": 60, "w": 700, "h": 50}, "styling": {"font_family": "Roboto", "font_size": 22, "font_weight": 700, "color": "#7B2FBE", "background_color": "transparent", "text_align": "left"}},
+        {"id": "s7-heading", "type": "heading", "content": "[PLACEHOLDER: Second Major Concept]", "position": {"x": 80, "y": 140, "w": 1760, "h": 100}, "styling": {"font_family": "JetBrains Mono", "font_size": 52, "font_weight": 700, "color": "#E8E8E8", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s7-content", "type": "text", "content": "[PLACEHOLDER: Explanation of the second major concept in the module]", "position": {"x": 80, "y": 310, "w": 900, "h": 500}, "styling": {"font_family": "Roboto", "font_size": 28, "font_weight": 400, "color": "#E8E8E8", "background_color": "transparent", "text_align": "left"}},
+        {"id": "s7-visual", "type": "image", "content": "[PLACEHOLDER: Diagram or visual aid]", "position": {"x": 1060, "y": 310, "w": 780, "h": 500}, "styling": {"font_family": "Roboto", "font_size": 16, "font_weight": 400, "color": "#E8E8E8", "background_color": "#1A1A2A", "text_align": "center"}}
+      ]
+    },
+    {
+      "order": 8,
+      "type": "comparison",
+      "blocks": [
+        {"id": "s8-label", "type": "caption", "content": "COMPARISON", "position": {"x": 80, "y": 60, "w": 400, "h": 50}, "styling": {"font_family": "Roboto", "font_size": 22, "font_weight": 700, "color": "#7B2FBE", "background_color": "transparent", "text_align": "left"}},
+        {"id": "s8-heading", "type": "heading", "content": "[PLACEHOLDER: Before vs. After]", "position": {"x": 80, "y": 140, "w": 1760, "h": 100}, "styling": {"font_family": "JetBrains Mono", "font_size": 52, "font_weight": 700, "color": "#E8E8E8", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s8-before", "type": "comparison_side", "content": "WITHOUT KNOWLEDGE\n[PLACEHOLDER: Problems and mistakes without this knowledge]", "position": {"x": 80, "y": 310, "w": 840, "h": 500}, "styling": {"font_family": "Roboto", "font_size": 26, "font_weight": 400, "color": "#E8E8E8", "background_color": "#1A1A2A", "text_align": "center"}},
+        {"id": "s8-after", "type": "comparison_side", "content": "WITH KNOWLEDGE\n[PLACEHOLDER: Benefits and outcomes with this knowledge]", "position": {"x": 1000, "y": 310, "w": 840, "h": 500}, "styling": {"font_family": "Roboto", "font_size": 26, "font_weight": 400, "color": "#0D0D0D", "background_color": "#00D4FF", "text_align": "center"}}
+      ]
+    },
+    {
+      "order": 9,
+      "type": "best_practices",
+      "blocks": [
+        {"id": "s9-label", "type": "caption", "content": "BEST PRACTICES", "position": {"x": 80, "y": 60, "w": 400, "h": 50}, "styling": {"font_family": "Roboto", "font_size": 22, "font_weight": 700, "color": "#39FF14", "background_color": "transparent", "text_align": "left"}},
+        {"id": "s9-heading", "type": "heading", "content": "[PLACEHOLDER: Do's and Don'ts]", "position": {"x": 80, "y": 140, "w": 1760, "h": 100}, "styling": {"font_family": "JetBrains Mono", "font_size": 52, "font_weight": 700, "color": "#E8E8E8", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s9-do1", "type": "do", "content": "DO: [PLACEHOLDER: Best practice 1]", "position": {"x": 80, "y": 310, "w": 800, "h": 120}, "styling": {"font_family": "Roboto", "font_size": 28, "font_weight": 400, "color": "#0D0D0D", "background_color": "#39FF14", "text_align": "left"}},
+        {"id": "s9-do2", "type": "do", "content": "DO: [PLACEHOLDER: Best practice 2]", "position": {"x": 80, "y": 470, "w": 800, "h": 120}, "styling": {"font_family": "Roboto", "font_size": 28, "font_weight": 400, "color": "#0D0D0D", "background_color": "#39FF14", "text_align": "left"}},
+        {"id": "s9-do3", "type": "do", "content": "DO: [PLACEHOLDER: Best practice 3]", "position": {"x": 80, "y": 630, "w": 800, "h": 120}, "styling": {"font_family": "Roboto", "font_size": 28, "font_weight": 400, "color": "#0D0D0D", "background_color": "#39FF14", "text_align": "left"}},
+        {"id": "s9-dont1", "type": "dont", "content": "DON'T: [PLACEHOLDER: Common mistake 1]", "position": {"x": 1060, "y": 310, "w": 780, "h": 120}, "styling": {"font_family": "Roboto", "font_size": 28, "font_weight": 400, "color": "#E8E8E8", "background_color": "#CC0000", "text_align": "left"}},
+        {"id": "s9-dont2", "type": "dont", "content": "DON'T: [PLACEHOLDER: Common mistake 2]", "position": {"x": 1060, "y": 470, "w": 780, "h": 120}, "styling": {"font_family": "Roboto", "font_size": 28, "font_weight": 400, "color": "#E8E8E8", "background_color": "#CC0000", "text_align": "left"}},
+        {"id": "s9-dont3", "type": "dont", "content": "DON'T: [PLACEHOLDER: Common mistake 3]", "position": {"x": 1060, "y": 630, "w": 780, "h": 120}, "styling": {"font_family": "Roboto", "font_size": 28, "font_weight": 400, "color": "#E8E8E8", "background_color": "#CC0000", "text_align": "left"}}
+      ]
+    },
+    {
+      "order": 10,
+      "type": "quiz",
+      "blocks": [
+        {"id": "s10-label", "type": "caption", "content": "KNOWLEDGE CHECK", "position": {"x": 80, "y": 60, "w": 500, "h": 50}, "styling": {"font_family": "Roboto", "font_size": 22, "font_weight": 700, "color": "#7B2FBE", "background_color": "transparent", "text_align": "left"}},
+        {"id": "s10-heading", "type": "heading", "content": "[PLACEHOLDER: Test Your Understanding]", "position": {"x": 80, "y": 140, "w": 1760, "h": 100}, "styling": {"font_family": "JetBrains Mono", "font_size": 52, "font_weight": 700, "color": "#E8E8E8", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s10-q1", "type": "quiz_question", "content": "Q1: [PLACEHOLDER: Question 1?]\n\nA) [PLACEHOLDER]\nB) [PLACEHOLDER]\nC) [PLACEHOLDER]\nD) [PLACEHOLDER]", "position": {"x": 80, "y": 310, "w": 840, "h": 500}, "styling": {"font_family": "Roboto", "font_size": 26, "font_weight": 400, "color": "#E8E8E8", "background_color": "#1A1A2A", "text_align": "left"}},
+        {"id": "s10-q2", "type": "quiz_question", "content": "Q2: [PLACEHOLDER: Question 2?]\n\nA) [PLACEHOLDER]\nB) [PLACEHOLDER]\nC) [PLACEHOLDER]\nD) [PLACEHOLDER]", "position": {"x": 1000, "y": 310, "w": 840, "h": 500}, "styling": {"font_family": "Roboto", "font_size": 26, "font_weight": 400, "color": "#E8E8E8", "background_color": "#1A1A2A", "text_align": "left"}}
+      ]
+    },
+    {
+      "order": 11,
+      "type": "summary",
+      "blocks": [
+        {"id": "s11-label", "type": "caption", "content": "MODULE SUMMARY", "position": {"x": 80, "y": 60, "w": 400, "h": 50}, "styling": {"font_family": "Roboto", "font_size": 22, "font_weight": 700, "color": "#00D4FF", "background_color": "transparent", "text_align": "left"}},
+        {"id": "s11-heading", "type": "heading", "content": "[PLACEHOLDER: Key Takeaways]", "position": {"x": 80, "y": 140, "w": 1760, "h": 100}, "styling": {"font_family": "JetBrains Mono", "font_size": 52, "font_weight": 700, "color": "#E8E8E8", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s11-t1", "type": "takeaway", "content": "[PLACEHOLDER: Takeaway 1 — key lesson or skill]", "position": {"x": 80, "y": 310, "w": 1760, "h": 100}, "styling": {"font_family": "Roboto", "font_size": 30, "font_weight": 400, "color": "#0D0D0D", "background_color": "#00D4FF", "text_align": "left"}},
+        {"id": "s11-t2", "type": "takeaway", "content": "[PLACEHOLDER: Takeaway 2 — key lesson or skill]", "position": {"x": 80, "y": 450, "w": 1760, "h": 100}, "styling": {"font_family": "Roboto", "font_size": 30, "font_weight": 400, "color": "#E8E8E8", "background_color": "#7B2FBE", "text_align": "left"}},
+        {"id": "s11-t3", "type": "takeaway", "content": "[PLACEHOLDER: Takeaway 3 — key lesson or skill]", "position": {"x": 80, "y": 590, "w": 1760, "h": 100}, "styling": {"font_family": "Roboto", "font_size": 30, "font_weight": 400, "color": "#0D0D0D", "background_color": "#39FF14", "text_align": "left"}},
+        {"id": "s11-next", "type": "text", "content": "[PLACEHOLDER: Next module or next steps for learner]", "position": {"x": 80, "y": 750, "w": 1760, "h": 80}, "styling": {"font_family": "Roboto", "font_size": 26, "font_weight": 400, "color": "#E8E8E8", "background_color": "transparent", "text_align": "center"}}
+      ]
+    },
+    {
+      "order": 12,
+      "type": "closing",
+      "blocks": [
+        {"id": "s12-logo", "type": "image", "content": "[LOGO_PLACEHOLDER]", "position": {"x": 760, "y": 180, "w": 400, "h": 160}, "styling": {"font_family": "JetBrains Mono", "font_size": 16, "font_weight": 400, "color": "#E8E8E8", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s12-heading", "type": "heading", "content": "[PLACEHOLDER: Questions & Discussion]", "position": {"x": 160, "y": 400, "w": 1600, "h": 120}, "styling": {"font_family": "JetBrains Mono", "font_size": 60, "font_weight": 700, "color": "#00D4FF", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s12-contact", "type": "text", "content": "[PLACEHOLDER: trainer@company.com | Resources: company.com/training]", "position": {"x": 160, "y": 560, "w": 1600, "h": 60}, "styling": {"font_family": "Roboto", "font_size": 26, "font_weight": 300, "color": "#7B2FBE", "background_color": "transparent", "text_align": "center"}}
+      ]
+    }
+  ]
+}

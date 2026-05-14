@@ -1,0 +1,121 @@
+{
+  "name": "Startup Deck",
+  "description": "High-energy startup presentation designed to captivate audiences and communicate vision.",
+  "category": "Startup",
+  "tags": ["startup", "vision", "growth", "team"],
+  "thumbnail_url": "",
+  "theme_name": "Startup Energy",
+  "is_active": true,
+  "metadata": {
+    "total_slides": 10,
+    "estimated_duration": 12,
+    "default_audience": "General audience, potential co-founders, early adopters"
+  },
+  "slides": [
+    {
+      "order": 1,
+      "type": "title",
+      "blocks": [
+        {"id": "s1-logo", "type": "image", "content": "[LOGO_PLACEHOLDER]", "position": {"x": 80, "y": 60, "w": 200, "h": 80}, "styling": {"font_family": "Nunito", "font_size": 16, "font_weight": 400, "color": "#2D2D2D", "background_color": "transparent", "text_align": "left"}},
+        {"id": "s1-title", "type": "title", "content": "[PLACEHOLDER: Startup Name]", "position": {"x": 160, "y": 360, "w": 1600, "h": 160}, "styling": {"font_family": "Nunito", "font_size": 88, "font_weight": 800, "color": "#6C63FF", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s1-tagline", "type": "subtitle", "content": "[PLACEHOLDER: Bold tagline that captures the essence]", "position": {"x": 160, "y": 560, "w": 1600, "h": 80}, "styling": {"font_family": "Nunito", "font_size": 36, "font_weight": 400, "color": "#2D2D2D", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s1-accent", "type": "decoration", "content": "", "position": {"x": 0, "y": 980, "w": 1920, "h": 8}, "styling": {"font_family": "Nunito", "font_size": 16, "font_weight": 400, "color": "#6C63FF", "background_color": "#6C63FF", "text_align": "left"}}
+      ]
+    },
+    {
+      "order": 2,
+      "type": "vision",
+      "blocks": [
+        {"id": "s2-heading", "type": "heading", "content": "[PLACEHOLDER: Our Vision]", "position": {"x": 80, "y": 80, "w": 900, "h": 100}, "styling": {"font_family": "Nunito", "font_size": 56, "font_weight": 800, "color": "#6C63FF", "background_color": "transparent", "text_align": "left"}},
+        {"id": "s2-vision", "type": "text", "content": "[PLACEHOLDER: Big, inspiring vision statement — one or two sentences maximum]", "position": {"x": 80, "y": 240, "w": 1760, "h": 200}, "styling": {"font_family": "Nunito", "font_size": 40, "font_weight": 400, "color": "#2D2D2D", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s2-why", "type": "text", "content": "[PLACEHOLDER: Why now? Why us?]", "position": {"x": 80, "y": 500, "w": 1760, "h": 120}, "styling": {"font_family": "Nunito", "font_size": 30, "font_weight": 400, "color": "#FF6584", "background_color": "transparent", "text_align": "center"}}
+      ]
+    },
+    {
+      "order": 3,
+      "type": "problem",
+      "blocks": [
+        {"id": "s3-label", "type": "caption", "content": "THE PROBLEM WE SOLVE", "position": {"x": 80, "y": 60, "w": 600, "h": 50}, "styling": {"font_family": "Nunito", "font_size": 22, "font_weight": 700, "color": "#FF6584", "background_color": "transparent", "text_align": "left"}},
+        {"id": "s3-heading", "type": "heading", "content": "[PLACEHOLDER: Problem Statement]", "position": {"x": 80, "y": 140, "w": 1760, "h": 100}, "styling": {"font_family": "Nunito", "font_size": 56, "font_weight": 800, "color": "#2D2D2D", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s3-pain1", "type": "pain_point", "content": "[PLACEHOLDER: Pain Point 1]", "position": {"x": 80, "y": 320, "w": 540, "h": 400}, "styling": {"font_family": "Nunito", "font_size": 28, "font_weight": 400, "color": "#2D2D2D", "background_color": "#FFF0F3", "text_align": "center"}},
+        {"id": "s3-pain2", "type": "pain_point", "content": "[PLACEHOLDER: Pain Point 2]", "position": {"x": 700, "y": 320, "w": 540, "h": 400}, "styling": {"font_family": "Nunito", "font_size": 28, "font_weight": 400, "color": "#2D2D2D", "background_color": "#F0EDFF", "text_align": "center"}},
+        {"id": "s3-pain3", "type": "pain_point", "content": "[PLACEHOLDER: Pain Point 3]", "position": {"x": 1320, "y": 320, "w": 520, "h": 400}, "styling": {"font_family": "Nunito", "font_size": 28, "font_weight": 400, "color": "#2D2D2D", "background_color": "#EDFFF9", "text_align": "center"}}
+      ]
+    },
+    {
+      "order": 4,
+      "type": "solution",
+      "blocks": [
+        {"id": "s4-label", "type": "caption", "content": "OUR SOLUTION", "position": {"x": 80, "y": 60, "w": 400, "h": 50}, "styling": {"font_family": "Nunito", "font_size": 22, "font_weight": 700, "color": "#43D9AD", "background_color": "transparent", "text_align": "left"}},
+        {"id": "s4-heading", "type": "heading", "content": "[PLACEHOLDER: Solution Name]", "position": {"x": 80, "y": 140, "w": 1760, "h": 100}, "styling": {"font_family": "Nunito", "font_size": 60, "font_weight": 800, "color": "#2D2D2D", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s4-desc", "type": "text", "content": "[PLACEHOLDER: Clear, concise description of the solution in 2-3 sentences]", "position": {"x": 200, "y": 300, "w": 1520, "h": 150}, "styling": {"font_family": "Nunito", "font_size": 32, "font_weight": 400, "color": "#2D2D2D", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s4-benefit1", "type": "benefit", "content": "[PLACEHOLDER: Benefit 1]", "position": {"x": 80, "y": 520, "w": 540, "h": 300}, "styling": {"font_family": "Nunito", "font_size": 26, "font_weight": 600, "color": "#FFFFFF", "background_color": "#6C63FF", "text_align": "center"}},
+        {"id": "s4-benefit2", "type": "benefit", "content": "[PLACEHOLDER: Benefit 2]", "position": {"x": 700, "y": 520, "w": 540, "h": 300}, "styling": {"font_family": "Nunito", "font_size": 26, "font_weight": 600, "color": "#FFFFFF", "background_color": "#FF6584", "text_align": "center"}},
+        {"id": "s4-benefit3", "type": "benefit", "content": "[PLACEHOLDER: Benefit 3]", "position": {"x": 1320, "y": 520, "w": 520, "h": 300}, "styling": {"font_family": "Nunito", "font_size": 26, "font_weight": 600, "color": "#FFFFFF", "background_color": "#43D9AD", "text_align": "center"}}
+      ]
+    },
+    {
+      "order": 5,
+      "type": "traction",
+      "blocks": [
+        {"id": "s5-label", "type": "caption", "content": "TRACTION", "position": {"x": 80, "y": 60, "w": 300, "h": 50}, "styling": {"font_family": "Nunito", "font_size": 22, "font_weight": 700, "color": "#6C63FF", "background_color": "transparent", "text_align": "left"}},
+        {"id": "s5-heading", "type": "heading", "content": "[PLACEHOLDER: The Numbers Speak]", "position": {"x": 80, "y": 140, "w": 1760, "h": 100}, "styling": {"font_family": "Nunito", "font_size": 52, "font_weight": 800, "color": "#2D2D2D", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s5-num1", "type": "big_number", "content": "[PLACEHOLDER: XXX+\nCustomers]", "position": {"x": 80, "y": 310, "w": 540, "h": 320}, "styling": {"font_family": "Nunito", "font_size": 60, "font_weight": 800, "color": "#6C63FF", "background_color": "#F0EDFF", "text_align": "center"}},
+        {"id": "s5-num2", "type": "big_number", "content": "[PLACEHOLDER: $XXXK\nARR]", "position": {"x": 700, "y": 310, "w": 540, "h": 320}, "styling": {"font_family": "Nunito", "font_size": 60, "font_weight": 800, "color": "#FF6584", "background_color": "#FFF0F3", "text_align": "center"}},
+        {"id": "s5-num3", "type": "big_number", "content": "[PLACEHOLDER: XX%\nGrowth MoM]", "position": {"x": 1320, "y": 310, "w": 520, "h": 320}, "styling": {"font_family": "Nunito", "font_size": 60, "font_weight": 800, "color": "#43D9AD", "background_color": "#EDFFF9", "text_align": "center"}}
+      ]
+    },
+    {
+      "order": 6,
+      "type": "product",
+      "blocks": [
+        {"id": "s6-label", "type": "caption", "content": "PRODUCT DEMO", "position": {"x": 80, "y": 60, "w": 400, "h": 50}, "styling": {"font_family": "Nunito", "font_size": 22, "font_weight": 700, "color": "#6C63FF", "background_color": "transparent", "text_align": "left"}},
+        {"id": "s6-heading", "type": "heading", "content": "[PLACEHOLDER: See It in Action]", "position": {"x": 80, "y": 140, "w": 1760, "h": 100}, "styling": {"font_family": "Nunito", "font_size": 52, "font_weight": 800, "color": "#2D2D2D", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s6-screen", "type": "image", "content": "[PLACEHOLDER: Product screenshot or demo image]", "position": {"x": 200, "y": 280, "w": 1520, "h": 680}, "styling": {"font_family": "Nunito", "font_size": 16, "font_weight": 400, "color": "#2D2D2D", "background_color": "#F5F5F5", "text_align": "center"}}
+      ]
+    },
+    {
+      "order": 7,
+      "type": "team",
+      "blocks": [
+        {"id": "s7-label", "type": "caption", "content": "THE TEAM", "position": {"x": 80, "y": 60, "w": 300, "h": 50}, "styling": {"font_family": "Nunito", "font_size": 22, "font_weight": 700, "color": "#FF6584", "background_color": "transparent", "text_align": "left"}},
+        {"id": "s7-heading", "type": "heading", "content": "[PLACEHOLDER: Built by Experts]", "position": {"x": 80, "y": 140, "w": 1760, "h": 100}, "styling": {"font_family": "Nunito", "font_size": 52, "font_weight": 800, "color": "#2D2D2D", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s7-m1", "type": "team_member", "content": "[PLACEHOLDER: Founder 1\nCEO — Background]", "position": {"x": 180, "y": 300, "w": 460, "h": 500}, "styling": {"font_family": "Nunito", "font_size": 26, "font_weight": 600, "color": "#2D2D2D", "background_color": "#F0EDFF", "text_align": "center"}},
+        {"id": "s7-m2", "type": "team_member", "content": "[PLACEHOLDER: Founder 2\nCTO — Background]", "position": {"x": 740, "y": 300, "w": 460, "h": 500}, "styling": {"font_family": "Nunito", "font_size": 26, "font_weight": 600, "color": "#2D2D2D", "background_color": "#FFF0F3", "text_align": "center"}},
+        {"id": "s7-m3", "type": "team_member", "content": "[PLACEHOLDER: Founder 3\nCMO — Background]", "position": {"x": 1300, "y": 300, "w": 460, "h": 500}, "styling": {"font_family": "Nunito", "font_size": 26, "font_weight": 600, "color": "#2D2D2D", "background_color": "#EDFFF9", "text_align": "center"}}
+      ]
+    },
+    {
+      "order": 8,
+      "type": "market",
+      "blocks": [
+        {"id": "s8-label", "type": "caption", "content": "MARKET SIZE", "position": {"x": 80, "y": 60, "w": 400, "h": 50}, "styling": {"font_family": "Nunito", "font_size": 22, "font_weight": 700, "color": "#43D9AD", "background_color": "transparent", "text_align": "left"}},
+        {"id": "s8-heading", "type": "heading", "content": "[PLACEHOLDER: Massive Market Opportunity]", "position": {"x": 80, "y": 140, "w": 1760, "h": 100}, "styling": {"font_family": "Nunito", "font_size": 52, "font_weight": 800, "color": "#2D2D2D", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s8-tam", "type": "stat", "content": "TAM\n[PLACEHOLDER: $XXB]", "position": {"x": 80, "y": 310, "w": 540, "h": 400}, "styling": {"font_family": "Nunito", "font_size": 52, "font_weight": 800, "color": "#FFFFFF", "background_color": "#6C63FF", "text_align": "center"}},
+        {"id": "s8-sam", "type": "stat", "content": "SAM\n[PLACEHOLDER: $XXB]", "position": {"x": 700, "y": 310, "w": 540, "h": 400}, "styling": {"font_family": "Nunito", "font_size": 52, "font_weight": 800, "color": "#FFFFFF", "background_color": "#FF6584", "text_align": "center"}},
+        {"id": "s8-som", "type": "stat", "content": "SOM\n[PLACEHOLDER: $XXM]", "position": {"x": 1320, "y": 310, "w": 520, "h": 400}, "styling": {"font_family": "Nunito", "font_size": 52, "font_weight": 800, "color": "#FFFFFF", "background_color": "#43D9AD", "text_align": "center"}}
+      ]
+    },
+    {
+      "order": 9,
+      "type": "ask",
+      "blocks": [
+        {"id": "s9-label", "type": "caption", "content": "THE ASK", "position": {"x": 80, "y": 60, "w": 300, "h": 50}, "styling": {"font_family": "Nunito", "font_size": 22, "font_weight": 700, "color": "#6C63FF", "background_color": "transparent", "text_align": "left"}},
+        {"id": "s9-heading", "type": "heading", "content": "[PLACEHOLDER: Join Our Journey]", "position": {"x": 80, "y": 140, "w": 1760, "h": 100}, "styling": {"font_family": "Nunito", "font_size": 52, "font_weight": 800, "color": "#2D2D2D", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s9-amount", "type": "stat", "content": "[PLACEHOLDER: $X.XM Seed Round]", "position": {"x": 580, "y": 300, "w": 760, "h": 180}, "styling": {"font_family": "Nunito", "font_size": 60, "font_weight": 800, "color": "#FFFFFF", "background_color": "#6C63FF", "text_align": "center"}},
+        {"id": "s9-use1", "type": "text", "content": "[PLACEHOLDER: XX% Product Development]", "position": {"x": 80, "y": 560, "w": 540, "h": 140}, "styling": {"font_family": "Nunito", "font_size": 28, "font_weight": 600, "color": "#2D2D2D", "background_color": "#F0EDFF", "text_align": "center"}},
+        {"id": "s9-use2", "type": "text", "content": "[PLACEHOLDER: XX% Growth & Marketing]", "position": {"x": 700, "y": 560, "w": 540, "h": 140}, "styling": {"font_family": "Nunito", "font_size": 28, "font_weight": 600, "color": "#2D2D2D", "background_color": "#FFF0F3", "text_align": "center"}},
+        {"id": "s9-use3", "type": "text", "content": "[PLACEHOLDER: XX% Team Expansion]", "position": {"x": 1320, "y": 560, "w": 520, "h": 140}, "styling": {"font_family": "Nunito", "font_size": 28, "font_weight": 600, "color": "#2D2D2D", "background_color": "#EDFFF9", "text_align": "center"}}
+      ]
+    },
+    {
+      "order": 10,
+      "type": "closing",
+      "blocks": [
+        {"id": "s10-logo", "type": "image", "content": "[LOGO_PLACEHOLDER]", "position": {"x": 760, "y": 180, "w": 400, "h": 160}, "styling": {"font_family": "Nunito", "font_size": 16, "font_weight": 400, "color": "#2D2D2D", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s10-cta", "type": "heading", "content": "[PLACEHOLDER: Let's Change the World Together]", "position": {"x": 160, "y": 400, "w": 1600, "h": 120}, "styling": {"font_family": "Nunito", "font_size": 60, "font_weight": 800, "color": "#6C63FF", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s10-contact", "type": "text", "content": "[PLACEHOLDER: founder@startup.com | www.startup.com]", "position": {"x": 160, "y": 560, "w": 1600, "h": 60}, "styling": {"font_family": "Nunito", "font_size": 30, "font_weight": 400, "color": "#2D2D2D", "background_color": "transparent", "text_align": "center"}}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "Corporate Excellence",
+  "colors": {
+    "primary":    "#2C1810",
+    "secondary":  "#3D2314",
+    "accent":     "#8B5E3C",
+    "background": "#F5F0E8",
+    "text":       "#1A1008",
+    "surface":    "#E8DDD0",
+    "muted":      "#9B8B7E"
+  },
+  "fonts": {
+    "heading": { "family": "Inter, sans-serif", "size": 52, "weight": 800 },
+    "body":    { "family": "Inter, sans-serif", "size": 22, "weight": 400 },
+    "caption": { "family": "Inter, sans-serif", "size": 16, "weight": 300 }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "Tech Modern",
+  "colors": {
+    "primary":    "#0D1117",
+    "secondary":  "#161B22",
+    "accent":     "#58A6FF",
+    "background": "#F0F6FF",
+    "text":       "#0D1117",
+    "surface":    "#DDE8F5",
+    "muted":      "#57606A"
+  },
+  "fonts": {
+    "heading": { "family": "Inter, sans-serif", "size": 52, "weight": 800 },
+    "body":    { "family": "Inter, sans-serif", "size": 22, "weight": 400 },
+    "caption": { "family": "Inter, sans-serif", "size": 16, "weight": 300 }
+  }
+}

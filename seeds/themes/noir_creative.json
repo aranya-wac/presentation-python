@@ -1,0 +1,17 @@
+{
+  "name": "Noir Creative",
+  "colors": {
+    "primary":    "#0D0D0D",
+    "secondary":  "#1A1A1A",
+    "accent":     "#D4A843",
+    "background": "#0D0D0D",
+    "text":       "#F5F0E8",
+    "surface":    "#181818",
+    "muted":      "#5A5550"
+  },
+  "fonts": {
+    "heading": { "family": "Georgia, serif", "size": 54, "weight": 700 },
+    "body":    { "family": "Inter, sans-serif", "size": 20, "weight": 300 },
+    "caption": { "family": "Inter, sans-serif", "size": 12, "weight": 500 }
+  }
+}

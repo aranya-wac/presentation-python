@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ presentation.title }}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family={{ fonts.heading.family | replace(' ', '+') }}:wght@400;600;700;800&family={{ fonts.body.family | replace(' ', '+') }}:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0f0f13;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      font-family: '{{ fonts.body.family }}', Inter, sans-serif;
+      user-select: none;
+    }
+
+    /* ── Viewport wrapper — JS sets transform scale ── */
+    #vp {
+      position: relative;
+      width: 1280px;
+      height: 720px;
+      transform-origin: center center;
+      flex-shrink: 0;
+    }
+
+    /* ── Individual slides ── */
+    .slide {
+      position: absolute;
+      inset: 0;
+      width: 1280px;
+      height: 720px;
+      overflow: hidden;
+      display: none;
+    }
+    .slide.active { display: block; }
+
+    /* ── Blocks: all absolutely positioned ── */
+    .block {
+      position: absolute;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+
+    /* Text blocks */
+    .block-text {
+      white-space: pre-wrap;
+      word-break: break-word;
+      line-height: 1.4;
+    }
+
+    /* Image blocks */
+    .block-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Shape blocks */
+    .block-shape { }
+
+    /* Panel blocks */
+    .block-panel { }
+
+    /* Badge: pill border */
+    .block-badge {
+      white-space: nowrap;
+      border: 1.5px solid currentColor;
+      border-radius: 999px;
+      padding: 0 10px;
+      display: flex;
+      align-items: center;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* ── Bottom navigation bar ── */
+    #nav {
+      position: fixed;
+      bottom: 0;
+      left: 0; right: 0;
+      height: 52px;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      z-index: 999;
+    }
+    #nav button {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #fff;
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.15s;
+    }
+    #nav button:hover:not(:disabled) { background: rgba(255,255,255,0.2); }
+    #nav button:disabled { opacity: 0.25; cursor: default; }
+    #counter {
+      color: rgba(255,255,255,0.45);
+      font-size: 12px;
+      min-width: 60px;
+      text-align: center;
+      font-family: Inter, sans-serif;
+    }
+    #title-bar {
+      color: rgba(255,255,255,0.55);
+      font-size: 12px;
+      max-width: 320px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-family: Inter, sans-serif;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="vp">
+    {% for slide in slides %}
+    <div class="slide{% if loop.first %} active{% endif %}"
+         style="background: {{ slide.background_css }};">
+      {% for block in slide.blocks %}
+
+        {# ── Panel block ── #}
+        {% if block.type == 'panel' %}
+        <div class="block block-panel" style="
+          left:   {{ block.position.x }}px;
+          top:    {{ block.position.y }}px;
+          width:  {{ block.position.w }}px;
+          height: {{ block.position.h }}px;
+          background: {{ block.styling.background_color }};
+        "></div>
+
+        {# ── Shape / accent bar ── #}
+        {% elif block.type == 'shape' %}
+        <div class="block block-shape" style="
+          left:   {{ block.position.x }}px;
+          top:    {{ block.position.y }}px;
+          width:  {{ block.position.w }}px;
+          height: {{ block.position.h }}px;
+          background: {{ block.styling.background_color or block.styling.color }};
+          border-radius: {{ [block.position.h, block.position.w] | min * 0.5 }}px;
+        "></div>
+
+        {# ── Image block ── #}
+        {% elif block.type == 'image' %}
+        {% if block.content %}
+        <div class="block block-image" style="
+          left:   {{ block.position.x }}px;
+          top:    {{ block.position.y }}px;
+          width:  {{ block.position.w }}px;
+          height: {{ block.position.h }}px;
+          border-radius: {{ '0' if block.position.x == 0 else '12px' }};
+        ">
+          <img src="{{ block.content }}" alt="" />
+        </div>
+        {% endif %}
+
+        {# ── Badge block ── #}
+        {% elif block.type == 'badge' %}
+        <div class="block block-badge" style="
+          left:   {{ block.position.x }}px;
+          top:    {{ block.position.y }}px;
+          width:  {{ block.position.w }}px;
+          height: {{ block.position.h }}px;
+          color:  {{ block.styling.color }};
+          font-family: '{{ block.styling.font_family or fonts.body.family }}', sans-serif;
+          font-size:   {{ block.styling.font_size }}px;
+          font-weight: {{ block.styling.font_weight }};
+        ">{{ block.content }}</div>
+
+        {# ── All text-based blocks (text, title, heading, body, bullet, stat, quote, caption, card, subtitle, process_circle) ── #}
+        {% else %}
+        <div class="block block-text" style="
+          left:        {{ block.position.x }}px;
+          top:         {{ block.position.y }}px;
+          width:       {{ block.position.w }}px;
+          height:      {{ block.position.h }}px;
+          font-family: '{{ block.styling.font_family or fonts.body.family }}', sans-serif;
+          font-size:   {{ block.styling.font_size }}px;
+          font-weight: {{ block.styling.font_weight }};
+          color:       {{ block.styling.color }};
+          background:  {{ block.styling.background_color }};
+          text-align:  {{ block.styling.text_align }};
+          {% if block.type in ('stat', 'process_circle') %}
+          display: flex;
+          align-items: center;
+          justify-content: {{ 'center' if block.styling.text_align == 'center' else 'flex-start' }};
+          border-radius: {% if block.type == 'process_circle' %}50%{% else %}12px{% endif %};
+          {% endif %}
+        ">{{ block.content }}</div>
+        {% endif %}
+
+      {% endfor %}
+      {% if slide.notes %}
+      <aside class="presenter-notes" hidden>{{ slide.notes }}</aside>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+
+  <div id="nav">
+    <button id="btn-prev" onclick="go(-1)">&#8592;</button>
+    <span id="title-bar">{{ presentation.title }}</span>
+    <span id="counter">1 / {{ slides | length }}</span>
+    <button id="btn-next" onclick="go(1)">&#8594;</button>
+  </div>
+
+  <script>
+    // ── Scale viewport to fit window ──────────────────────────────────────
+    const vp = document.getElementById('vp');
+    const NAV_H = 52;
+    function resize() {
+      const sx = window.innerWidth  / 1280;
+      const sy = (window.innerHeight - NAV_H) / 720;
+      vp.style.transform = `scale(${Math.min(sx, sy)})`;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    // ── Slide navigation ─────────────────────────────────────────────────
+    const slides  = document.querySelectorAll('.slide');
+    const counter = document.getElementById('counter');
+    const btnPrev = document.getElementById('btn-prev');
+    const btnNext = document.getElementById('btn-next');
+    let cur = 0;
+
+    function go(dir) {
+      slides[cur].classList.remove('active');
+      cur = Math.max(0, Math.min(slides.length - 1, cur + dir));
+      slides[cur].classList.add('active');
+      counter.textContent = `${cur + 1} / ${slides.length}`;
+      btnPrev.disabled = cur === 0;
+      btnNext.disabled = cur === slides.length - 1;
+    }
+
+    btnPrev.disabled = true;
+    if (slides.length <= 1) btnNext.disabled = true;
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown'  || e.key === ' ') go(1);
+      if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')                      go(-1);
+    });
+  </script>
+</body>
+</html>

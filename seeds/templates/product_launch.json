@@ -1,0 +1,116 @@
+{
+  "name": "Product Launch",
+  "description": "Exciting product launch presentation to build anticipation and drive adoption.",
+  "category": "Product",
+  "tags": ["product", "launch", "announcement", "marketing"],
+  "thumbnail_url": "",
+  "theme_name": "Creative Bold",
+  "is_active": true,
+  "metadata": {
+    "total_slides": 10,
+    "estimated_duration": 12,
+    "default_audience": "Customers, press, and early adopters"
+  },
+  "slides": [
+    {
+      "order": 1,
+      "type": "title",
+      "blocks": [
+        {"id": "s1-logo", "type": "image", "content": "[LOGO_PLACEHOLDER]", "position": {"x": 80, "y": 60, "w": 200, "h": 80}, "styling": {"font_family": "Poppins", "font_size": 16, "font_weight": 400, "color": "#FFFFFF", "background_color": "transparent", "text_align": "left"}},
+        {"id": "s1-announce", "type": "caption", "content": "INTRODUCING", "position": {"x": 160, "y": 300, "w": 1600, "h": 60}, "styling": {"font_family": "Poppins", "font_size": 28, "font_weight": 300, "color": "#F7C59F", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s1-product", "type": "title", "content": "[PLACEHOLDER: Product Name]", "position": {"x": 160, "y": 380, "w": 1600, "h": 200}, "styling": {"font_family": "Poppins", "font_size": 100, "font_weight": 800, "color": "#FF6B35", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s1-tagline", "type": "subtitle", "content": "[PLACEHOLDER: Product tagline]", "position": {"x": 160, "y": 600, "w": 1600, "h": 80}, "styling": {"font_family": "Poppins", "font_size": 36, "font_weight": 300, "color": "#EFEFD0", "background_color": "transparent", "text_align": "center"}}
+      ]
+    },
+    {
+      "order": 2,
+      "type": "problem",
+      "blocks": [
+        {"id": "s2-heading", "type": "heading", "content": "[PLACEHOLDER: The Problem Today]", "position": {"x": 80, "y": 100, "w": 1760, "h": 120}, "styling": {"font_family": "Poppins", "font_size": 60, "font_weight": 800, "color": "#FF6B35", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s2-p1", "type": "bullet", "content": "[PLACEHOLDER: Problem bullet 1]", "position": {"x": 200, "y": 300, "w": 1520, "h": 80}, "styling": {"font_family": "Poppins", "font_size": 32, "font_weight": 400, "color": "#EFEFD0", "background_color": "transparent", "text_align": "left"}},
+        {"id": "s2-p2", "type": "bullet", "content": "[PLACEHOLDER: Problem bullet 2]", "position": {"x": 200, "y": 420, "w": 1520, "h": 80}, "styling": {"font_family": "Poppins", "font_size": 32, "font_weight": 400, "color": "#EFEFD0", "background_color": "transparent", "text_align": "left"}},
+        {"id": "s2-p3", "type": "bullet", "content": "[PLACEHOLDER: Problem bullet 3]", "position": {"x": 200, "y": 540, "w": 1520, "h": 80}, "styling": {"font_family": "Poppins", "font_size": 32, "font_weight": 400, "color": "#EFEFD0", "background_color": "transparent", "text_align": "left"}},
+        {"id": "s2-p4", "type": "bullet", "content": "[PLACEHOLDER: Problem bullet 4]", "position": {"x": 200, "y": 660, "w": 1520, "h": 80}, "styling": {"font_family": "Poppins", "font_size": 32, "font_weight": 400, "color": "#EFEFD0", "background_color": "transparent", "text_align": "left"}}
+      ]
+    },
+    {
+      "order": 3,
+      "type": "solution",
+      "blocks": [
+        {"id": "s3-heading", "type": "heading", "content": "[PLACEHOLDER: Product Name] Changes Everything", "position": {"x": 80, "y": 100, "w": 1760, "h": 120}, "styling": {"font_family": "Poppins", "font_size": 56, "font_weight": 800, "color": "#FF6B35", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s3-desc", "type": "text", "content": "[PLACEHOLDER: Product description — what it does and how it works]", "position": {"x": 200, "y": 280, "w": 1520, "h": 150}, "styling": {"font_family": "Poppins", "font_size": 30, "font_weight": 400, "color": "#EFEFD0", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s3-feat1", "type": "feature", "content": "[PLACEHOLDER: Key Feature 1]", "position": {"x": 80, "y": 500, "w": 540, "h": 360}, "styling": {"font_family": "Poppins", "font_size": 26, "font_weight": 400, "color": "#1B1B2F", "background_color": "#FF6B35", "text_align": "center"}},
+        {"id": "s3-feat2", "type": "feature", "content": "[PLACEHOLDER: Key Feature 2]", "position": {"x": 700, "y": 500, "w": 540, "h": 360}, "styling": {"font_family": "Poppins", "font_size": 26, "font_weight": 400, "color": "#1B1B2F", "background_color": "#F7C59F", "text_align": "center"}},
+        {"id": "s3-feat3", "type": "feature", "content": "[PLACEHOLDER: Key Feature 3]", "position": {"x": 1320, "y": 500, "w": 520, "h": 360}, "styling": {"font_family": "Poppins", "font_size": 26, "font_weight": 400, "color": "#1B1B2F", "background_color": "#EFEFD0", "text_align": "center"}}
+      ]
+    },
+    {
+      "order": 4,
+      "type": "demo",
+      "blocks": [
+        {"id": "s4-heading", "type": "heading", "content": "[PLACEHOLDER: See It in Action]", "position": {"x": 80, "y": 60, "w": 1760, "h": 100}, "styling": {"font_family": "Poppins", "font_size": 56, "font_weight": 800, "color": "#FF6B35", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s4-screenshot", "type": "image", "content": "[PLACEHOLDER: Product screenshot]", "position": {"x": 80, "y": 200, "w": 1760, "h": 760}, "styling": {"font_family": "Poppins", "font_size": 16, "font_weight": 400, "color": "#EFEFD0", "background_color": "#2A2A3F", "text_align": "center"}}
+      ]
+    },
+    {
+      "order": 5,
+      "type": "benefits",
+      "blocks": [
+        {"id": "s5-heading", "type": "heading", "content": "[PLACEHOLDER: Why People Love It]", "position": {"x": 80, "y": 60, "w": 1760, "h": 100}, "styling": {"font_family": "Poppins", "font_size": 56, "font_weight": 800, "color": "#FF6B35", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s5-b1", "type": "benefit", "content": "[PLACEHOLDER: Benefit 1 — description]", "position": {"x": 80, "y": 240, "w": 800, "h": 240}, "styling": {"font_family": "Poppins", "font_size": 30, "font_weight": 400, "color": "#EFEFD0", "background_color": "transparent", "text_align": "left"}},
+        {"id": "s5-b2", "type": "benefit", "content": "[PLACEHOLDER: Benefit 2 — description]", "position": {"x": 80, "y": 520, "w": 800, "h": 240}, "styling": {"font_family": "Poppins", "font_size": 30, "font_weight": 400, "color": "#EFEFD0", "background_color": "transparent", "text_align": "left"}},
+        {"id": "s5-b3", "type": "benefit", "content": "[PLACEHOLDER: Benefit 3 — description]", "position": {"x": 1060, "y": 240, "w": 780, "h": 240}, "styling": {"font_family": "Poppins", "font_size": 30, "font_weight": 400, "color": "#EFEFD0", "background_color": "transparent", "text_align": "left"}},
+        {"id": "s5-b4", "type": "benefit", "content": "[PLACEHOLDER: Benefit 4 — description]", "position": {"x": 1060, "y": 520, "w": 780, "h": 240}, "styling": {"font_family": "Poppins", "font_size": 30, "font_weight": 400, "color": "#EFEFD0", "background_color": "transparent", "text_align": "left"}}
+      ]
+    },
+    {
+      "order": 6,
+      "type": "social_proof",
+      "blocks": [
+        {"id": "s6-heading", "type": "heading", "content": "[PLACEHOLDER: What Beta Users Say]", "position": {"x": 80, "y": 60, "w": 1760, "h": 100}, "styling": {"font_family": "Poppins", "font_size": 52, "font_weight": 800, "color": "#FF6B35", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s6-q1", "type": "quote", "content": "\"[PLACEHOLDER: User testimonial quote 1]\"\n— [PLACEHOLDER: Name, Title]", "position": {"x": 80, "y": 240, "w": 840, "h": 400}, "styling": {"font_family": "Poppins", "font_size": 28, "font_weight": 300, "color": "#1B1B2F", "background_color": "#FF6B35", "text_align": "center"}},
+        {"id": "s6-q2", "type": "quote", "content": "\"[PLACEHOLDER: User testimonial quote 2]\"\n— [PLACEHOLDER: Name, Title]", "position": {"x": 1000, "y": 240, "w": 840, "h": 400}, "styling": {"font_family": "Poppins", "font_size": 28, "font_weight": 300, "color": "#1B1B2F", "background_color": "#F7C59F", "text_align": "center"}}
+      ]
+    },
+    {
+      "order": 7,
+      "type": "pricing",
+      "blocks": [
+        {"id": "s7-heading", "type": "heading", "content": "[PLACEHOLDER: Simple, Transparent Pricing]", "position": {"x": 80, "y": 60, "w": 1760, "h": 100}, "styling": {"font_family": "Poppins", "font_size": 52, "font_weight": 800, "color": "#FF6B35", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s7-plan1", "type": "pricing_tier", "content": "[PLACEHOLDER: Plan 1\n$XX/mo\nFeature list]", "position": {"x": 80, "y": 240, "w": 560, "h": 600}, "styling": {"font_family": "Poppins", "font_size": 26, "font_weight": 400, "color": "#EFEFD0", "background_color": "#2A2A3F", "text_align": "center"}},
+        {"id": "s7-plan2", "type": "pricing_tier", "content": "[PLACEHOLDER: Plan 2 (Popular)\n$XX/mo\nFeature list]", "position": {"x": 720, "y": 200, "w": 560, "h": 680}, "styling": {"font_family": "Poppins", "font_size": 26, "font_weight": 400, "color": "#1B1B2F", "background_color": "#FF6B35", "text_align": "center"}},
+        {"id": "s7-plan3", "type": "pricing_tier", "content": "[PLACEHOLDER: Plan 3\n$XX/mo\nFeature list]", "position": {"x": 1360, "y": 240, "w": 480, "h": 600}, "styling": {"font_family": "Poppins", "font_size": 26, "font_weight": 400, "color": "#EFEFD0", "background_color": "#2A2A3F", "text_align": "center"}}
+      ]
+    },
+    {
+      "order": 8,
+      "type": "roadmap",
+      "blocks": [
+        {"id": "s8-heading", "type": "heading", "content": "[PLACEHOLDER: What's Coming Next]", "position": {"x": 80, "y": 60, "w": 1760, "h": 100}, "styling": {"font_family": "Poppins", "font_size": 52, "font_weight": 800, "color": "#FF6B35", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s8-now", "type": "roadmap_item", "content": "NOW\n[PLACEHOLDER: Current Release Features]", "position": {"x": 80, "y": 240, "w": 540, "h": 500}, "styling": {"font_family": "Poppins", "font_size": 26, "font_weight": 400, "color": "#1B1B2F", "background_color": "#FF6B35", "text_align": "center"}},
+        {"id": "s8-next", "type": "roadmap_item", "content": "NEXT\n[PLACEHOLDER: Q2 Planned Features]", "position": {"x": 700, "y": 240, "w": 540, "h": 500}, "styling": {"font_family": "Poppins", "font_size": 26, "font_weight": 400, "color": "#EFEFD0", "background_color": "#2A2A3F", "text_align": "center"}},
+        {"id": "s8-later", "type": "roadmap_item", "content": "LATER\n[PLACEHOLDER: H2 Vision Features]", "position": {"x": 1320, "y": 240, "w": 520, "h": 500}, "styling": {"font_family": "Poppins", "font_size": 26, "font_weight": 400, "color": "#EFEFD0", "background_color": "#332244", "text_align": "center"}}
+      ]
+    },
+    {
+      "order": 9,
+      "type": "faq",
+      "blocks": [
+        {"id": "s9-heading", "type": "heading", "content": "[PLACEHOLDER: Common Questions]", "position": {"x": 80, "y": 60, "w": 1760, "h": 100}, "styling": {"font_family": "Poppins", "font_size": 52, "font_weight": 800, "color": "#FF6B35", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s9-q1", "type": "faq", "content": "Q: [PLACEHOLDER: Question 1?]\nA: [PLACEHOLDER: Answer 1]", "position": {"x": 80, "y": 240, "w": 800, "h": 160}, "styling": {"font_family": "Poppins", "font_size": 26, "font_weight": 400, "color": "#EFEFD0", "background_color": "transparent", "text_align": "left"}},
+        {"id": "s9-q2", "type": "faq", "content": "Q: [PLACEHOLDER: Question 2?]\nA: [PLACEHOLDER: Answer 2]", "position": {"x": 80, "y": 440, "w": 800, "h": 160}, "styling": {"font_family": "Poppins", "font_size": 26, "font_weight": 400, "color": "#EFEFD0", "background_color": "transparent", "text_align": "left"}},
+        {"id": "s9-q3", "type": "faq", "content": "Q: [PLACEHOLDER: Question 3?]\nA: [PLACEHOLDER: Answer 3]", "position": {"x": 80, "y": 640, "w": 800, "h": 160}, "styling": {"font_family": "Poppins", "font_size": 26, "font_weight": 400, "color": "#EFEFD0", "background_color": "transparent", "text_align": "left"}},
+        {"id": "s9-q4", "type": "faq", "content": "Q: [PLACEHOLDER: Question 4?]\nA: [PLACEHOLDER: Answer 4]", "position": {"x": 1060, "y": 240, "w": 780, "h": 560}, "styling": {"font_family": "Poppins", "font_size": 26, "font_weight": 400, "color": "#EFEFD0", "background_color": "transparent", "text_align": "left"}}
+      ]
+    },
+    {
+      "order": 10,
+      "type": "closing",
+      "blocks": [
+        {"id": "s10-logo", "type": "image", "content": "[LOGO_PLACEHOLDER]", "position": {"x": 760, "y": 160, "w": 400, "h": 160}, "styling": {"font_family": "Poppins", "font_size": 16, "font_weight": 400, "color": "#FFFFFF", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s10-heading", "type": "heading", "content": "[PLACEHOLDER: Try Product Name Free Today]", "position": {"x": 160, "y": 380, "w": 1600, "h": 140}, "styling": {"font_family": "Poppins", "font_size": 64, "font_weight": 800, "color": "#FF6B35", "background_color": "transparent", "text_align": "center"}},
+        {"id": "s10-cta", "type": "text", "content": "[PLACEHOLDER: website.com/signup]", "position": {"x": 560, "y": 560, "w": 800, "h": 80}, "styling": {"font_family": "Poppins", "font_size": 40, "font_weight": 700, "color": "#1B1B2F", "background_color": "#FF6B35", "text_align": "center"}}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>{{ presentation.title }}</title>
+  <style>
+    @page {
+      size: 1920px 1080px;
+      margin: 0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: '{{ fonts.body.family }}', sans-serif;
+      background: white;
+    }
+    .slide-page {
+      width: 1920px;
+      height: 1080px;
+      position: relative;
+      page-break-after: always;
+      background-color: {{ colors.background }};
+      overflow: hidden;
+    }
+    .slide-page:last-child {
+      page-break-after: avoid;
+    }
+    .slide-block {
+      position: absolute;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+  {% for slide in slides %}
+  <div class="slide-page">
+    {% for block in slide.blocks %}
+    <div
+      class="slide-block"
+      style="
+        left: {{ block.position.x }}px;
+        top: {{ block.position.y }}px;
+        width: {{ block.position.w }}px;
+        height: {{ block.position.h }}px;
+        font-family: '{{ block.styling.font_family }}', sans-serif;
+        font-size: {{ block.styling.font_size }}px;
+        font-weight: {{ block.styling.font_weight }};
+        color: {{ block.styling.color }};
+        background-color: {{ block.styling.background_color }};
+        text-align: {{ block.styling.text_align }};
+      "
+    >
+      {% if block.type == 'image' %}
+        {% if block.content %}
+          <img src="{{ block.content }}" alt="image" style="max-width:100%;max-height:100%;object-fit:contain;" />
+        {% endif %}
+      {% else %}
+        {{ block.content }}
+      {% endif %}
+    </div>
+    {% endfor %}
+    {% if slide.notes %}
+    <div class="presenter-notes" style="
+      position: absolute;
+      bottom: 8px;
+      left: 24px;
+      right: 24px;
+      font-size: 10px;
+      color: #666;
+      border-top: 1px solid #ddd;
+      padding-top: 6px;
+      font-style: italic;
+      line-height: 1.4;
+    ">Notes: {{ slide.notes }}</div>
+    {% endif %}
+  </div>
+  {% endfor %}
+</body>
+</html>

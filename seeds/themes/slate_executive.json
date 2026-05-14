@@ -1,0 +1,17 @@
+{
+  "name": "Slate Executive",
+  "colors": {
+    "primary":    "#1B2A4A",
+    "secondary":  "#2C3E6B",
+    "accent":     "#C9A84C",
+    "background": "#0E1525",
+    "text":       "#EEF2F8",
+    "surface":    "#162038",
+    "muted":      "#5B6E92"
+  },
+  "fonts": {
+    "heading": { "family": "Georgia, serif", "size": 48, "weight": 700 },
+    "body":    { "family": "Inter, sans-serif", "size": 19, "weight": 400 },
+    "caption": { "family": "Inter, sans-serif", "size": 12, "weight": 500 }
+  }
+}
