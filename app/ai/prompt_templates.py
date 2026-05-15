@@ -212,6 +212,7 @@ Return ONLY this JSON (no markdown):
 
 Constraints:
 - slides[] length = $slide_count. slides[0].type="title". slides[1].type="agenda" (bullets = section names). slides[-1].type="closing".
+- Each slide must cover a DISTINCT angle of the topic. NEVER repeat the same numbers, claims, or framing across slides. If two slides would land on the same idea, change one to a different facet (e.g. temporal: 2024 vs 2028; geographic: APAC vs EMEA; functional: technology stack vs adoption metrics; stakeholder: customers vs investors vs employees). When the user prompt is short or vague, generate slides that each take an obviously different sub-topic — do not pad with restatements.
 - bullets ≤6 items, ≤14 words each. Empty for title/closing/chart/roadmap/comparison/kanban/funnel.
 - stats: 2–4 items only on type=stats. Format "<NUMBER><UNIT> <Label>".
 - chart.data: 3–8 (label, numeric value) pairs, only on type=chart.
