@@ -329,23 +329,27 @@ Return ONLY valid JSON. No markdown fences, no commentary."""
             raise HTTPException(
                 status_code=500, detail=f"AI generation failed: {exc}"
             ) from exc
-
-        replacements = (result or {}).get("replacements", {}) if isinstance(result, dict) else {}
-        if not isinstance(replacements, dict):
-            replacements = {}
-
-        # Apply replacements + scrub any leftover bracket markers as a safety net
-        for slide in slides:
-            for block in slide.get("blocks", []):
-                bid = block.get("id", "")
-                if bid in replacements and isinstance(replacements[bid], str):
-                    block["content"] = replacements[bid]
-                # Safety net: strip any remaining "[PLACEHOLDER...]" markers.
-                content = block.get("content", "")
-                if isinstance(content, str) and "[PLACEHOLDER" in content.upper():
-                    block["content"] = _PLACEHOLDER_RE.sub("", content).strip()
     else:
+        result = None
         token_count = 0
+
+    # Apply the AI's text replacements to the slide blocks. This must run
+    # whenever we DID call the AI (slots non-empty). The placeholder scrub
+    # runs unconditionally so unsubstituted markers like "[PLACEHOLDER: ...]"
+    # never end up in a saved deck.
+    replacements = (result or {}).get("replacements", {}) if isinstance(result, dict) else {}
+    if not isinstance(replacements, dict):
+        replacements = {}
+
+    for slide in slides:
+        for block in slide.get("blocks", []):
+            bid = block.get("id", "")
+            if bid in replacements and isinstance(replacements[bid], str):
+                block["content"] = replacements[bid]
+            # Safety net: strip any remaining "[PLACEHOLDER...]" markers.
+            content = block.get("content", "")
+            if isinstance(content, str) and "[PLACEHOLDER" in content.upper():
+                block["content"] = _PLACEHOLDER_RE.sub("", content).strip()
 
     # Title: use user-supplied or derive from prompt
     title = (req.title or "").strip() or f"{template.name} — {prompt_text[:50]}".strip(" —")
