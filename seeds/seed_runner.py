@@ -566,6 +566,8 @@ async def seed_templates(db, theme_id_map: dict[str, str], force_rebuild: bool =
             existing.is_active = data.get("is_active", True)
             existing.thumbnail_url = data.get("thumbnail_url", "")
             existing.preview_pptx_path = preview_path
+            existing.is_system = True
+            existing.is_published = True
             await db.commit()
             logger.info(f"Template '{name}' updated")
         else:
@@ -580,6 +582,8 @@ async def seed_templates(db, theme_id_map: dict[str, str], force_rebuild: bool =
                 metadata_json=metadata,
                 slides=data.get("slides", []),
                 preview_pptx_path=preview_path,
+                is_system=True,
+                is_published=True,
             )
             db.add(template)
             await db.commit()
