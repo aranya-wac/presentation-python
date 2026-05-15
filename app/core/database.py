@@ -18,7 +18,17 @@ async def init_db() -> None:
     global _engine, _session_factory
     url = settings.DATABASE_URL
     connect_args = {"check_same_thread": False} if url.startswith("sqlite") else {}
-    _engine = create_async_engine(url, echo=False, connect_args=connect_args)
+    # SQLite ignores pool_* args; for MySQL these are essential:
+    #   - pool_pre_ping: lightweight ping before use, so stale connections
+    #     (killed by the server's wait_timeout) are detected and replaced
+    #     instead of erroring mid-query with "Lost connection to MySQL".
+    #   - pool_recycle: proactively recycle connections older than 30 min
+    #     so we never even reach the server's wait_timeout (default 8h).
+    engine_kwargs: dict = {"echo": False, "connect_args": connect_args}
+    if not url.startswith("sqlite"):
+        engine_kwargs["pool_pre_ping"] = True
+        engine_kwargs["pool_recycle"] = 1800  # 30 minutes
+    _engine = create_async_engine(url, **engine_kwargs)
     _session_factory = async_sessionmaker(_engine, expire_on_commit=False)
     async with _engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
