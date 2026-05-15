@@ -1,7 +1,10 @@
 from __future__ import annotations
 
+import json
+from typing import Annotated
+
 from pydantic import field_validator
-from pydantic_settings import BaseSettings, PydanticBaseSettingsSource
+from pydantic_settings import BaseSettings, NoDecode, PydanticBaseSettingsSource
 
 
 class Settings(BaseSettings):
@@ -29,13 +32,23 @@ class Settings(BaseSettings):
     # to a reachable broker without a worker would leave docs stuck in
     # "pending" forever.
     USE_EXTRACTION_WORKER: bool = False
-    ALLOWED_ORIGINS: list[str] = ["http://localhost:3000"]
+    # NoDecode prevents pydantic-settings from JSON-parsing the env var before
+    # our validator runs, so plain strings like "https://foo.vercel.app" or
+    # comma-separated "https://a.com,https://b.com" don't crash on startup.
+    ALLOWED_ORIGINS: Annotated[list[str], NoDecode] = ["http://localhost:3000"]
 
     @field_validator("ALLOWED_ORIGINS", mode="before")
     @classmethod
     def parse_origins(cls, v):
         if isinstance(v, str):
-            return [o.strip() for o in v.split(",")]
+            s = v.strip()
+            # Still accept a JSON-encoded list for the .env file form.
+            if s.startswith("["):
+                try:
+                    return json.loads(s)
+                except json.JSONDecodeError:
+                    pass
+            return [o.strip() for o in s.split(",") if o.strip()]
         return v
 
     @field_validator("DATABASE_URL", mode="before")
