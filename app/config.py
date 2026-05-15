@@ -38,6 +38,18 @@ class Settings(BaseSettings):
             return [o.strip() for o in v.split(",")]
         return v
 
+    @field_validator("DATABASE_URL", mode="before")
+    @classmethod
+    def normalize_database_url(cls, v):
+        # Render (and Heroku) hand out connection strings as `postgres://...`,
+        # but SQLAlchemy needs `postgresql+asyncpg://...` for the async driver.
+        if isinstance(v, str):
+            if v.startswith("postgres://"):
+                return "postgresql+asyncpg://" + v[len("postgres://"):]
+            if v.startswith("postgresql://"):
+                return "postgresql+asyncpg://" + v[len("postgresql://"):]
+        return v
+
     model_config = {"env_file": ".env"}
 
     @classmethod

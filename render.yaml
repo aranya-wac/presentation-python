@@ -1,0 +1,42 @@
+# Render Blueprint: one web service (Dockerfile-built) + a free Postgres.
+# After you push, on Render: New + > Blueprint > pick the repo. It will read
+# this file and provision both services. Then set the secret env vars marked
+# `sync: false` in the dashboard (GEMINI_API_KEY, SECRET_KEY, ALLOWED_ORIGINS).
+
+databases:
+  - name: wacdeckstudio-db
+    plan: free
+    databaseName: wacdeckstudio
+    user: wacdeck
+
+services:
+  - type: web
+    name: wacdeckstudio-api
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health
+    envVars:
+      # Render's Postgres connection string comes back as `postgres://...`;
+      # SQLAlchemy needs the async driver prefix `postgresql+asyncpg://`.
+      # Set DATABASE_URL manually in the dashboard using the value from the
+      # database's "External Database URL" with `postgres://` swapped for
+      # `postgresql+asyncpg://`.
+      - key: DATABASE_URL
+        fromDatabase:
+          name: wacdeckstudio-db
+          property: connectionString
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ALLOWED_ORIGINS
+        sync: false
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: "1440"
+      - key: REFRESH_TOKEN_EXPIRE_DAYS
+        value: "30"
+      - key: MAX_UPLOAD_SIZE_MB
+        value: "10"
+      - key: USE_EXTRACTION_WORKER
+        value: "False"

@@ -46,10 +46,12 @@ async def _apply_inline_migrations(conn) -> None:
             result = await conn.execute(text(f"PRAGMA table_info({table})"))
             return any(row[1] == column for row in result.fetchall())
 
+        # Postgres exposes the current schema via current_schema(); MySQL uses DATABASE().
+        schema_fn = "current_schema()" if dialect == "postgresql" else "DATABASE()"
         result = await conn.execute(
             text(
                 "SELECT COUNT(*) FROM information_schema.columns "
-                "WHERE table_schema = DATABASE() "
+                f"WHERE table_schema = {schema_fn} "
                 "AND table_name = :t AND column_name = :c"
             ),
             {"t": table, "c": column},
@@ -97,6 +99,23 @@ async def _apply_inline_migrations(conn) -> None:
                 "lower(hex(randomblob(6))), "
                 "p.id, p.owner_id, 'owner', p.owner_id, "
                 "COALESCE(p.created_at, CURRENT_TIMESTAMP), CURRENT_TIMESTAMP "
+                "FROM projects p "
+                "WHERE NOT EXISTS ("
+                "  SELECT 1 FROM project_members m "
+                "  WHERE m.project_id = p.id AND m.user_id = p.owner_id"
+                ")"
+            )
+        )
+    elif dialect == "postgresql":
+        # Postgres 13+ ships gen_random_uuid() in core (no pgcrypto extension required).
+        # The WHERE NOT EXISTS clause makes this idempotent, so INSERT IGNORE isn't needed.
+        await conn.execute(
+            text(
+                "INSERT INTO project_members "
+                "(id, project_id, user_id, role, invited_by, created_at, updated_at) "
+                "SELECT gen_random_uuid()::text, p.id, p.owner_id, 'owner', p.owner_id, "
+                "       COALESCE(p.created_at, (now() at time zone 'utc')), "
+                "       (now() at time zone 'utc') "
                 "FROM projects p "
                 "WHERE NOT EXISTS ("
                 "  SELECT 1 FROM project_members m "
