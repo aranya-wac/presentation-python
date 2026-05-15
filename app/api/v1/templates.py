@@ -329,8 +329,6 @@ Return ONLY valid JSON. No markdown fences, no commentary."""
             raise HTTPException(
                 status_code=500, detail=f"AI generation failed: {exc}"
             ) from exc
-    else:
-        token_count = 0
 
         replacements = (result or {}).get("replacements", {}) if isinstance(result, dict) else {}
         if not isinstance(replacements, dict):
@@ -346,6 +344,8 @@ Return ONLY valid JSON. No markdown fences, no commentary."""
                 content = block.get("content", "")
                 if isinstance(content, str) and "[PLACEHOLDER" in content.upper():
                     block["content"] = _PLACEHOLDER_RE.sub("", content).strip()
+    else:
+        token_count = 0
 
     # Title: use user-supplied or derive from prompt
     title = (req.title or "").strip() or f"{template.name} — {prompt_text[:50]}".strip(" —")
