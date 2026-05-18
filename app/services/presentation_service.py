@@ -4,7 +4,7 @@ import json
 from typing import Optional
 
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select
+from sqlalchemy import func, or_, select
 from sqlalchemy.orm import joinedload
 
 from app.core.exceptions import ForbiddenError, NotFoundError
@@ -209,7 +209,22 @@ async def update_presentation(
     if req.logo_url is not None:
         p.logo_url = req.logo_url
     if req.theme_id is not None:
-        p.theme_id = req.theme_id
+        # Same UUID-or-slug resolution as create_presentation; keep the
+        # previous theme if neither matches so we never break the FK.
+        lookup = req.theme_id.strip()
+        if lookup:
+            theme_row = (
+                await db.execute(
+                    select(Theme).where(
+                        or_(
+                            Theme.id == lookup,
+                            func.lower(Theme.name) == lookup.lower(),
+                        )
+                    )
+                )
+            ).scalar_one_or_none()
+            if theme_row is not None:
+                p.theme_id = str(theme_row.id)
     if req.slides is not None:
         p.slides = [_slide_to_dict(s) for s in req.slides]
     if req.layouts is not None:
@@ -235,6 +250,28 @@ async def create_presentation(
             raise NotFoundError("No templates found in database")
         template_id = str(first_template.id)
 
+    # Resolve theme_id: the frontend's local preset fallback ships theme slugs
+    # like "clementa" instead of database UUIDs, which would otherwise blow up
+    # the FK on insert. Accept either form.
+    theme_lookup = (req.theme_id or "").strip()
+    theme_row = (
+        await db.execute(
+            select(Theme).where(
+                or_(
+                    Theme.id == theme_lookup,
+                    func.lower(Theme.name) == theme_lookup.lower(),
+                )
+            )
+        )
+    ).scalar_one_or_none()
+    if theme_row is None:
+        # Fall back to whatever the first available theme is, so a deck is at
+        # least persisted instead of dropped on the floor.
+        theme_row = (await db.execute(select(Theme))).scalars().first()
+        if theme_row is None:
+            raise NotFoundError("No themes found in database")
+    resolved_theme_id = str(theme_row.id)
+
     slides_data = [_slide_to_dict(s) for s in req.slides]
 
     # If the user has a brand kit and provided no logo, default to it.
@@ -248,7 +285,7 @@ async def create_presentation(
     presentation = Presentation(
         user_id=str(user.id),
         template_id=template_id,
-        theme_id=req.theme_id,
+        theme_id=resolved_theme_id,
         title=req.title,
         description=req.description,
         logo_url=logo_url,
