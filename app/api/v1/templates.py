@@ -275,9 +275,15 @@ async def generate_from_prompt(
             if btype and btype not in text_block_types and not _block_has_placeholder(block):
                 # unknown block types — skip unless they have placeholder markers
                 continue
+            # Block IDs from the preview generator are NOT unique across
+             # slides (every slide has e.g. "heading-0", every stats slide
+             # has "stat-0".."stat-2"). Send the AI a slide-scoped key so
+             # each block gets its own replacement instead of every block
+             # with the same raw id sharing one.
+            slot_key = f"s{slide.get('order', 0)}-{block.get('id', '')}"
             slots.append(
                 {
-                    "id": block.get("id", ""),
+                    "id": slot_key,
                     "slide_order": slide.get("order", 0),
                     "slide_type": slide_type,
                     "block_type": block.get("type", "text"),
@@ -342,10 +348,12 @@ Return ONLY valid JSON. No markdown fences, no commentary."""
         replacements = {}
 
     for slide in slides:
+        slot_prefix = f"s{slide.get('order', 0)}-"
         for block in slide.get("blocks", []):
             bid = block.get("id", "")
-            if bid in replacements and isinstance(replacements[bid], str):
-                block["content"] = replacements[bid]
+            slot_key = f"{slot_prefix}{bid}"
+            if slot_key in replacements and isinstance(replacements[slot_key], str):
+                block["content"] = replacements[slot_key]
             # Safety net: strip any remaining "[PLACEHOLDER...]" markers.
             content = block.get("content", "")
             if isinstance(content, str) and "[PLACEHOLDER" in content.upper():
