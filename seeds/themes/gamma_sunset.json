@@ -1,0 +1,24 @@
+{
+  "name": "Gamma Sunset",
+  "colors": {
+    "primary":    "#1A0F0A",
+    "secondary":  "#2A1810",
+    "accent":     "#FF8C42",
+    "background": "#0D0604",
+    "text":       "#FFEEDD",
+    "surface":    "#2A1810",
+    "muted":      "#A89384"
+  },
+  "fonts": {
+    "heading": { "family": "Inter Tight, Inter, sans-serif", "size": 56, "weight": 900 },
+    "body":    { "family": "Inter, sans-serif", "size": 22, "weight": 400 },
+    "caption": { "family": "Inter, sans-serif", "size": 14, "weight": 500 }
+  },
+  "tokens": {
+    "style":             "cinematic-warm",
+    "illustration_mood": "warm sunset gradient, amber orange, deep red shadows, cinematic atmospheric",
+    "heading_size":      60,
+    "card_radius":       20,
+    "use_serif_quotes":  false
+  }
+}

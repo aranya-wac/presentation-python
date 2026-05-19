@@ -1,0 +1,24 @@
+{
+  "name": "Twilight",
+  "colors": {
+    "primary":    "#3A1F0F",
+    "secondary":  "#4D2F1C",
+    "accent":     "#C97A4A",
+    "background": "#F2E2D2",
+    "text":       "#4D2F1C",
+    "surface":    "#E8D5BF",
+    "muted":      "#8A6A50"
+  },
+  "fonts": {
+    "heading": { "family": "Inter Tight, Inter, sans-serif", "size": 56, "weight": 700 },
+    "body":    { "family": "Inter, sans-serif", "size": 22, "weight": 400 },
+    "caption": { "family": "Inter, sans-serif", "size": 14, "weight": 500 }
+  },
+  "tokens": {
+    "style":             "editorial-warm",
+    "illustration_mood": "warm dusty peach, sunset rose, soft amber, gentle gradient horizon",
+    "heading_size":      60,
+    "card_radius":       16,
+    "use_serif_quotes":  true
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "AI Product Demo",
+  "description": "9-slide AI/ML product demo deck. Problem, capability showcase, technical depth, roadmap.",
+  "category": "Demo",
+  "tags": ["AI", "ML", "Product", "Tech", "Featured"],
+  "theme_name": "Gamma Aurora",
+  "thumbnail_url": "",
+  "is_active": true,
+  "metadata": { "total_slides": 9, "audience": "Technical buyers, partners", "tone": "confident, transparent, technical" },
+  "slides": [
+    { "order": 1, "type": "title",   "title": "[Product] — AI That [Verb]", "body": ["A live demonstration"] },
+    { "order": 2, "type": "content", "title": "The Problem We're Solving",  "body": ["The manual workflow today", "Why traditional automation fails", "What AI uniquely enables"] },
+    { "order": 3, "type": "content", "title": "What You're About to See",   "body": ["The use case", "The data we'll use", "The outcome we'll measure"] },
+    { "order": 4, "type": "stats",   "title": "Performance",                "body": ["Accuracy, latency, throughput vs. baseline"] },
+    { "order": 5, "type": "agenda",  "title": "How It Works",               "body": ["Architecture in three steps", "Models we use and why", "How it improves over time"] },
+    { "order": 6, "type": "content", "title": "Trust and Safety",           "body": ["What it doesn't do", "How we audit decisions", "Customer control and overrides"] },
+    { "order": 7, "type": "content", "title": "Integration",                "body": ["APIs and SDKs", "Data residency", "Time to first value"] },
+    { "order": 8, "type": "roadmap", "title": "Where It's Going",           "body": ["Q1 capability", "Q2 capability", "Q3 capability", "Q4 capability"] },
+    { "order": 9, "type": "closing", "title": "Try It Today",               "body": ["Sandbox access", "Pilot program", "Docs and community"] }
+  ]
+}

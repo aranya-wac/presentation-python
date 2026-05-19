@@ -1,0 +1,24 @@
+{
+  "name": "Gamma Ivory",
+  "colors": {
+    "primary":    "#1A2440",
+    "secondary":  "#2A3858",
+    "accent":     "#BF8A3B",
+    "background": "#FBF8F1",
+    "text":       "#1A2440",
+    "surface":    "#F0EAD9",
+    "muted":      "#7A8299"
+  },
+  "fonts": {
+    "heading": { "family": "Newsreader, Georgia, serif", "size": 56, "weight": 800 },
+    "body":    { "family": "Inter, sans-serif", "size": 22, "weight": 400 },
+    "caption": { "family": "Inter, sans-serif", "size": 14, "weight": 500 }
+  },
+  "tokens": {
+    "style":             "classical-editorial",
+    "illustration_mood": "ivory cream background, deep navy and antique gold, classical fine-art editorial, refined botanical motifs",
+    "heading_size":      60,
+    "card_radius":       14,
+    "use_serif_quotes":  true
+  }
+}

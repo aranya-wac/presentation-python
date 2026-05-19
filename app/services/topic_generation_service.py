@@ -206,8 +206,12 @@ async def stream_generation(
     MAX_IMAGES_PER_DECK = 5
     _image_semaphore = asyncio.Semaphore(1)
     IMAGE_STYLE_SUFFIX = (
-        ". Editorial photograph, soft natural light, shallow depth of field, "
-        "muted desaturated palette, clean composition, professional, no text overlay."
+        ". Style: flat editorial vector illustration, premium presentation "
+        "illustration, bold geometric shapes with subtle internal gradients, "
+        "limited sophisticated color palette (deep blues, indigo, soft accents), "
+        "clean composition, minimalist, abstract metaphor not literal depiction, "
+        "NO photography, NO realistic people faces, NO text, NO logos, "
+        "16:9 widescreen, museum-quality editorial design, Gamma presentation style."
     )
     image_tasks: list[tuple[int, "asyncio.Task[str | None]"]] = []
 
@@ -263,7 +267,14 @@ async def stream_generation(
         if not heading:
             return ""
         if slide_type == "title":
-            return f"A striking hero image illustrating: {heading}"
+            return (
+                f"Abstract atmospheric photograph for a presentation title-slide BACKGROUND about: {heading}. "
+                f"Subject: organic flowing textured surfaces — layered curved sand dunes, smooth "
+                f"wave-like architectural folds, stone or marble with subtle ridges, or flowing fabric "
+                f"folds. Dark and moody with soft directional grazing light. Refined editorial mood. "
+                f"No people, no faces, no illustrations, no buildings, no text, no logos. Premium "
+                f"magazine photography quality. 16:9 landscape full-bleed."
+            )
         return f"An editorial illustration of: {heading}, in the context of {topic}"
 
     # Pre-compute content payload per outline item using the brief.

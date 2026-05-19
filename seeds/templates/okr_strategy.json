@@ -1,0 +1,20 @@
+{
+  "name": "OKR Strategy",
+  "description": "8-slide OKR planning deck. Themes, objectives, key results, owners, dependencies.",
+  "category": "Strategy",
+  "tags": ["OKR", "Planning", "Leadership"],
+  "theme_name": "Gamma Carbon",
+  "thumbnail_url": "",
+  "is_active": true,
+  "metadata": { "total_slides": 8, "audience": "Team and stakeholders", "tone": "crisp, accountable" },
+  "slides": [
+    { "order": 1, "type": "title",   "title": "OKRs for [Quarter or Year]", "body": ["[Team or Function]"] },
+    { "order": 2, "type": "content", "title": "Strategic Themes",           "body": ["3 themes that anchor the period", "Why these and not others"] },
+    { "order": 3, "type": "agenda",  "title": "Objectives",                 "body": ["Objective 1 — outcome statement", "Objective 2 — outcome statement", "Objective 3 — outcome statement"] },
+    { "order": 4, "type": "stats",   "title": "Key Results — Objective 1",  "body": ["3 measurable KRs with targets"] },
+    { "order": 5, "type": "stats",   "title": "Key Results — Objective 2",  "body": ["3 measurable KRs with targets"] },
+    { "order": 6, "type": "stats",   "title": "Key Results — Objective 3",  "body": ["3 measurable KRs with targets"] },
+    { "order": 7, "type": "content", "title": "Dependencies and Risks",     "body": ["What we need from other teams", "What could derail us", "Mitigations in place"] },
+    { "order": 8, "type": "closing", "title": "How We'll Track",            "body": ["Cadence and rituals", "Dashboards and owners", "When we re-plan"] }
+  ]
+}

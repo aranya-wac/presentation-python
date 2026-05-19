@@ -1,0 +1,24 @@
+{
+  "name": "Gamma Sprout",
+  "colors": {
+    "primary":    "#0B3D2E",
+    "secondary":  "#1C5A45",
+    "accent":     "#2E8B6B",
+    "background": "#EAF4EC",
+    "text":       "#1C3A2C",
+    "surface":    "#D7E8DC",
+    "muted":      "#6F8C7C"
+  },
+  "fonts": {
+    "heading": { "family": "Newsreader, Georgia, serif", "size": 56, "weight": 700 },
+    "body":    { "family": "Inter, sans-serif", "size": 22, "weight": 400 },
+    "caption": { "family": "Inter, sans-serif", "size": 14, "weight": 500 }
+  },
+  "tokens": {
+    "style":             "editorial-botanical",
+    "illustration_mood": "soft sage green and cream, watercolor-style organic shapes, gentle gradients, peaceful botanical aesthetic, hand-illustrated editorial style",
+    "heading_size":      60,
+    "card_radius":       18,
+    "use_serif_quotes":  true
+  }
+}

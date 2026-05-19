@@ -1,0 +1,22 @@
+{
+  "name": "Sustainability Report",
+  "description": "10-slide ESG / sustainability impact report. Mission, footprint, initiatives, goals, transparency.",
+  "category": "Report",
+  "tags": ["Sustainability", "ESG", "Impact", "Report"],
+  "theme_name": "Gamma Sage",
+  "thumbnail_url": "",
+  "is_active": true,
+  "metadata": { "total_slides": 10, "audience": "Stakeholders, board, public", "tone": "honest, ambitious, transparent" },
+  "slides": [
+    { "order": 1,  "type": "title",      "title": "[Year] Impact Report",          "body": ["[Company Name]"] },
+    { "order": 2,  "type": "content",    "title": "Our Sustainability Mission",    "body": ["What we're trying to change", "Why we care", "Who's accountable"] },
+    { "order": 3,  "type": "stats",      "title": "Year in Numbers",               "body": ["Emissions, waste reduction, renewable %, social impact"] },
+    { "order": 4,  "type": "chart",      "title": "Carbon Footprint Over Time",    "body": ["Scope 1, 2, 3 over the last 3 years"] },
+    { "order": 5,  "type": "kanban",     "title": "Pillars of Our Strategy",       "body": ["Planet — climate and resources", "People — equity and community", "Governance — ethics and transparency"] },
+    { "order": 6,  "type": "content",    "title": "What We Did This Year",         "body": ["Initiative 1 — outcome", "Initiative 2 — outcome", "Initiative 3 — outcome"] },
+    { "order": 7,  "type": "comparison", "title": "Where We Are vs. Our Targets",  "body": ["Targets set", "What we delivered against them"] },
+    { "order": 8,  "type": "quote",      "title": "Voice From the Field",          "body": ["A first-person account of impact on the ground"] },
+    { "order": 9,  "type": "roadmap",    "title": "Path to 2030",                  "body": ["Near-term", "Mid-term", "Long-term"] },
+    { "order": 10, "type": "closing",    "title": "Hold Us Accountable",           "body": ["Where to find our data", "How to give feedback", "Annual reporting cadence"] }
+  ]
+}

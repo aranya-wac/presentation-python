@@ -1,0 +1,24 @@
+{
+  "name": "Gamma Editorial",
+  "colors": {
+    "primary":    "#0F0F11",
+    "secondary":  "#1A1A1F",
+    "accent":     "#FF4C4C",
+    "background": "#050507",
+    "text":       "#FAFAFA",
+    "surface":    "#1A1A1F",
+    "muted":      "#9CA3AF"
+  },
+  "fonts": {
+    "heading": { "family": "Inter Tight, Inter, sans-serif", "size": 60, "weight": 900 },
+    "body":    { "family": "Inter, sans-serif", "size": 22, "weight": 400 },
+    "caption": { "family": "Inter, sans-serif", "size": 14, "weight": 500 }
+  },
+  "tokens": {
+    "style":             "editorial-noir",
+    "illustration_mood": "high-contrast black background, single accent red, dramatic minimalist",
+    "heading_size":      64,
+    "card_radius":       20,
+    "use_serif_quotes":  false
+  }
+}

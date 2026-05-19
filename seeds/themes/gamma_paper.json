@@ -1,0 +1,24 @@
+{
+  "name": "Gamma Paper",
+  "colors": {
+    "primary":    "#0A0A0A",
+    "secondary":  "#1A1A1A",
+    "accent":     "#D4733A",
+    "background": "#F4EFE4",
+    "text":       "#1A1A1A",
+    "surface":    "#E8E2D2",
+    "muted":      "#6B6157"
+  },
+  "fonts": {
+    "heading": { "family": "Inter Tight, Inter, sans-serif", "size": 56, "weight": 900 },
+    "body":    { "family": "Inter, sans-serif", "size": 22, "weight": 400 },
+    "caption": { "family": "Inter, sans-serif", "size": 14, "weight": 500 }
+  },
+  "tokens": {
+    "style":             "editorial-light",
+    "illustration_mood": "warm earth tones, muted ochre, terracotta, paper-textured",
+    "heading_size":      60,
+    "card_radius":       16,
+    "use_serif_quotes":  true
+  }
+}

@@ -19,6 +19,17 @@ from app.models.template import Template
 from app.models.theme import Theme
 from app.models.user import User
 from app.schemas.presentation import PresentationDetail
+from app.utils.logger import get_logger
+
+logger = get_logger(__name__)
+
+# Single-flight cache for template-preview generation. When N concurrent
+# requests hit the same template's preview endpoint with no cached preview,
+# only the FIRST request actually generates; the others await the same
+# Future. Prevents wasted Gemini calls and duplicate-row races.
+import asyncio as _asyncio
+_preview_inflight: dict[str, "_asyncio.Future"] = {}
+_preview_inflight_lock = _asyncio.Lock()
 from app.schemas.template import (
     GenerateFromSimpleTemplateRequest,
     PreviewResponse,
@@ -129,6 +140,7 @@ async def generate_simple(
 @router.get("/{template_id}/preview", response_model=PreviewResponse)
 async def get_template_preview(
     template_id: str,
+    refresh: bool = False,
     _user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ) -> PreviewResponse:
@@ -151,27 +163,80 @@ async def get_template_preview(
     if not theme:
         raise HTTPException(status_code=404, detail=f"Theme {template.theme_id} not found")
 
-    # Check for existing cached preview
-    existing = (
+    # Check for existing cached preview. Use `.first()` (not
+    # `.scalar_one_or_none()`) because concurrent clicks on the same template
+    # can race and create multiple preview rows. Keep the newest, drop the
+    # rest so the DB doesn't accumulate duplicates.
+    from sqlalchemy import delete as _delete
+    existing_rows = (
         await db.execute(
             select(Presentation).where(
                 Presentation.template_id == template_id,
                 Presentation.is_preview == True,  # noqa: E712
-            )
+            ).order_by(Presentation.created_at.desc())
         )
-    ).scalar_one_or_none()
+    ).scalars().all()
+
+    existing = existing_rows[0] if existing_rows else None
+    if len(existing_rows) > 1:
+        # Dedupe: delete all but the newest preview.
+        stale_ids = [p.id for p in existing_rows[1:]]
+        await db.execute(_delete(Presentation).where(Presentation.id.in_(stale_ids)))
+        await db.commit()
+        logger.info(
+            f"Cleaned up {len(stale_ids)} duplicate preview rows for template {template_id}"
+        )
+
+    if refresh and existing_rows:
+        # Force regeneration: delete all cached previews for this template.
+        all_ids = [p.id for p in existing_rows]
+        await db.execute(_delete(Presentation).where(Presentation.id.in_(all_ids)))
+        await db.commit()
+        logger.info(
+            f"Refresh requested: deleted {len(all_ids)} cached preview(s) for template {template_id}"
+        )
+        existing = None
 
     if existing:
         slides = existing.slides or []
     else:
-        from app.agents.generation.preview_generator_agent import PreviewGeneratorAgent
+        # Single-flight coalescing — only ONE generation runs per template at
+        # a time. Concurrent requests await the same future.
+        async with _preview_inflight_lock:
+            inflight = _preview_inflight.get(template_id)
+            if inflight is None:
+                # We're the first; create the future and run.
+                inflight = _asyncio.get_event_loop().create_future()
+                _preview_inflight[template_id] = inflight
+                am_leader = True
+            else:
+                am_leader = False
 
-        agent = PreviewGeneratorAgent()
-        try:
-            preview = await agent.run(template, theme)
-        except Exception as exc:
-            raise HTTPException(status_code=500, detail=f"Preview generation failed: {exc}") from exc
-        slides = preview.slides or []
+        if am_leader:
+            logger.info(f"Preview generation [leader] for template {template_id}")
+            try:
+                from app.agents.generation.preview_generator_agent import PreviewGeneratorAgent
+                agent = PreviewGeneratorAgent()
+                preview = await agent.run(template, theme)
+                slides = preview.slides or []
+                inflight.set_result(slides)
+            except Exception as exc:
+                inflight.set_exception(exc)
+                raise HTTPException(
+                    status_code=500, detail=f"Preview generation failed: {exc}"
+                ) from exc
+            finally:
+                async with _preview_inflight_lock:
+                    _preview_inflight.pop(template_id, None)
+        else:
+            # We're a follower; wait for the leader's result.
+            logger.info(f"Preview generation [follower] awaiting leader for template {template_id}")
+            try:
+                slides = await inflight
+            except Exception as exc:
+                raise HTTPException(
+                    status_code=500, detail=f"Preview generation failed: {exc}"
+                ) from exc
 
     theme_dict = {
         "id": str(theme.id),

@@ -1,0 +1,24 @@
+{
+  "name": "Vortex",
+  "colors": {
+    "primary":    "#0B0E14",
+    "secondary":  "#1A1F2A",
+    "accent":     "#6B7280",
+    "background": "#0B0E14",
+    "text":       "#B8BCC4",
+    "surface":    "#1A1F2A",
+    "muted":      "#6B7280"
+  },
+  "fonts": {
+    "heading": { "family": "Inter Tight, Inter, sans-serif", "size": 56, "weight": 700 },
+    "body":    { "family": "Inter, sans-serif", "size": 22, "weight": 400 },
+    "caption": { "family": "Inter, sans-serif", "size": 14, "weight": 500 }
+  },
+  "tokens": {
+    "style":             "editorial-dark",
+    "illustration_mood": "deep charcoal, layered dark wave forms, subtle silver highlights, refined atmospheric texture",
+    "heading_size":      60,
+    "card_radius":       16,
+    "use_serif_quotes":  false
+  }
+}

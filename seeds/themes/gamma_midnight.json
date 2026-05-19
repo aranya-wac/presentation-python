@@ -1,0 +1,24 @@
+{
+  "name": "Gamma Midnight",
+  "colors": {
+    "primary":    "#0B1437",
+    "secondary":  "#162455",
+    "accent":     "#7FB8FF",
+    "background": "#050B1F",
+    "text":       "#E8EEFF",
+    "surface":    "#162455",
+    "muted":      "#8B97C2"
+  },
+  "fonts": {
+    "heading": { "family": "Inter Tight, Inter, sans-serif", "size": 56, "weight": 800 },
+    "body":    { "family": "Inter, sans-serif", "size": 22, "weight": 400 },
+    "caption": { "family": "Inter, sans-serif", "size": 14, "weight": 500 }
+  },
+  "tokens": {
+    "style":             "corporate-navy",
+    "illustration_mood": "deep navy and cobalt blue, ice-blue accents, corporate board-room editorial",
+    "heading_size":      56,
+    "card_radius":       18,
+    "use_serif_quotes":  false
+  }
+}

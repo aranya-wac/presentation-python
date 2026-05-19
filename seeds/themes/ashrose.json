@@ -1,0 +1,24 @@
+{
+  "name": "Ashrose",
+  "colors": {
+    "primary":    "#3A2025",
+    "secondary":  "#4D2F35",
+    "accent":     "#B0707A",
+    "background": "#F0E2E0",
+    "text":       "#4D2F35",
+    "surface":    "#E5D2CF",
+    "muted":      "#8A6065"
+  },
+  "fonts": {
+    "heading": { "family": "Inter Tight, Inter, sans-serif", "size": 56, "weight": 700 },
+    "body":    { "family": "Inter, sans-serif", "size": 22, "weight": 400 },
+    "caption": { "family": "Inter, sans-serif", "size": 14, "weight": 500 }
+  },
+  "tokens": {
+    "style":             "editorial-soft",
+    "illustration_mood": "soft ash rose, muted dusty pink, gentle warmth, refined editorial",
+    "heading_size":      60,
+    "card_radius":       16,
+    "use_serif_quotes":  true
+  }
+}
