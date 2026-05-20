@@ -1,0 +1,24 @@
+{
+  "name": "Clementa",
+  "colors": {
+    "primary":    "#2B1E10",
+    "secondary":  "#3D2C1B",
+    "accent":     "#C9854E",
+    "background": "#F7F0E4",
+    "text":       "#3D2C1B",
+    "surface":    "#EFE6D2",
+    "muted":      "#80715E"
+  },
+  "fonts": {
+    "heading": { "family": "Inter Tight, Inter, sans-serif", "size": 56, "weight": 700 },
+    "body":    { "family": "Inter, sans-serif", "size": 22, "weight": 400 },
+    "caption": { "family": "Inter, sans-serif", "size": 14, "weight": 500 }
+  },
+  "tokens": {
+    "style":             "editorial-warm",
+    "illustration_mood": "warm cream and terracotta, soft sun-bleached tones, layered organic curves",
+    "heading_size":      60,
+    "card_radius":       16,
+    "use_serif_quotes":  true
+  }
+}

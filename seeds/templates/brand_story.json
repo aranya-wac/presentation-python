@@ -1,0 +1,20 @@
+{
+  "name": "Brand Story",
+  "description": "8-slide brand narrative deck. Origin, belief, mission, voice, future.",
+  "category": "Brand",
+  "tags": ["Brand", "Storytelling", "Editorial"],
+  "theme_name": "Gamma Paper",
+  "thumbnail_url": "",
+  "is_active": true,
+  "metadata": { "total_slides": 8, "audience": "Internal team, partners, press", "tone": "warm, considered, editorial" },
+  "slides": [
+    { "order": 1, "type": "title",   "title": "[Brand Name]",              "body": ["A story in [N] chapters"] },
+    { "order": 2, "type": "content", "title": "Where We Started",          "body": ["The founding moment", "What we noticed others didn't", "What we set out to do"] },
+    { "order": 3, "type": "quote",   "title": "What We Believe",           "body": ["A founding-principle quote that anchors the brand"] },
+    { "order": 4, "type": "content", "title": "Our Mission",               "body": ["The change we want to make", "Who it serves", "What success looks like"] },
+    { "order": 5, "type": "content", "title": "What We Make",              "body": ["Product or service in plain language", "Why it's different", "Who it's for"] },
+    { "order": 6, "type": "content", "title": "Our Voice",                 "body": ["How we sound on the page", "What we always say", "What we never say"] },
+    { "order": 7, "type": "stats",   "title": "Proof in the World",        "body": ["Customers, communities, impact numbers"] },
+    { "order": 8, "type": "closing", "title": "What's Next",               "body": ["The next chapter we're writing", "How to be part of it"] }
+  ]
+}

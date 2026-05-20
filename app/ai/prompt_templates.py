@@ -69,20 +69,29 @@ $analysis_summary
 
 Slide type: $slide_type
 
+═══ GAMMA-TIER VOICE (NON-NEGOTIABLE) ═══
+1. Bullets are 6-12 words each. Hard ceiling 14. Most should be 8-10.
+2. Parallel structure within a slide — all bullets start with the same part of speech.
+3. Specific: real numbers, named tools, concrete examples. Never "many", "various", "significant".
+4. Active voice. No "is being", "will be done by".
+5. Banned filler: "leverage", "synergize", "best-in-class", "next-generation",
+   "ecosystem", "stakeholders", "going forward", "robust", "seamless", "innovative".
+6. Confident declarative. No "we believe", "may", "could potentially".
+
 Write content appropriate for this slide type:
-- "title": strong headline (≤8 words) as heading + punchy tagline (≤15 words) as a subtitle bullet
-- "agenda": heading + 4-6 section names as bullets
-- "content": heading (≤6 words) + 3-5 bullets (10-20 words each, concrete and specific) + optional body paragraph
-- "quote": one memorable quote (20-40 words) as quote + attribution as caption
-- "stats": heading + 3-4 data points as stats in format "VALUE Label" (e.g. "47% Cost Reduction")
-- "closing": call-to-action headline as heading + contact/next-step as subtitle bullet
+- "title": punchy headline (≤6 words) + tagline subtitle (≤10 words)
+- "agenda": heading (≤4 words) + 4-6 section names (3-6 words each)
+- "content": heading (≤5 words) + 3-4 bullets (8-12 words each, parallel structure, specific)
+- "quote": one memorable quote (12-25 words) + named attribution (name + role)
+- "stats": heading (≤5 words) + 3-4 data points like "73% Faster Resolution" (each MUST include a number)
+- "closing": CTA verb-phrase heading (≤6 words) + next-step bullet (≤10 words)
 
 Return a single JSON object (NOT an array):
 {
   "heading": "Slide heading text",
   "body": "Optional body paragraph text (for content slides), empty string otherwise",
   "bullets": ["bullet point 1", "bullet point 2"],
-  "stats": ["47% Cost Reduction", "$2.4B Market Size"],
+  "stats": ["47% Cost Reduction", "$$2.4B Market Size"],
   "quote": "Quote text if this is a quote slide, empty string otherwise",
   "caption": "Attribution or caption text, empty string if not applicable"
 }
@@ -210,7 +219,21 @@ Return ONLY this JSON (no markdown):
   ]
 }
 
-Constraints:
+═══ GAMMA-TIER VOICE (NON-NEGOTIABLE) ═══
+Every bullet you write must follow these rules. Treat them as hard constraints:
+1. LENGTH: 6-12 words per bullet. Hard ceiling 14. Most should be 8-10.
+2. PARALLEL STRUCTURE: bullets within the same slide start with the same
+   part of speech (all verbs, or all noun-phrases). Pick one and stick.
+3. SPECIFIC: use real numbers, named tools, concrete examples — never
+   "many", "various", "significant", "robust", "world-class".
+4. ACTIVE VOICE: subject does the action. Cut "is being", "will be done by".
+5. NO CORPORATE FILLER: ban "leverage", "synergize", "best-in-class",
+   "next-generation", "ecosystem", "stakeholders", "going forward",
+   "robust", "seamless", "innovative", "cutting-edge".
+6. CONFIDENT DECLARATIVE: state facts. No "we believe", "may", "could potentially".
+7. NO PADDING: if a slide doesn't have enough substance for 4 bullets, use 3.
+
+═══ STRUCTURAL CONSTRAINTS ═══
 - slides[] length = $slide_count. slides[0].type="title". slides[1].type="agenda" (bullets = section names). slides[-1].type="closing".
 - Each slide must cover a DISTINCT angle of the topic. NEVER repeat the same numbers, claims, or framing across slides. If two slides would land on the same idea, change one to a different facet (e.g. temporal: 2024 vs 2028; geographic: APAC vs EMEA; functional: technology stack vs adoption metrics; stakeholder: customers vs investors vs employees). When the user prompt is short or vague, generate slides that each take an obviously different sub-topic — do not pad with restatements.
 - bullets ≤6 items, ≤14 words each. Empty for title/closing/chart/roadmap/comparison/kanban/funnel.

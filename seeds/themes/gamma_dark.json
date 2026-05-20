@@ -1,0 +1,24 @@
+{
+  "name": "Gamma Dark",
+  "colors": {
+    "primary":    "#18181B",
+    "secondary":  "#27272A",
+    "accent":     "#6366F1",
+    "background": "#09090B",
+    "text":       "#FAFAFA",
+    "surface":    "#27272A",
+    "muted":      "#71717A"
+  },
+  "fonts": {
+    "heading": { "family": "Inter Tight, Inter, sans-serif", "size": 56, "weight": 800 },
+    "body":    { "family": "Inter, sans-serif", "size": 22, "weight": 400 },
+    "caption": { "family": "Inter, sans-serif", "size": 16, "weight": 500 }
+  },
+  "tokens": {
+    "style":             "editorial-dark",
+    "illustration_mood": "deep blues and indigo, modern minimal abstract, cool muted palette",
+    "heading_size":      56,
+    "card_radius":       20,
+    "use_serif_quotes":  false
+  }
+}

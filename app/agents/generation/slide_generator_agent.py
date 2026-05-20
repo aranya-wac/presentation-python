@@ -2,14 +2,39 @@ from __future__ import annotations
 
 import asyncio
 import json
+import time
 from typing import Any
 
 from app.ai import gemini_client
 from app.ai.prompt_templates import SLIDE_CONTENT_PROMPT, render
 from app.agents.generation.template_mapper_agent import TemplateMappingResult
+from app.config import settings
+from app.services import backdrop_service
 from app.utils.logger import get_logger
 
 logger = get_logger(__name__)
+
+
+# Editor backdrops are DISABLED for all slide types. Reason:
+#
+# 1. Gamma's premium look doesn't actually use full-bleed photographic
+#    backdrops on most slides — it relies on disciplined typography,
+#    contained cards on theme bg, and AI illustrations only as content
+#    blocks (right-half of title/closing).
+# 2. Heavy backdrop overlays conflict with the existing layout color logic,
+#    which uses theme.primary for headings (a dark color on light themes).
+#    Dark heading + dark overlay = invisible text.
+# 3. Title/closing slides use a split-card composition with the AI image
+#    on the right, not a backdrop. See `title_hero` layout below.
+#
+# To re-enable per-variant backdrops later, repopulate this dict and toggle
+# EDITOR_BACKDROPS_ENABLED in settings. Logic to attach them survives in
+# slide_generator_agent + generate_stream.
+_VARIANT_FOR_TYPE: dict[str, str] = {}
+
+
+def _backdrop_variant(slide_type: str) -> str | None:
+    return _VARIANT_FOR_TYPE.get(slide_type)
 
 W, H = 1280, 720
 
@@ -17,6 +42,30 @@ W, H = 1280, 720
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
+
+def _hex_luminance(hex_color: str) -> float:
+    """Perceived luminance 0.0 (black) → 1.0 (white) for a hex color.
+    Used to detect dark themes so we can swap heading/card colors."""
+    h = (hex_color or "").lstrip("#")
+    if len(h) == 3:
+        h = "".join(c * 2 for c in h)
+    if len(h) != 6:
+        return 1.0
+    try:
+        r, g, b = int(h[0:2], 16), int(h[2:4], 16), int(h[4:6], 16)
+    except ValueError:
+        return 1.0
+    # Rec. 709 perceived luminance.
+    return (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255.0
+
+
+def _is_dark_hex(hex_color: str) -> bool:
+    return _hex_luminance(hex_color) < 0.35
+
+
+def _is_light_hex(hex_color: str) -> bool:
+    return _hex_luminance(hex_color) >= 0.65
+
 
 def _premium_card_pair(theme_colors: dict) -> tuple[str, str, str, str]:
     """Return (dark_bg, dark_text, light_bg, light_text) for alternating cards."""
@@ -29,6 +78,48 @@ def _premium_card_pair(theme_colors: dict) -> tuple[str, str, str, str]:
 def _is_card_dark(idx: int) -> bool:
     """Gamma-style: top-left and bottom-right are dark, others light."""
     return idx in (0, 3)
+
+
+# Keyword → Lucide-React icon name. Used to auto-pick a card icon from its
+# content. Order matters — first matching keyword wins. Covers the most
+# common deck topics; falls back to a generic accent icon.
+_ICON_KEYWORDS: list[tuple[tuple[str, ...], str]] = [
+    (("revenue", "money", "cost", "price", "budget", "roi", "saving"), "dollar-sign"),
+    (("data", "analytic", "metric", "chart", "graph", "report"), "bar-chart-3"),
+    (("ai", "intelligence", "ml", "machine", "model", "neural"), "sparkles"),
+    (("automate", "automation", "workflow", "process", "pipeline"), "zap"),
+    (("team", "people", "collaborat", "user", "customer", "audience"), "users"),
+    (("growth", "scale", "expand", "increase", "performance"), "trending-up"),
+    (("design", "brand", "creative", "visual", "aesthetic"), "palette"),
+    (("security", "secure", "trust", "safety", "privacy", "compliance"), "shield-check"),
+    (("speed", "fast", "quick", "instant", "real-time", "rapid"), "rocket"),
+    (("quality", "premium", "best", "excellence"), "award"),
+    (("integration", "connect", "api", "sync", "import", "export"), "plug-zap"),
+    (("idea", "innovation", "concept", "research", "discover"), "lightbulb"),
+    (("global", "international", "world", "country", "region"), "globe"),
+    (("target", "goal", "objective", "milestone", "kpi"), "target"),
+    (("strategy", "plan", "roadmap", "vision"), "compass"),
+    (("communication", "message", "chat", "notification"), "message-circle"),
+    (("storage", "database", "file", "document"), "database"),
+    (("mobile", "device", "platform"), "smartphone"),
+    (("schedule", "time", "calendar", "deadline"), "calendar"),
+    (("alert", "warning", "risk", "issue"), "alert-triangle"),
+    (("success", "win", "achievement", "complete", "deliver"), "check-circle-2"),
+    (("learn", "training", "education", "course"), "graduation-cap"),
+    (("market", "sales", "go-to-market", "gtm"), "shopping-cart"),
+    (("code", "developer", "engineer", "build", "tech"), "code-2"),
+    (("cloud", "saas", "service", "hosting"), "cloud"),
+]
+
+
+def _pick_card_icon(content: str) -> str:
+    """Pick a Lucide icon name based on card text content. Falls back to
+    a generic 'circle-check' icon when no keyword matches."""
+    text = (content or "").lower()
+    for keywords, icon in _ICON_KEYWORDS:
+        if any(kw in text for kw in keywords):
+            return icon
+    return "circle-check"
 
 
 def _layout_blocks(
@@ -45,10 +136,38 @@ def _layout_blocks(
     text_col  = theme_colors.get("text",       "#0F172A")
     surface   = theme_colors.get("surface",    "#F1F5F9")
 
+    # Per-theme design tokens (stored under fonts._tokens). Each Gamma-tier
+    # theme can override heading size, card radius, illustration mood, etc.
+    # Falls back to safe defaults for themes that don't declare tokens.
+    tokens = theme_fonts.get("_tokens", {}) if isinstance(theme_fonts, dict) else {}
+    THEME_HEADING_SIZE = int(tokens.get("heading_size", 56))
+
+    # Dark-mode detection. Page-bg luminance < 0.35 → dark theme.
+    is_dark = _is_dark_hex(bg_col)
+
+    # In dark mode, `primary` is typically reused as a heading-text color
+    # downstream (which would render dark-on-dark and be invisible). Solution:
+    # keep `primary` as-is for panel/card backgrounds (which legitimately use
+    # a dark color), but introduce a separate `heading_color` for text. All
+    # heading text below now uses `heading_color` instead of `primary`.
+    if is_dark:
+        heading_color = "#FAFAFA"
+        text_col = text_col if _is_light_hex(text_col) else "#E5E5E5"
+    else:
+        heading_color = primary
+
     hfam = theme_fonts.get("heading", {}).get("family", "Inter, sans-serif")
     bfam = theme_fonts.get("body",    {}).get("family", "Inter, sans-serif")
 
-    dark_card_bg, dark_card_text, light_card_bg, light_card_text = _premium_card_pair(theme_colors)
+    if is_dark:
+        # Gamma-style translucent cards: subtle white-on-dark wash that lets
+        # the underlying deck backdrop (wavy texture) show through, instead
+        # of opaque theme-primary rectangles that clash with the backdrop.
+        # Two slightly different alphas keep visual rhythm between cards.
+        dark_card_bg, dark_card_text = "rgba(255,255,255,0.07)", "#FAFAFA"
+        light_card_bg, light_card_text = "rgba(255,255,255,0.04)", "#E5E5E5"
+    else:
+        dark_card_bg, dark_card_text, light_card_bg, light_card_text = _premium_card_pair(theme_colors)
 
     blocks_out: list[dict] = []
 
@@ -151,117 +270,180 @@ def _layout_blocks(
             },
         })
 
-    # ── title_hero ──────────────────────────────────────────────────────────
+    # ── title_hero (Gamma "Industry Benchmark"-style: full-bleed dark photo
+    # background, title centered across the canvas) ──
     if slide_type == "title" or layout == "title_hero":
         title_text = _get("title", "Presentation Title")
         sub_text   = _get("subtitle", "")
 
-        # Adaptive title sizing — long titles need a smaller font and more
-        # vertical room or they overflow the slide.
+        # Text spans the full slide width and centers — sits on top of a
+        # full-bleed background photo (added later by the preview/stream
+        # pipeline). Generous left/right margins keep the title from
+        # touching the edges.
+        TEXT_X = 120
+        TEXT_W = W - 240  # 1040 at W=1280
+
         title_len = len(title_text)
-        if   title_len <= 22:  t_size, t_height, t_y = 84, 200, 230
-        elif title_len <= 40:  t_size, t_height, t_y = 64, 220, 220
-        elif title_len <= 60:  t_size, t_height, t_y = 52, 260, 200
-        elif title_len <= 90:  t_size, t_height, t_y = 42, 300, 180
-        else:                  t_size, t_height, t_y = 34, 340, 160
+        if   title_len <= 18:  t_size, t_height, t_y = 96, 200, 240
+        elif title_len <= 30:  t_size, t_height, t_y = 80, 240, 220
+        elif title_len <= 50:  t_size, t_height, t_y = 64, 280, 200
+        elif title_len <= 80:  t_size, t_height, t_y = 48, 320, 180
+        else:                  t_size, t_height, t_y = 38, 360, 160
 
-        # Subtitle / accent bar / footer positions shift with title height.
-        bar_y = t_y + t_height + 10
-        sub_y = bar_y + 20
+        bar_y = t_y + t_height + 16
+        sub_y = bar_y + 26
 
-        # Top-of-slide eyebrow tag — small, all-caps, accent color. Adds the
-        # editorial chrome Gamma uses on hero slides.
+        # Title text colors adapt to theme lightness — dark themes get white
+        # text (will sit on a dark atmospheric backdrop), light themes get
+        # the theme's heading color (will sit on a light/cream backdrop).
+        title_text_color = "#ffffff" if is_dark else heading_color
+        eyebrow_color = "rgba(255,255,255,0.85)" if is_dark else heading_color
+        subtitle_color = (
+            "rgba(255,255,255,0.85)" if is_dark
+            else f"rgba(0,0,0,0.7)"
+        )
+        foot_color = (
+            "rgba(255,255,255,0.55)" if is_dark else "rgba(0,0,0,0.5)"
+        )
+
         blocks_out.append(_b("hero-eyebrow", "badge", "PRESENTATION",
-                              100, 80, 200, 28,
-                              size=11, weight=800, color=accent, align="left", family=bfam))
-        # Decorative thin line under the eyebrow
-        blocks_out.append({
-            "id": "hero-eyebrow-line", "type": "shape", "content": "",
-            "position": {"x": 100, "y": 116, "w": 60, "h": 2},
-            "styling": {
-                "font_family": "", "font_size": 0, "font_weight": 0,
-                "color": accent, "background_color": accent, "text_align": "left",
-            },
-        })
+                              TEXT_X, 80, 200, 28,
+                              size=11, weight=800, color=eyebrow_color,
+                              align="center", family=bfam))
 
         blocks_out.append(_b("title", "title", title_text,
-                              100, t_y, 1080, t_height,
-                              size=t_size, weight=900, color="#ffffff",
-                              align="left", family=hfam))
-        blocks_out.append(_accent_bar(100, bar_y, 120, 5))
+                              TEXT_X, t_y, TEXT_W, t_height,
+                              size=t_size, weight=900, color=title_text_color,
+                              align="center", family=hfam))
+        # Centered accent bar — width-aware so it visually grounds the title.
+        bar_w = 120
+        blocks_out.append(_accent_bar(TEXT_X + (TEXT_W - bar_w) // 2, bar_y, bar_w, 4))
         if sub_text:
             blocks_out.append(_b("subtitle", "subtitle", sub_text,
-                                  100, sub_y, 1080, 90,
+                                  TEXT_X, sub_y, TEXT_W, 90,
                                   size=22, weight=400,
-                                  color="rgba(255,255,255,0.78)", align="left"))
+                                  color=subtitle_color, align="center"))
 
-        # Bottom-left brand mark — subtle but signals polish.
+        # Bottom-center brand mark — subtle but signals polish.
         blocks_out.append(_b("hero-foot", "caption", "Crafted with WAC Deck Studio",
-                              100, H - 60, 600, 24,
+                              TEXT_X, H - 50, TEXT_W, 22,
                               size=11, weight=600,
-                              color="rgba(255,255,255,0.45)", align="left", family=bfam))
+                              color=foot_color, align="center", family=bfam))
 
-    # ── agenda_rows ─────────────────────────────────────────────────────────
+    # ── agenda_rows (Gamma editorial: big numerals on the left, refined
+    # serif-weight text on the right, thin divider between items — no heavy
+    # rectangles) ─
     elif slide_type == "agenda" or layout == "agenda_rows":
         heading = _get("heading", _get("title", "Agenda"))
         bullets  = _bullets()
+        body_text = _get("body", "")
 
         bdg = _badge(badge_label)
         if bdg:
             blocks_out.append(bdg)
+
+        # Width-aware heading sizing — long titles wrap to 2 lines and need
+        # taller heading blocks so they don't overflow into the items below.
+        # The items_start_y also shifts so divider/numerals don't overlap.
+        head_len = len(heading)
+        if head_len <= 30:
+            h_size, h_height = 56, 80
+        elif head_len <= 50:
+            h_size, h_height = 46, 130
+        else:
+            h_size, h_height = 38, 160
+        head_y = 78
+        bar_y = head_y + h_height + 10
+        items_start_y = bar_y + 30
+
         blocks_out.append(_b("heading", "heading", heading,
-                              60, 68, 900, 80,
-                              size=44, weight=800, color=primary,
+                              60, head_y, W - 120, h_height,
+                              size=h_size, weight=800, color=heading_color,
                               align="left", family=hfam))
-        blocks_out.append(_accent_bar(60, 158, 100, 4))
+        blocks_out.append(_accent_bar(60, bar_y, 100, 4))
+
+        # Fallback — if Gemini routed this slide to "agenda" type but didn't
+        # produce list items, derive them from the body text by splitting on
+        # sentence/clause boundaries. Avoids the empty-slide failure mode.
+        if not bullets and body_text:
+            import re as _re
+            parts = [
+                p.strip() for p in _re.split(r"(?<=[.!?])\s+|\n+|;\s+", body_text)
+                if len(p.strip()) > 4
+            ]
+            if len(parts) >= 2:
+                bullets = parts[:6]
+            else:
+                # Single block of body — render it as a paragraph under the
+                # heading so the slide isn't empty.
+                blocks_out.append(_b("agenda-body", "body", body_text,
+                                      60, items_start_y, W - 120, 360,
+                                      size=22, weight=400,
+                                      color=text_col, align="left", family=bfam))
+                return blocks_out
+
+        n_rows = min(len(bullets), 6)
+        gap = 8
+        avail_h = H - items_start_y - 60  # leave 60px breathing room at bottom
+        start_y = items_start_y
+        row_h = max(64, min(98, (avail_h - (n_rows - 1) * gap) // max(n_rows, 1)))
+        item_text_color = "#FAFAFA" if is_dark else "#0A0A0A"
+        num_color = "rgba(255,255,255,0.35)" if is_dark else "rgba(0,0,0,0.30)"
+        divider_color = "rgba(255,255,255,0.10)" if is_dark else "rgba(0,0,0,0.10)"
 
         for idx, b in enumerate(bullets[:6]):
             clean = b.lstrip("•-* ").strip()
-            cy = 178 + idx * 82
-            is_dark = idx % 2 == 0
-            card_bg   = dark_card_bg   if is_dark else light_card_bg
-            card_text = dark_card_text if is_dark else light_card_text
-            blocks_out.append({
-                "id": f"agenda-row-{idx}", "type": "card",
-                "content": f"{idx + 1:02d}  {clean}",
-                "position": {"x": 60, "y": cy, "w": 1160, "h": 68},
-                "styling": {
-                    "font_family": hfam, "font_size": 20, "font_weight": 600,
-                    "color": card_text, "background_color": card_bg, "text_align": "left",
-                },
-            })
+            cy = start_y + idx * (row_h + gap)
+            num_w = 90
+            text_x = 60 + num_w + 24
 
-    # ── split_panel (Gamma hero: gradient panel left + cards right) ─────────
+            # Large muted index numeral on the left — Gamma editorial signature.
+            blocks_out.append(_b(f"agenda-num-{idx}", "text", f"{idx + 1:02d}",
+                                  60, cy + (row_h - 60) // 2, num_w, 60,
+                                  size=44, weight=300, color=num_color,
+                                  align="left", family=hfam))
+            # Item text — strong, refined.
+            blocks_out.append(_b(f"agenda-row-{idx}", "text", clean,
+                                  text_x, cy + (row_h - 32) // 2,
+                                  W - text_x - 60, 40,
+                                  size=22, weight=600, color=item_text_color,
+                                  align="left", family=hfam))
+            # Thin divider after each row except the last.
+            if idx < n_rows - 1:
+                blocks_out.append({
+                    "id": f"agenda-div-{idx}", "type": "shape", "content": "",
+                    "position": {"x": 60, "y": cy + row_h + gap // 2 - 1,
+                                 "w": W - 120, "h": 1},
+                    "styling": {
+                        "font_family": "", "font_size": 0, "font_weight": 0,
+                        "color": divider_color, "background_color": divider_color,
+                        "text_align": "left",
+                    },
+                })
+
+    # ── split_panel (full-width 2x2 cards — no left panel, no illustration;
+    # the deck-wide atmospheric backdrop fills the slide visually) ─────────
     elif layout == "split_panel":
         heading     = _get("heading", _get("title", "Section"))
         bullets_raw = _bullets()
 
-        panel_grad = f"linear-gradient(160deg, {primary} 0%, {secondary} 65%, {accent}55 100%)"
-        blocks_out.append(_panel("left-panel", 0, 0, 490, 720, panel_grad))
-        # Accent dot on panel
-        blocks_out.append({
-            "id": "panel-dot", "type": "shape", "content": "",
-            "position": {"x": 420, "y": 320, "w": 40, "h": 40},
-            "styling": {
-                "font_family": "", "font_size": 0, "font_weight": 0,
-                "color": accent, "background_color": f"{accent}60", "text_align": "left",
-            },
-        })
-
-        rx = 530
-        rw = 710
-
-        bdg = _badge(badge_label, rx, 35)
+        bdg = _badge(badge_label, 60, 35)
         if bdg:
             blocks_out.append(bdg)
 
         blocks_out.append(_b("heading", "heading", heading,
-                              rx, 75, rw, 100,
-                              size=40, weight=800, color=primary,
+                              60, 75, W - 120, 100,
+                              size=52, weight=800, color=heading_color,
                               align="left", family=hfam))
+        blocks_out.append(_accent_bar(60, 180, 100, 4))
 
-        card_w = (rw - 20) // 2   # 345
-        card_h = 185
+        # 2x2 card grid spanning full slide width.
+        grid_x = 60
+        grid_w = W - 120                # 1160
+        card_w = (grid_w - 28) // 2     # 566 per card with 28px gap
+        card_h = 220                    # taller cards since we have more space
+        grid_y = 220
+        row_gap = 24
 
         for idx, btext in enumerate(bullets_raw[:4]):
             parts = btext.split(": ", 1) if ": " in btext else [btext, ""]
@@ -271,8 +453,8 @@ def _layout_blocks(
 
             col = idx % 2
             row = idx // 2
-            cx  = rx + col * (card_w + 20)
-            cy  = 195 + row * (card_h + 15)
+            cx  = grid_x + col * (card_w + 28)
+            cy  = grid_y + row * (card_h + row_gap)
 
             is_dark   = _is_card_dark(idx)
             card_bg   = dark_card_bg   if is_dark else light_card_bg
@@ -280,9 +462,10 @@ def _layout_blocks(
 
             blocks_out.append({
                 "id": f"card-{idx}", "type": "card", "content": content_str,
+                "icon": _pick_card_icon(content_str),
                 "position": {"x": cx, "y": cy, "w": card_w, "h": card_h},
                 "styling": {
-                    "font_family": hfam, "font_size": 17, "font_weight": 700,
+                    "font_family": hfam, "font_size": 18, "font_weight": 700,
                     "color": card_text, "background_color": card_bg, "text_align": "left",
                 },
             })
@@ -290,7 +473,7 @@ def _layout_blocks(
         if not bullets_raw:
             body_text = _get("body", "")
             blocks_out.append(_b("body", "bullet", body_text,
-                                  rx, 195, rw, 460,
+                                  60, 220, W - 120, 460,
                                   size=22, weight=400, color=text_col))
 
     # ── card_grid (full-width 2×2) ────────────────────────────────────────
@@ -303,7 +486,7 @@ def _layout_blocks(
             blocks_out.append(bdg)
         blocks_out.append(_b("heading", "heading", heading,
                               60, 68, 1160, 80,
-                              size=44, weight=800, color=primary,
+                              size=56, weight=800, color=heading_color,
                               align="left", family=hfam))
         blocks_out.append(_accent_bar(60, 158, 100, 4))
 
@@ -321,6 +504,7 @@ def _layout_blocks(
 
             blocks_out.append({
                 "id": f"card-{idx}", "type": "card", "content": btext,
+                "icon": _pick_card_icon(btext),  # Gamma-style icon per card
                 "position": {"x": cx, "y": cy, "w": card_w, "h": card_h},
                 "styling": {
                     "font_family": hfam, "font_size": 20, "font_weight": 700,
@@ -328,7 +512,7 @@ def _layout_blocks(
                 },
             })
 
-    # ── stats_showcase ────────────────────────────────────────────────────
+    # ── stats (Gamma "One year. Five numbers." — HUGE numbers, no cards) ──
     elif slide_type == "stats" or layout == "stats_showcase":
         heading = _get("heading", _get("title", "Key Metrics"))
         stats   = by_type.get("stat", [])
@@ -338,46 +522,76 @@ def _layout_blocks(
         bdg = _badge(badge_label)
         if bdg:
             blocks_out.append(bdg)
+        # Smaller heading because the NUMBERS are the hero, not the title.
         blocks_out.append(_b("heading", "heading", heading,
-                              60, 68, 1160, 80,
-                              size=44, weight=800, color="#ffffff",
+                              60, 68, 1160, 60,
+                              size=36, weight=700, color="#ffffff",
                               align="center", family=hfam))
-        blocks_out.append(_accent_bar(560, 158, 160, 5))
 
-        n = min(len(stats), 4)
-        if n <= 2:
-            stat_w = 460
-            total  = n * stat_w + (n - 1) * 40
-            sx0    = (W - total) // 2
+        n = min(len(stats), 5)
+        # Layout: 3 stats in a single row of 3; 4 in 2x2; 5 in 3-over-2.
+        # Numbers are HUGE (~110pt) with thin labels underneath — matches
+        # Gamma's "<5min  45%  4+" look directly.
+        STAT_NUM_SIZE = 110 if n <= 3 else 90
+        LABEL_SIZE    = 16
+        DESC_SIZE     = 13
+
+        def _stat_block(stat: dict, idx: int, sx: int, sy: int, sw: int, sh: int) -> None:
+            content = stat.get("content", "—")
+            # Content is "BIG\nLABEL\nDescription...". Split into the 3 parts.
+            parts = content.split("\n", 2) if "\n" in content else [content]
+            big   = parts[0].strip() if len(parts) > 0 else "—"
+            label = parts[1].strip() if len(parts) > 1 else ""
+            desc  = parts[2].strip() if len(parts) > 2 else ""
+
+            # HUGE number — accent-colored, ultra-bold, no card background.
+            blocks_out.append(_b(f"stat-num-{idx}", "text", big,
+                                  sx, sy, sw, STAT_NUM_SIZE + 20,
+                                  size=STAT_NUM_SIZE, weight=900,
+                                  color="#ffffff", align="center", family=hfam))
+            # Label — tighter spacing under the number.
+            if label:
+                blocks_out.append(_b(f"stat-label-{idx}", "text", label,
+                                      sx, sy + STAT_NUM_SIZE + 10, sw, 30,
+                                      size=LABEL_SIZE, weight=700,
+                                      color="#ffffff", align="center", family=hfam))
+            # Optional description — small, dimmed.
+            if desc:
+                blocks_out.append(_b(f"stat-desc-{idx}", "text", desc,
+                                      sx + 10, sy + STAT_NUM_SIZE + 48, sw - 20, 80,
+                                      size=DESC_SIZE, weight=400,
+                                      color="rgba(255,255,255,0.65)", align="center", family=bfam))
+
+        if n <= 3:
+            # Single row, equally spaced.
+            stat_w = (W - 160) // n
+            base_y = 200
             for idx, stat in enumerate(stats[:n]):
-                sx = sx0 + idx * (stat_w + 40)
-                blocks_out.append({
-                    "id": stat.get("id", f"stat-{idx}"), "type": "stat",
-                    "content": stat.get("content", "—"),
-                    "position": {"x": sx, "y": 220, "w": stat_w, "h": 290},
-                    "styling": {
-                        "font_family": hfam, "font_size": 72, "font_weight": 800,
-                        "color": accent,
-                        "background_color": "rgba(255,255,255,0.08)", "text_align": "center",
-                    },
-                })
-        else:
-            stat_w, stat_h = 560, 210
+                sx = 80 + idx * stat_w
+                _stat_block(stat, idx, sx, base_y, stat_w, 400)
+        elif n == 4:
+            # 2x2 grid.
+            stat_w = (W - 200) // 2
             for idx, stat in enumerate(stats[:4]):
                 col = idx % 2
                 row = idx // 2
-                sx  = 60  + col * (stat_w + 40)
-                sy  = 180 + row * (stat_h + 20)
-                blocks_out.append({
-                    "id": stat.get("id", f"stat-{idx}"), "type": "stat",
-                    "content": stat.get("content", "—"),
-                    "position": {"x": sx, "y": sy, "w": stat_w, "h": stat_h},
-                    "styling": {
-                        "font_family": hfam, "font_size": 60, "font_weight": 800,
-                        "color": accent,
-                        "background_color": "rgba(255,255,255,0.08)", "text_align": "center",
-                    },
-                })
+                sx = 80 + col * (stat_w + 40)
+                sy = 175 + row * 240
+                _stat_block(stat, idx, sx, sy, stat_w, 220)
+        else:
+            # 5 stats: 3 on top, 2 centered on bottom.
+            top_w = (W - 200) // 3
+            for idx in range(3):
+                sx = 80 + idx * (top_w + 20)
+                _stat_block(stats[idx], idx, sx, 175, top_w, 220)
+            bot_w = (W - 240) // 2
+            bot_offset = (W - 2 * bot_w - 40) // 2
+            for j in range(2):
+                idx = 3 + j
+                if idx >= len(stats):
+                    break
+                sx = bot_offset + j * (bot_w + 40)
+                _stat_block(stats[idx], idx, sx, 425, bot_w, 220)
 
     # ── quote_centered ─────────────────────────────────────────────────────
     elif slide_type == "quote" or layout == "quote_centered":
@@ -407,7 +621,7 @@ def _layout_blocks(
             blocks_out.append(bdg)
         blocks_out.append(_b("heading", "heading", heading,
                               60, 68, 1160, 80,
-                              size=40, weight=800, color=primary,
+                              size=52, weight=800, color=heading_color,
                               align="left", family=hfam))
         blocks_out.append(_accent_bar(60, 158, 100, 4))
 
@@ -440,8 +654,12 @@ def _layout_blocks(
                                   size=14, weight=400,
                                   color=text_col, align="center", family=bfam))
 
-    # ── roadmap_timeline ──────────────────────────────────────────────────
+    # ── roadmap (Gamma chevron-arrows in 2x2 or 1x4 grid) ─────────────────
     elif slide_type == "roadmap" or layout == "roadmap_timeline":
+        # Gamma "From idea to finished deck in four steps" layout —
+        # stacked horizontal arrow bars (Input → Generate → Design → Ship).
+        # Each bar shows: step label inside the arrow + optional description
+        # beneath. Cascading indent gives the visual flow.
         heading = _get("heading", _get("title", "Roadmap"))
         steps = by_type.get("roadmap_step", [])
 
@@ -449,10 +667,10 @@ def _layout_blocks(
         if bdg:
             blocks_out.append(bdg)
         blocks_out.append(_b("heading", "heading", heading,
-                              60, 68, 1160, 80,
-                              size=40, weight=800, color=primary,
+                              60, 68, 1160, 70,
+                              size=52, weight=800, color=heading_color,
                               align="left", family=hfam))
-        blocks_out.append(_accent_bar(60, 158, 100, 4))
+        blocks_out.append(_accent_bar(60, 148, 100, 4))
 
         n = min(len(steps), 6) if steps else 0
         if n == 0:
@@ -460,42 +678,75 @@ def _layout_blocks(
                                   80, 220, 1120, 200,
                                   size=16, color=text_col, align="center"))
         else:
-            # Horizontal timeline: circles + labels + connecting line
+            # Editorial timeline: prominent phase label on the LEFT (accent
+            # color, bold), description on the RIGHT, hairline divider between
+            # rows. Matches the new agenda style — clean, premium, no heavy
+            # rectangles. A subtle vertical rail on the far left connects
+            # the timeline visually.
             margin_x = 80
-            avail_w  = W - 2 * margin_x
-            step_w   = avail_w // n
-            circle_d = 64
-            track_y  = 290
+            start_y = 200
+            avail_h = H - start_y - 60
+            row_h = max(70, min(110, (avail_h - (n - 1) * 8) // n))
+            gap = 8
+            rail_x = margin_x
+            phase_x = margin_x + 30
+            phase_w = 220
+            desc_x = phase_x + phase_w + 24
+            desc_w = W - desc_x - margin_x
+            divider_col = "rgba(255,255,255,0.10)" if is_dark else "rgba(0,0,0,0.10)"
+            label_col = "#FAFAFA" if is_dark else "#0A0A0A"
+
+            # Vertical rail spanning all rows.
+            rail_h = n * (row_h + gap) - gap
             blocks_out.append({
-                "id": "rm-track", "type": "shape", "content": "",
-                "position": {"x": margin_x + step_w // 2, "y": track_y + circle_d // 2 - 2,
-                             "w": (n - 1) * step_w if n > 1 else 1, "h": 3},
+                "id": "rm-rail", "type": "shape", "content": "",
+                "position": {"x": rail_x, "y": start_y + 8, "w": 2, "h": rail_h - 16},
                 "styling": {
                     "font_family": "", "font_size": 0, "font_weight": 0,
-                    "color": accent, "background_color": f"{accent}55", "text_align": "left",
+                    "color": accent, "background_color": accent + "55", "text_align": "left",
                 },
             })
+
             for idx, step in enumerate(steps[:n]):
                 raw = step.get("content", "")
                 phase, _, label = raw.partition("||")
-                cx = margin_x + idx * step_w + step_w // 2 - circle_d // 2
+                by = start_y + idx * (row_h + gap)
+
+                # Dot on the rail for this row.
                 blocks_out.append({
-                    "id": f"rm-circle-{idx}", "type": "process_circle",
-                    "content": str(idx + 1),
-                    "position": {"x": cx, "y": track_y, "w": circle_d, "h": circle_d},
+                    "id": f"rm-dot-{idx}", "type": "shape", "content": "",
+                    "position": {"x": rail_x - 5, "y": by + row_h // 2 - 6, "w": 12, "h": 12},
                     "styling": {
-                        "font_family": hfam, "font_size": 26, "font_weight": 800,
-                        "color": "#ffffff", "background_color": accent, "text_align": "center",
+                        "font_family": "", "font_size": 0, "font_weight": 0,
+                        "color": accent, "background_color": accent, "text_align": "left",
                     },
                 })
-                blocks_out.append(_b(f"rm-phase-{idx}", "text", phase,
-                                      margin_x + idx * step_w, track_y + circle_d + 20,
-                                      step_w, 30,
-                                      size=14, weight=700, color=accent, align="center", family=hfam))
-                blocks_out.append(_b(f"rm-label-{idx}", "text", label,
-                                      margin_x + idx * step_w + 8, track_y + circle_d + 56,
-                                      step_w - 16, 110,
-                                      size=14, weight=500, color=text_col, align="center", family=bfam))
+                # Phase label (Q3 2024, etc) — accent color, bold.
+                phase_text = phase.strip() or f"Phase {idx + 1}"
+                blocks_out.append(_b(f"rm-phase-{idx}", "text", phase_text,
+                                      phase_x, by + (row_h - 32) // 2,
+                                      phase_w, 36,
+                                      size=20, weight=800, color=accent,
+                                      align="left", family=hfam))
+                # Description on the right.
+                desc_text = label.strip() or phase_text
+                blocks_out.append(_b(f"rm-label-{idx}", "text", desc_text,
+                                      desc_x, by + (row_h - 30) // 2,
+                                      desc_w, 36,
+                                      size=20, weight=500, color=label_col,
+                                      align="left", family=hfam))
+                # Divider line after each row except the last.
+                if idx < n - 1:
+                    blocks_out.append({
+                        "id": f"rm-div-{idx}", "type": "shape", "content": "",
+                        "position": {"x": phase_x, "y": by + row_h + gap // 2 - 1,
+                                     "w": W - phase_x - margin_x, "h": 1},
+                        "styling": {
+                            "font_family": "", "font_size": 0, "font_weight": 0,
+                            "color": divider_col, "background_color": divider_col,
+                            "text_align": "left",
+                        },
+                    })
 
     # ── comparison_split ──────────────────────────────────────────────────
     elif slide_type == "comparison" or layout == "comparison_split":
@@ -527,7 +778,7 @@ def _layout_blocks(
             blocks_out.append(bdg)
         blocks_out.append(_b("heading", "heading", heading,
                               60, 68, 1160, 80,
-                              size=40, weight=800, color=primary,
+                              size=52, weight=800, color=heading_color,
                               align="left", family=hfam))
         blocks_out.append(_accent_bar(60, 158, 100, 4))
 
@@ -590,7 +841,7 @@ def _layout_blocks(
             blocks_out.append(bdg)
         blocks_out.append(_b("heading", "heading", heading,
                               60, 68, 1160, 80,
-                              size=40, weight=800, color=primary,
+                              size=52, weight=800, color=heading_color,
                               align="left", family=hfam))
         blocks_out.append(_accent_bar(60, 158, 100, 4))
 
@@ -626,7 +877,7 @@ def _layout_blocks(
             blocks_out.append(bdg)
         blocks_out.append(_b("heading", "heading", heading,
                               60, 68, 1160, 80,
-                              size=40, weight=800, color=primary,
+                              size=52, weight=800, color=heading_color,
                               align="left", family=hfam))
         blocks_out.append(_accent_bar(60, 158, 100, 4))
 
@@ -688,38 +939,66 @@ def _layout_blocks(
             blocks_out.append(bdg)
         blocks_out.append(_b("heading", "heading", heading,
                               60, 68, 1160, 80,
-                              size=44, weight=800, color=primary,
+                              size=56, weight=800, color=heading_color,
                               align="left", family=hfam))
         blocks_out.append(_accent_bar(60, 158, 100, 4))
 
         n       = min(len(bullets_raw), 4)
-        step_w  = min(240, (W - 120 - (n - 1) * 20) // n)
-        total_w = n * step_w + (n - 1) * 20
-        start_x = (W - total_w) // 2
+        # Wider step "tracks" — each gets a roomy column for circle + title +
+        # description so the flow reads as 4 connected stages, not 4 tiny dots.
+        step_w  = (W - 160) // n     # 280 for n=4
+        start_x = 80
+        circle_size = 96
+        circle_y = 240
+        desc_label_col = "#FAFAFA" if is_dark else "#0A0A0A"
+        desc_body_col  = "rgba(255,255,255,0.78)" if is_dark else "rgba(0,0,0,0.65)"
+
+        # Continuous horizontal rail behind the circles — connects the flow.
+        rail_y = circle_y + circle_size // 2 - 1
+        blocks_out.append({
+            "id": "step-rail", "type": "shape", "content": "",
+            "position": {"x": start_x + circle_size // 2,
+                         "y": rail_y,
+                         "w": (n - 1) * step_w, "h": 2},
+            "styling": {
+                "font_family": "", "font_size": 0, "font_weight": 0,
+                "color": accent, "background_color": accent + "55", "text_align": "left",
+            },
+        })
 
         for idx, btext in enumerate(bullets_raw[:n]):
-            cx = start_x + idx * (step_w + 20)
+            cx = start_x + idx * step_w
+            # Numbered circle — accent color, prominent.
             blocks_out.append({
                 "id": f"step-num-{idx}", "type": "process_circle",
                 "content": str(idx + 1),
-                "position": {"x": cx + step_w // 2 - 40, "y": 210, "w": 80, "h": 80},
+                "position": {"x": cx + (step_w - circle_size) // 2,
+                             "y": circle_y, "w": circle_size, "h": circle_size},
                 "styling": {
-                    "font_family": hfam, "font_size": 32, "font_weight": 800,
+                    "font_family": hfam, "font_size": 40, "font_weight": 800,
                     "color": "#ffffff", "background_color": accent, "text_align": "center",
                 },
             })
-            if idx < n - 1:
-                blocks_out.append({
-                    "id": f"connector-{idx}", "type": "shape", "content": "",
-                    "position": {"x": cx + step_w + 25, "y": 248, "w": 15, "h": 4},
-                    "styling": {
-                        "font_family": "", "font_size": 0, "font_weight": 0,
-                        "color": accent, "background_color": accent, "text_align": "left",
-                    },
-                })
-            blocks_out.append(_b(f"step-{idx}", "text", btext,
-                                  cx, 310, step_w, 180,
-                                  size=15, weight=600, color=text_col, align="center", family=hfam))
+
+            # Split "Title: Description" if a colon exists; otherwise the
+            # entire bullet becomes the body.
+            parts = btext.split(": ", 1) if ": " in btext else [btext, ""]
+            title_line = parts[0].strip()
+            body_line  = parts[1].strip() if len(parts) > 1 else ""
+
+            # Step title — bold, under the circle.
+            blocks_out.append(_b(f"step-title-{idx}", "text", title_line,
+                                  cx + 10, circle_y + circle_size + 24,
+                                  step_w - 20, 32,
+                                  size=18, weight=700, color=desc_label_col,
+                                  align="center", family=hfam))
+            # Step description — softer body text.
+            if body_line:
+                blocks_out.append(_b(f"step-{idx}", "text", body_line,
+                                      cx + 10, circle_y + circle_size + 64,
+                                      step_w - 20, 140,
+                                      size=14, weight=400, color=desc_body_col,
+                                      align="center", family=bfam))
 
     # ── closing ────────────────────────────────────────────────────────────
     elif slide_type == "closing" or layout == "closing":
@@ -763,7 +1042,7 @@ def _layout_blocks(
             blocks_out.append(bdg)
         blocks_out.append(_b("heading", "heading", heading,
                               60, 68, 1160, 80,
-                              size=44, weight=800, color=primary,
+                              size=56, weight=800, color=heading_color,
                               align="left", family=hfam))
         blocks_out.append(_accent_bar(60, 158, 100, 4))
 
@@ -909,7 +1188,7 @@ def _trim_bullet(text: str, max_words: int) -> str:
 # Bullet density caps: keep slides scannable, not paragraphs.
 # 16 words ≈ one full speaker-paced line at our default body font, which is
 # what Gamma-quality decks tend to hit. Anything longer wraps awkwardly.
-_BULLET_MAX_WORDS = 16
+_BULLET_MAX_WORDS = 12  # Gamma-tight. Was 16; cut to enforce editorial voice.
 _BULLET_MAX_COUNT = 6
 
 
@@ -1114,8 +1393,13 @@ class SlideGeneratorAgent:
         analysis: dict[str, Any],
         mapping: TemplateMappingResult,
         logo_url: str = "",
-        max_concurrency: int = 3,
+        max_concurrency: int | None = None,
     ) -> list[dict]:
+        # Env-tunable concurrency. Default raised from 3 → 8 so 15-slide decks
+        # finish content generation in ~15s instead of ~25s.
+        if max_concurrency is None:
+            max_concurrency = max(1, int(settings.SLIDE_GEN_CONCURRENCY))
+
         analysis_summary = json.dumps(analysis, indent=2)
         outline_summary = json.dumps(
             [
@@ -1135,9 +1419,37 @@ class SlideGeneratorAgent:
             async with semaphore:
                 return await self._generate_slide_content(item, analysis_summary, outline_summary)
 
-        logger.info(f"Generating {len(outline)} slides (max {max_concurrency} concurrent)")
+        # Kick off backdrop fetches in parallel with slide-content generation.
+        # By the time _build_slides runs, most/all backdrop tasks have completed
+        # — so editor_background attach adds ~0s to wall-clock.
+        backdrop_tasks: dict[str, asyncio.Task[str]] = {}
+        if settings.EDITOR_BACKDROPS_ENABLED:
+            theme_colors = mapping.theme.colors
+            needed_variants = {
+                v for v in (_backdrop_variant(item.get("type", "content")) for item in outline) if v
+            }
+            for variant in needed_variants:
+                backdrop_tasks[variant] = asyncio.create_task(
+                    backdrop_service.get_backdrop(theme_colors, variant)
+                )
+
+        logger.info(
+            f"Generating {len(outline)} slides "
+            f"(concurrency={max_concurrency}, backdrops={'on' if backdrop_tasks else 'off'})"
+        )
+        t0 = time.perf_counter()
         contents = await asyncio.gather(*[_throttled(item) for item in outline])
-        return self._build_slides(outline, list(contents), mapping, logo_url)
+        t_content = time.perf_counter() - t0
+
+        t1 = time.perf_counter()
+        slides = await self._build_slides(outline, list(contents), mapping, logo_url, backdrop_tasks)
+        t_build = time.perf_counter() - t1
+
+        logger.info(
+            f"Slide generation timings: content={t_content:.2f}s "
+            f"build+backdrops={t_build:.2f}s total={t_content + t_build:.2f}s"
+        )
+        return slides
 
     async def _generate_slide_content(
         self, outline_item: dict, analysis_summary: str, full_outline: str
@@ -1151,12 +1463,13 @@ class SlideGeneratorAgent:
         )
         return await gemini_client.generate_json(prompt)
 
-    def _build_slides(
+    async def _build_slides(
         self,
         outline: list[dict],
         contents: list[dict],
         mapping: TemplateMappingResult,
         logo_url: str,
+        backdrop_tasks: dict[str, "asyncio.Task[str]"] | None = None,
     ) -> list[dict]:
         theme_colors = mapping.theme.colors
         theme_fonts  = mapping.theme.fonts
@@ -1190,11 +1503,32 @@ class SlideGeneratorAgent:
             blocks     = _layout_blocks(slide_type, slide_layout, gen_blocks, theme_colors, theme_fonts)
             background = _slide_background(slide_type, slide_layout, "", theme_colors)
 
-            result.append({
+            slide_dict: dict = {
                 "order":      outline_item.get("order", i + 1),
                 "type":       slide_type,
                 "background": background,
                 "blocks":     blocks,
-            })
+            }
+
+            # Editor-only photographic backdrop. Exporters ignore this field
+            # and continue rendering `background` (color/gradient). Awaiting
+            # here is cheap — tasks were started in run() and most have
+            # already resolved during slide-content generation.
+            if backdrop_tasks is not None:
+                variant = _backdrop_variant(slide_type)
+                task = backdrop_tasks.get(variant)
+                if task is not None:
+                    try:
+                        image_url = await task
+                    except Exception as exc:
+                        logger.warning(f"Backdrop task for {variant} failed: {exc}")
+                        image_url = ""
+                    if image_url:
+                        slide_dict["editor_background"] = {
+                            "image": image_url,
+                            "overlay": backdrop_service.overlay_for(variant),
+                        }
+
+            result.append(slide_dict)
 
         return result

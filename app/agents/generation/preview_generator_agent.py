@@ -200,23 +200,44 @@ SAMPLE_ANALYSIS: dict[str, dict[str, Any]] = {
 
 # Single prompt that returns ALL slides at once
 _PREVIEW_BATCH_PROMPT = Template("""
-You are a presentation content writer. Generate content for ALL slides in one response.
+You are a senior editorial designer writing GAMMA-TIER presentation copy.
+Read the voice rules carefully — they are non-negotiable.
 
 Presentation: $title
 Summary: $summary
 Audience: $audience
 
-Slides to generate (in order):
+Slides to generate (in order). Each slide has a `title`, a `type`, and a
+short `hint`. Use the hint as the spine; do NOT ignore it.
+
 $outline_json
 
-For each slide return content matching its type:
-- title: heading (≤8 words) + one subtitle bullet
-- agenda: heading + 4-6 section name bullets
-- content: heading (≤6 words) + 3-5 concrete bullet points
-- stats: heading + 3-4 stat strings like "47% Cost Reduction"
-- closing: call-to-action heading + one next-step bullet
+═══ GAMMA VOICE — every bullet must follow these rules ═══
+1. LENGTH: 6-12 words per bullet. Hard ceiling: 14 words. Most should be 8-10.
+2. PARALLEL STRUCTURE: bullets within the same slide start with the same
+   part of speech (all verbs, or all nouns, or all noun-phrases).
+3. SPECIFIC: use real numbers, named tools, concrete examples — never
+   vague like "many", "various", "significant impact".
+4. ACTIVE VOICE: subject does the action. Cut "is being", "will be done".
+5. NO CORPORATE FILLER: ban "leverage", "synergize", "best-in-class",
+   "next-generation", "ecosystem", "stakeholders", "going forward".
+6. CONFIDENT: declarative statements, not hedged ("we believe", "may").
+7. PLACEHOLDERS: tokens like [Product], [Year], [Company] MUST be replaced
+   with realistic specific names that fit the deck's topic.
 
-Return a JSON array with exactly one object per slide, same order:
+═══ SLIDE-TYPE RULES ═══
+- title: heading ≤6 words, punchy. Subtitle bullet ≤10 words.
+- agenda: heading ≤4 words. 4-6 section bullets, each 3-6 words.
+- content: heading ≤5 words. 3-4 bullets, each 8-12 words, parallel.
+- stats: heading ≤5 words. 3-4 stat strings like "2.4M ARR" or "73% Faster"
+  (one stat per string, ALWAYS includes a number). Bullets must be empty.
+- comparison: heading ≤5 words. Bullets formatted "Before: <6 words> | After: <6 words>".
+- roadmap: heading ≤5 words. 3-4 phase bullets like "Phase 1: <action verb> <object>".
+- quote: heading ≤6 words. quote field = 12-25 words, attributable. caption = name + role.
+- closing: heading is a clear CTA verb phrase ≤6 words. One bullet ≤10 words.
+
+═══ OUTPUT FORMAT ═══
+Return a JSON array, one object per slide, same order:
 [
   {
     "heading": "...",
@@ -319,28 +340,72 @@ class PreviewGeneratorAgent:
         from app.agents.generation.template_mapper_agent import TemplateMappingResult
         from app.core.database import _session_factory
 
-        category = template.category or "default"
-        analysis = dict(SAMPLE_ANALYSIS.get(category, SAMPLE_ANALYSIS["default"]))
-
-        meta = template.metadata_json or {}
-        total_slides = meta.get("total_slides", analysis["estimated_slides"])
-        analysis["estimated_slides"] = total_slides
-
-        logger.info(
-            f"Generating preview for '{template.name}' "
-            f"(category={category}, slides={total_slides}) — single AI call"
+        # Gamma-tier templates ship with their own slide outline (title/type
+        # per slide). Prefer that over the legacy category-based hardcoded
+        # SAMPLE_ANALYSIS — it gives us template-specific, accurate previews
+        # instead of one-size-fits-all "Strategic Overview" placeholder text.
+        template_slides = template.slides or []
+        has_template_outline = (
+            bool(template_slides)
+            and isinstance(template_slides[0], dict)
+            and "type" in template_slides[0]
+            and "title" in template_slides[0]
+            and "blocks" not in template_slides[0]  # legacy already-rendered slides
         )
 
-        # 1. Build outline with zero AI calls
-        outline = _build_outline(analysis)
+        meta = template.metadata_json or {}
 
-        # 2. ONE AI call for all slide content
+        if has_template_outline:
+            # Build outline directly from the template's authored slide list.
+            outline = [
+                {
+                    "order": s.get("order", i + 1),
+                    "type":  s.get("type", "content"),
+                    "title": s.get("title", ""),
+                    "key_points": s.get("body", []) if isinstance(s.get("body"), list) else [s.get("body", "")],
+                }
+                for i, s in enumerate(template_slides)
+            ]
+            analysis = {
+                "title": template_slides[0].get("title", template.name) if template_slides else template.name,
+                "summary": template.description or "",
+                "audience": meta.get("audience", "General audience"),
+                "tone": meta.get("tone", "professional"),
+                "estimated_slides": len(outline),
+                "sections": [],
+            }
+            logger.info(
+                f"Preview using template outline for '{template.name}' "
+                f"({len(outline)} slides) — single AI call"
+            )
+        else:
+            # Fallback to legacy category-based sample (kept for templates
+            # that don't ship their own outline).
+            category = template.category or "default"
+            analysis = dict(SAMPLE_ANALYSIS.get(category, SAMPLE_ANALYSIS["default"]))
+            total_slides = meta.get("total_slides", analysis["estimated_slides"])
+            analysis["estimated_slides"] = total_slides
+            outline = _build_outline(analysis)
+            logger.info(
+                f"Preview using category sample for '{template.name}' "
+                f"(category={category}, slides={total_slides}) — single AI call"
+            )
+
+        # ONE AI call to flesh out the per-slide content from the outline.
         prompt = _PREVIEW_BATCH_PROMPT.substitute(
             title=analysis["title"],
             summary=analysis["summary"],
             audience=analysis["audience"],
             outline_json=json.dumps(
-                [{"order": s["order"], "type": s["type"], "title": s["title"]} for s in outline],
+                [
+                    {
+                        "order": s["order"],
+                        "type": s["type"],
+                        "title": s["title"],
+                        "hint": " · ".join(s.get("key_points", []))[:200] if s.get("key_points") else "",
+                    }
+                    for s in outline
+                ],
                 indent=2,
             ),
         )
@@ -356,7 +421,14 @@ class PreviewGeneratorAgent:
 
         # 4. Render slides locally using existing layout engine
         agent = SlideGeneratorAgent()
-        slides = agent._build_slides(outline, contents, mapping, logo_url="")
+        slides = await agent._build_slides(outline, contents, mapping, logo_url="")
+
+        # 5. Generate Gamma-tier AI illustrations for MULTIPLE slides — title,
+        # closing, and content slides — all in PARALLEL. Each illustration
+        # uses the theme's `illustration_mood` token so the deck has visual
+        # consistency. Slides with their own visuals (chart/roadmap/stats/
+        # comparison/kanban/funnel) skip — they already carry imagery.
+        await self._attach_illustrations(slides, contents, outline, theme, template)
 
         # 5. Persist as preview
         async with _session_factory() as db:
@@ -376,3 +448,294 @@ class PreviewGeneratorAgent:
 
         logger.info(f"Preview presentation created: {presentation.id}")
         return presentation
+
+    # ── Layout detection & image placement ────────────────────────────────
+    @staticmethod
+    def _detect_layout(slide: dict) -> str:
+        """Detect what layout was applied to this slide by inspecting its blocks.
+        Returns one of: 'title_hero', 'closing', 'split_panel', 'card_grid',
+        'content_clean', 'agenda_rows', 'structured', 'unknown'."""
+        blocks = slide.get("blocks", [])
+        ids = {b.get("id", "") for b in blocks}
+        stype = slide.get("type", "")
+        # Layouts with built-in visual structure — leave alone.
+        if stype in ("stats", "chart", "quote", "comparison", "kanban", "funnel", "roadmap"):
+            return "structured"
+        if stype in ("title",) or "hero-eyebrow" in ids:
+            return "title_hero"
+        if stype == "closing" or "cta" in ids:
+            return "closing"
+        if "left-panel" in ids:
+            return "split_panel"
+        if any(bid.startswith("agenda-row-") for bid in ids):
+            return "agenda_rows"
+        if any(bid.startswith("card-") for bid in ids):
+            return "card_grid"
+        return "content_clean"
+
+    @staticmethod
+    def _image_strategy_for_layout(layout: str) -> dict | None:
+        """Return how/where to place an AI illustration for a given layout.
+        None means skip (the layout has no room or already has visuals).
+
+        Returns dict with: position (x,y,w,h) + action ('replace_left_panel' |
+        'add_left' | 'add_right')."""
+        if layout == "title_hero":
+            # FULL-BLEED background photograph behind the entire title slide.
+            # This same image is re-used as a deck-wide backdrop on every
+            # other slide (see _attach_illustrations). Matches Gamma's
+            # "Resource Allocation Plan" / "Industry Benchmark" style.
+            return {"action": "full_bleed_bg", "x": 0, "y": 0, "w": 1280, "h": 720}
+        if layout == "closing":
+            return {"action": "full_bleed_bg", "x": 0, "y": 0, "w": 1280, "h": 720}
+        # No per-slide illustrations — Gamma's reference decks don't decorate
+        # individual slides with small AI illustrations. The deck-wide
+        # atmospheric backdrop alone provides visual continuity. Per-slide
+        # layout structure (cards, agenda, comparison) carries the content.
+        if layout == "content_clean":
+            # Skip — content_clean uses full-width heading + bullets and
+            # forcing them into the right half creates awkward narrow text.
+            # If we want images here later, redesign the content_clean layout.
+            return None
+        # agenda, card_grid, structured: SKIP — they already use the full width.
+        return None
+
+    # ── Multi-slide illustration generation ────────────────────────────────
+    @staticmethod
+    async def _attach_illustrations(
+        slides: list[dict],
+        contents: list[dict],
+        outline: list[dict],
+        theme,
+        template,
+    ) -> None:
+        """Generate AI illustrations for title/closing/content slides in
+        parallel and attach them to each slide as image blocks.
+
+        Skips slides that already carry visual structure (chart, roadmap,
+        stats, comparison, kanban, funnel) — those slide types are visual
+        on their own and don't need an illustration.
+        """
+        import asyncio
+        import uuid
+        from app.ai.gemini_client import generate_image
+        from app.api.v1.images import GENERATED_DIR
+
+        if not slides:
+            return
+
+        theme_tokens = (theme.fonts or {}).get("_tokens", {})
+        illustration_mood = theme_tokens.get(
+            "illustration_mood",
+            "deep blues and indigo, modern minimal abstract",
+        )
+        theme_bg = (theme.colors or {}).get("background", "#09090B")
+
+        # Detect theme luminance so the AI-generated backdrop matches the
+        # theme's brightness — a dark theme gets a dark moody texture, a
+        # light cream theme gets a light airy texture. Otherwise the dark
+        # heading text on a light theme becomes invisible against a forced
+        # dark bg.
+        def _is_dark(hex_color: str) -> bool:
+            h = (hex_color or "").lstrip("#")
+            if len(h) != 6:
+                return True
+            try:
+                r, g, b = int(h[:2], 16), int(h[2:4], 16), int(h[4:], 16)
+            except ValueError:
+                return True
+            return (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255 < 0.5
+
+        theme_is_dark = _is_dark(theme_bg)
+        if theme_is_dark:
+            mood_descriptor = "very dark and moody, deep shadows"
+            text_overlay_note = (
+                "The image must function as a BACKDROP for WHITE overlay text — "
+                "overall darkness 7/10, no bright focal point in the center."
+            )
+        else:
+            mood_descriptor = "soft, warm, light and airy, cream/paper toned, gentle"
+            text_overlay_note = (
+                "The image must function as a BACKDROP for DARK overlay text — "
+                "overall brightness 7/10, no dark focal point in the center, "
+                "soft pale tones throughout."
+            )
+
+        # Cap total images per preview. Lower = more selective (Gamma-tier
+        # decks don't illustrate every slide — only key ones).
+        MAX_ILLUSTRATIONS = 4
+
+        # Decide which slides get illustrations + position for each.
+        # Layout-aware: only place an image where the existing layout has
+        # room for it. SKIP layouts that already use the full width.
+        targets: list[tuple[int, str, dict, str, str]] = []  # +slide_type
+        for i, slide in enumerate(slides):
+            layout = PreviewGeneratorAgent._detect_layout(slide)
+            strategy = PreviewGeneratorAgent._image_strategy_for_layout(layout)
+            if strategy is None:
+                continue
+            heading = contents[i].get("heading") if i < len(contents) else slide.get("type", "")
+            subject = heading or slide.get("type", "presentation")
+            pos = {"x": strategy["x"], "y": strategy["y"], "w": strategy["w"], "h": strategy["h"]}
+            targets.append((i, subject, pos, strategy["action"], layout))
+            if len(targets) >= MAX_ILLUSTRATIONS:
+                break
+
+        if not targets:
+            return
+
+        async def _gen_one(idx: int, subject: str, pos: dict, action: str, layout: str) -> tuple[int, str | None, dict, str]:
+            try:
+                # Title/closing slides → FULL-BLEED dark atmospheric texture
+                # photograph that fills the whole slide as a background, with
+                # text overlaying on top. Matches Gamma's "Industry Benchmark
+                # Overview" title style: layered organic forms, wavy textures,
+                # architectural sand-dune-like surfaces, moody and dark.
+                if layout in ("title_hero", "closing"):
+                    prompt = (
+                        f"Abstract atmospheric photograph for a presentation title-slide BACKGROUND. "
+                        f"Subject: organic flowing textured surfaces — choose ONE: layered curved sand "
+                        f"dunes; smooth wave-like architectural folds; stone or marble with subtle "
+                        f"ridges; flowing fabric folds; abstract topographic ripples. "
+                        f"PALETTE: dominantly {theme_bg} tones, {mood_descriptor}, subtle highlights "
+                        f"of {illustration_mood}. Lighting: low contrast, soft directional grazing light "
+                        f"revealing texture. Mood: refined, minimal, editorial. "
+                        f"{text_overlay_note} "
+                        f"NO people, NO faces, NO illustrations, NO buildings, NO cities, NO logos, "
+                        f"NO text, NO words, NO charts, NO icons, NO neon, NO futuristic, NO sci-fi, "
+                        f"NO oversaturated colors. Premium magazine photography quality, like Gamma's "
+                        f"flagship editorial title decks. 16:9 landscape aspect ratio, full-bleed, "
+                        f"edge-to-edge."
+                    )
+                else:
+                    # Per-slide content illustration. Must visually harmonize
+                    # with the deck-wide atmospheric backdrop (dark wavy
+                    # texture) — same photographic-texture language, just a
+                    # different focal subject for variety. NO flat vector
+                    # illustrations, NO bright color blocks.
+                    subject_l = subject.lower()
+                    if any(k in subject_l for k in ("compare", "vs", "before", "after", "matrix", "tradeoff")):
+                        texture_hint = "intersecting geometric stone planes meeting at a soft seam, low-light architectural texture"
+                    elif any(k in subject_l for k in ("ecosystem", "network", "framework", "pillar", "system", "architecture", "platform")):
+                        texture_hint = "interlocking organic layered forms, like nested architectural folds or concentric ridges"
+                    elif any(k in subject_l for k in ("process", "step", "phase", "workflow", "journey", "pipeline", "timeline", "roadmap")):
+                        texture_hint = "long flowing curved lines of layered sand or fabric, suggesting movement and direction"
+                    elif any(k in subject_l for k in ("growth", "trend", "metric", "data", "performance", "result", "analytics")):
+                        texture_hint = "rising topographic ridges with grazing light, abstract elevation contour lines"
+                    else:
+                        texture_hint = "smooth organic textured surface — wavy fabric folds, dark marble veining, or layered stone"
+
+                    prompt = (
+                        f"Abstract atmospheric photograph for a presentation slide visual. "
+                        f"Subject: {texture_hint}. "
+                        f"PALETTE: dominantly {theme_bg} tones, {mood_descriptor}, subtle highlights of "
+                        f"{illustration_mood}. Lighting: soft directional grazing light revealing texture. "
+                        f"Mood: refined, minimal, editorial — same visual language as the deck's "
+                        f"atmospheric backdrop. "
+                        f"NO people, NO faces, NO illustrations, NO flat vector art, NO oversaturated colors, "
+                        f"NO buildings, NO cities, NO charts, NO icons, NO neon, NO futuristic, NO sci-fi, "
+                        f"NO logos, NO text, NO words, NO gray frame, NO border. "
+                        f"1:1 SQUARE aspect ratio, full-bleed. The image must blend seamlessly with a "
+                        f"{theme_bg} atmospheric slide — corner pixels must match {theme_bg} closely. "
+                        f"Premium magazine photography quality."
+                    )
+                img_bytes, mime = await asyncio.wait_for(generate_image(prompt), timeout=30.0)
+                GENERATED_DIR.mkdir(parents=True, exist_ok=True)
+                ext = mime.split("/")[-1] if "/" in mime else "png"
+                if ext == "jpeg":
+                    ext = "jpg"
+                fname = f"{uuid.uuid4()}.{ext}"
+                (GENERATED_DIR / fname).write_bytes(img_bytes)
+                return (idx, f"/generated/{fname}", pos, action)
+            except Exception as exc:
+                logger.warning(f"Illustration gen failed for slide {idx} ({subject}): {exc}")
+                return (idx, None, pos, action)
+
+        logger.info(
+            f"Generating {len(targets)} illustrations in parallel for '{template.name}'"
+        )
+        # Limit concurrency — Nano Banana on a paid plan handles a few in
+        # parallel but a burst of 6+ can hit rate limits. Semaphore = 3.
+        sem = asyncio.Semaphore(3)
+
+        async def _bounded(idx, subj, p, a, lay):
+            async with sem:
+                return await _gen_one(idx, subj, p, a, lay)
+
+        results = await asyncio.gather(*[_bounded(i, s, p, a, lay) for (i, s, p, a, lay) in targets])
+
+        # Capture the title's full-bleed atmospheric background so we can
+        # re-use it as a deck-wide backdrop on every other slide. Gives the
+        # whole deck a consistent Gamma-style atmospheric feel.
+        deck_bg_url: str | None = None
+
+        for (slide_idx, url, pos, action) in results:
+            if not url:
+                continue
+            slide = slides[slide_idx]
+            slide.setdefault("blocks", [])
+
+            if action == "replace_left_panel":
+                # Remove the existing decorative left panel + accent dot so
+                # the AI image sits cleanly in the left half of split_panel.
+                slide["blocks"] = [
+                    b for b in slide["blocks"]
+                    if b.get("id") not in ("left-panel", "panel-dot")
+                ]
+
+            image_block = {
+                "id": f"preview-illust-{slide_idx}",
+                "type": "image",
+                "content": url,
+                "position": pos,
+                "styling": {
+                    "font_family": "", "font_size": 0, "font_weight": 0,
+                    "color": "transparent", "background_color": "transparent",
+                    "text_align": "left",
+                },
+            }
+            if action == "full_bleed_bg":
+                # Full-bleed background — image must render BEHIND all other
+                # blocks (title text, eyebrow, etc.), so insert at index 0.
+                slide["blocks"].insert(0, image_block)
+                # First full-bleed image becomes the deck-wide backdrop.
+                if deck_bg_url is None:
+                    deck_bg_url = url
+            else:
+                slide["blocks"].append(image_block)
+
+        # Apply the deck-wide atmospheric backdrop to every slide that doesn't
+        # already have a full-bleed image. The block id `deck-bg-*` tells the
+        # frontend to render a stronger dark overlay so cards/text stay
+        # readable on content slides. Also strip the split_panel decorative
+        # left-panel block since the wavy backdrop now covers that region.
+        if deck_bg_url:
+            for i, slide in enumerate(slides):
+                slide.setdefault("blocks", [])
+                blocks = slide["blocks"]
+                has_full_bleed = any(
+                    b.get("type") == "image"
+                    and b.get("position", {}).get("x") == 0
+                    and b.get("position", {}).get("y") == 0
+                    and b.get("position", {}).get("w", 0) >= 1200
+                    for b in blocks
+                )
+                if has_full_bleed:
+                    continue
+                # Remove decorative left-panel artifacts — the deck-wide bg
+                # replaces them visually and they would just sit on top.
+                slide["blocks"] = [
+                    b for b in blocks
+                    if b.get("id") not in ("left-panel", "panel-dot")
+                ]
+                slide["blocks"].insert(0, {
+                    "id": f"deck-bg-{i}",
+                    "type": "image",
+                    "content": deck_bg_url,
+                    "position": {"x": 0, "y": 0, "w": 1280, "h": 720},
+                    "styling": {
+                        "font_family": "", "font_size": 0, "font_weight": 0,
+                        "color": "transparent", "background_color": "transparent",
+                        "text_align": "left",
+                    },
+                })

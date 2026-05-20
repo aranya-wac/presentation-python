@@ -272,15 +272,29 @@ def build_premium_pptx(slides: list[dict], theme_data: dict, output_path: str, t
 # ---------------------------------------------------------------------------
 
 async def seed_themes(db, force_rebuild: bool = False) -> dict[str, str]:
-    """Upsert all themes. Returns name->id mapping."""
+    """Upsert all themes. Returns name->id mapping.
+
+    Theme JSON may include a top-level `tokens` block (Gamma-tier templates
+    use it for heading_size, illustration_mood, etc.). The Theme model has
+    no dedicated `tokens` column, so we tuck tokens into `fonts._tokens` —
+    the layout engine + AI-illustration prompts read from there.
+    """
     from sqlalchemy import select
     from app.models.theme import Theme
 
     theme_id_map: dict[str, str] = {}
 
+    def _build_fonts(data: dict) -> dict:
+        fonts = dict(data.get("fonts") or {})
+        tokens = data.get("tokens")
+        if tokens:
+            fonts["_tokens"] = tokens
+        return fonts
+
     for theme_file in THEMES_DIR.glob("*.json"):
         data = json.loads(theme_file.read_text(encoding="utf-8"))
         name = data["name"]
+        fonts = _build_fonts(data)
 
         existing = (await db.execute(select(Theme).where(Theme.name == name))).scalar_one_or_none()
 
@@ -291,7 +305,7 @@ async def seed_themes(db, force_rebuild: bool = False) -> dict[str, str]:
 
         if existing and force_rebuild:
             existing.colors = data["colors"]
-            existing.fonts = data["fonts"]
+            existing.fonts = fonts
             await db.commit()
             await db.refresh(existing)
             theme_id_map[name] = str(existing.id)
@@ -300,7 +314,7 @@ async def seed_themes(db, force_rebuild: bool = False) -> dict[str, str]:
             theme = Theme(
                 name=name,
                 colors=data["colors"],
-                fonts=data["fonts"],
+                fonts=fonts,
             )
             db.add(theme)
             await db.commit()

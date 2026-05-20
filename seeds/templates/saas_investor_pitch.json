@@ -1,0 +1,22 @@
+{
+  "name": "SaaS Investor Pitch",
+  "description": "10-slide investor pitch deck for venture-stage SaaS startups. Problem, solution, market, traction, ask.",
+  "category": "Pitch",
+  "tags": ["Investor", "Startup", "SaaS", "Featured"],
+  "theme_name": "Gamma Dark",
+  "thumbnail_url": "",
+  "is_active": true,
+  "metadata": { "total_slides": 10, "audience": "VCs and angel investors", "tone": "confident, data-driven" },
+  "slides": [
+    { "order": 1,  "type": "title",      "title": "[Product Name]",                    "body": ["A new way to [solve problem] for [audience]"] },
+    { "order": 2,  "type": "content",    "title": "The Problem",                       "body": ["What's broken today", "Why now is the moment", "Who feels the pain most"] },
+    { "order": 3,  "type": "content",    "title": "Our Solution",                      "body": ["What we built", "How it works in plain English", "Why this approach wins"] },
+    { "order": 4,  "type": "stats",      "title": "Market Opportunity",                "body": ["TAM, SAM, SOM", "Growth rates", "Why now"] },
+    { "order": 5,  "type": "content",    "title": "Product",                           "body": ["Core capabilities", "What's shipped", "What's on the roadmap"] },
+    { "order": 6,  "type": "stats",      "title": "Traction",                          "body": ["Revenue, growth, customers", "Logos that matter", "Net retention"] },
+    { "order": 7,  "type": "comparison", "title": "Competitive Landscape",             "body": ["Why we win", "What's unique", "Where competitors fall short"] },
+    { "order": 8,  "type": "content",    "title": "Business Model",                    "body": ["How we make money", "Unit economics", "Path to profitability"] },
+    { "order": 9,  "type": "content",    "title": "The Team",                          "body": ["Founders and backgrounds", "Key hires", "Advisors"] },
+    { "order": 10, "type": "closing",    "title": "The Ask",                           "body": ["Round size + use of funds", "Milestones we'll hit", "Why now is the right time"] }
+  ]
+}

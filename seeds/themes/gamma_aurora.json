@@ -1,0 +1,24 @@
+{
+  "name": "Gamma Aurora",
+  "colors": {
+    "primary":    "#1A0B2E",
+    "secondary":  "#2D1B4E",
+    "accent":     "#B794F6",
+    "background": "#0A0418",
+    "text":       "#F5EBFF",
+    "surface":    "#2D1B4E",
+    "muted":      "#9B85C2"
+  },
+  "fonts": {
+    "heading": { "family": "Inter Tight, Inter, sans-serif", "size": 56, "weight": 900 },
+    "body":    { "family": "Inter, sans-serif", "size": 22, "weight": 400 },
+    "caption": { "family": "Inter, sans-serif", "size": 14, "weight": 500 }
+  },
+  "tokens": {
+    "style":             "modern-editorial",
+    "illustration_mood": "deep purple and violet, soft lavender highlights, clean modern editorial illustration",
+    "heading_size":      60,
+    "card_radius":       20,
+    "use_serif_quotes":  false
+  }
+}
