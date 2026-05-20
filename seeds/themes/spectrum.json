@@ -1,0 +1,24 @@
+{
+  "name": "Spectrum",
+  "colors": {
+    "primary":    "#1F2A4A",
+    "secondary":  "#2F3D5A",
+    "accent":     "#6B7AC4",
+    "background": "#EAEAF5",
+    "text":       "#2F3D5A",
+    "surface":    "#DDDBEA",
+    "muted":      "#6F7588"
+  },
+  "fonts": {
+    "heading": { "family": "Inter Tight, Inter, sans-serif", "size": 56, "weight": 700 },
+    "body":    { "family": "Inter, sans-serif", "size": 22, "weight": 400 },
+    "caption": { "family": "Inter, sans-serif", "size": 14, "weight": 500 }
+  },
+  "tokens": {
+    "style":             "editorial-cool",
+    "illustration_mood": "soft cool blue, lavender-tinted neutral, refined gradient haze, modern minimal",
+    "heading_size":      60,
+    "card_radius":       16,
+    "use_serif_quotes":  false
+  }
+}

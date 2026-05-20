@@ -1,0 +1,24 @@
+{
+  "name": "Pearl",
+  "colors": {
+    "primary":    "#2A2925",
+    "secondary":  "#3A3833",
+    "accent":     "#8B8275",
+    "background": "#F5F2EB",
+    "text":       "#2A2925",
+    "surface":    "#ECE7DE",
+    "muted":      "#6F6A60"
+  },
+  "fonts": {
+    "heading": { "family": "Inter Tight, Inter, sans-serif", "size": 56, "weight": 700 },
+    "body":    { "family": "Inter, sans-serif", "size": 22, "weight": 400 },
+    "caption": { "family": "Inter, sans-serif", "size": 14, "weight": 500 }
+  },
+  "tokens": {
+    "style":             "editorial-light",
+    "illustration_mood": "soft pearl cream, layered organic curves, neutral warm beige, wavy paper texture",
+    "heading_size":      60,
+    "card_radius":       16,
+    "use_serif_quotes":  true
+  }
+}

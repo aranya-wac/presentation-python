@@ -36,7 +36,7 @@ class GenerateImageResponse(BaseModel):
 
 
 @router.post("/generate", response_model=GenerateImageResponse)
-@limiter.limit("20/hour")
+@limiter.limit("500/hour")
 async def generate_image(
     request: Request,
     payload: GenerateImageRequest,

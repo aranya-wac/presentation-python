@@ -1,0 +1,20 @@
+{
+  "name": "Editorial Long-form",
+  "description": "8-slide magazine-style narrative deck. Hook, chapters, takeaways. Designed for storytelling.",
+  "category": "Editorial",
+  "tags": ["Editorial", "Magazine", "Storytelling", "Premium"],
+  "theme_name": "Gamma Ivory",
+  "thumbnail_url": "",
+  "is_active": true,
+  "metadata": { "total_slides": 8, "audience": "Readers, thought-leadership audience", "tone": "considered, literary, refined" },
+  "slides": [
+    { "order": 1, "type": "title",   "title": "[Headline]",                "body": ["A long-form essay by [Author]"] },
+    { "order": 2, "type": "content", "title": "Why This Story Matters",    "body": ["The moment we're living through", "What's been missed in the conversation", "What this piece argues"] },
+    { "order": 3, "type": "quote",   "title": "Opening Reflection",        "body": ["A quote or observation that frames the entire piece"] },
+    { "order": 4, "type": "content", "title": "Chapter One",                "body": ["First idea developed", "Evidence and example", "What it points to"] },
+    { "order": 5, "type": "content", "title": "Chapter Two",                "body": ["Second idea developed", "Evidence and example", "How it complicates Chapter One"] },
+    { "order": 6, "type": "content", "title": "Chapter Three",              "body": ["Third idea developed", "The synthesis", "Where this leads"] },
+    { "order": 7, "type": "quote",   "title": "Closing Reflection",        "body": ["A closing quote that leaves the reader thinking"] },
+    { "order": 8, "type": "closing", "title": "Further Reading",            "body": ["Three sources we'd send you to next", "How to reach the author"] }
+  ]
+}

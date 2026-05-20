@@ -1,0 +1,24 @@
+{
+  "name": "Gamma Slate",
+  "colors": {
+    "primary":    "#1F1F1F",
+    "secondary":  "#2D2D2D",
+    "accent":     "#A8A8A8",
+    "background": "#F7F7F7",
+    "text":       "#1A1A1A",
+    "surface":    "#EAEAEA",
+    "muted":      "#737373"
+  },
+  "fonts": {
+    "heading": { "family": "Inter Tight, Inter, sans-serif", "size": 56, "weight": 800 },
+    "body":    { "family": "Inter, sans-serif", "size": 22, "weight": 400 },
+    "caption": { "family": "Inter, sans-serif", "size": 14, "weight": 500 }
+  },
+  "tokens": {
+    "style":             "minimal-mono",
+    "illustration_mood": "monochrome grayscale, subtle gradient gray, pure information design, minimalist",
+    "heading_size":      60,
+    "card_radius":       12,
+    "use_serif_quotes":  false
+  }
+}

@@ -17,6 +17,22 @@ class Settings(BaseSettings):
     # higher-quality news results. When empty, it falls back to a
     # DuckDuckGo HTML scrape.
     SERPER_API_KEY: str = ""
+    # When set, the editor-backdrop service fetches photographic backgrounds
+    # from Unsplash. Empty → PIL fallback (vectorized radial gradient).
+    UNSPLASH_ACCESS_KEY: str = ""
+    # Max parallel Gemini slide-content calls. Higher → faster generation,
+    # at the cost of hitting rate limits sooner. Default tuned for ≤15 slides
+    # finishing under 40s wall-clock.
+    SLIDE_GEN_CONCURRENCY: int = 8
+    # Master switch for editor backdrops. Off → no backdrop service call,
+    # no editor_background field emitted. Lets us A/B and bypass for
+    # brand-strict themes.
+    EDITOR_BACKDROPS_ENABLED: bool = True
+    # Use Gemini Nano Banana to generate bespoke cinematic backdrops for
+    # hero/closing slides. Requires a PAID Gemini key (free tier quota is
+    # too small for image gen). Off by default → Unsplash handles heroes too.
+    # Set to true after upgrading Gemini plan for Gamma-tier hero imagery.
+    AI_HERO_BACKDROPS_ENABLED: bool = False
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24  # 24 hours
     REFRESH_TOKEN_EXPIRE_DAYS: int = 30
     MAX_UPLOAD_SIZE_MB: int = 10

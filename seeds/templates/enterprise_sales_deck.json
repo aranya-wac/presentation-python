@@ -1,0 +1,24 @@
+{
+  "name": "Enterprise Sales Deck",
+  "description": "12-slide field sales deck for B2B enterprise. Discovery, problem framing, solution, ROI, case studies.",
+  "category": "Sales",
+  "tags": ["Sales", "Enterprise", "B2B"],
+  "theme_name": "Gamma Midnight",
+  "thumbnail_url": "",
+  "is_active": true,
+  "metadata": { "total_slides": 12, "audience": "Enterprise buyers, C-suite", "tone": "boardroom, credible" },
+  "slides": [
+    { "order": 1,  "type": "title",      "title": "[Prospect Name] × [Our Company]", "body": ["A proposal to drive [outcome]"] },
+    { "order": 2,  "type": "agenda",     "title": "What We'll Cover",                "body": ["Where you are today", "Where we can take you", "What it takes to get there", "Investment + next steps"] },
+    { "order": 3,  "type": "content",    "title": "Today's Reality",                 "body": ["Friction in current workflow", "What it's costing the business", "Why the status quo is unsustainable"] },
+    { "order": 4,  "type": "stats",      "title": "The Cost of Inaction",            "body": ["Quantified pain in dollars and time"] },
+    { "order": 5,  "type": "content",    "title": "Our Approach",                    "body": ["How [our product] solves the problem", "What changes day-1", "What changes by quarter end"] },
+    { "order": 6,  "type": "comparison", "title": "Before vs. After",                "body": ["Today: manual, slow, expensive", "With us: automated, fast, measurable"] },
+    { "order": 7,  "type": "roadmap",    "title": "Implementation Timeline",         "body": ["Discovery", "Pilot", "Rollout", "Scale"] },
+    { "order": 8,  "type": "stats",      "title": "ROI You Can Expect",              "body": ["Payback period", "Annual savings", "Productivity lift"] },
+    { "order": 9,  "type": "quote",      "title": "Customer Result",                 "body": ["A peer-company outcome that mirrors yours"] },
+    { "order": 10, "type": "content",    "title": "Why [Our Company]",               "body": ["Track record", "Security and compliance", "Support and SLAs"] },
+    { "order": 11, "type": "content",    "title": "Investment",                      "body": ["Pricing tier", "What's included", "Multi-year incentive"] },
+    { "order": 12, "type": "closing",    "title": "Next Steps",                      "body": ["Sign and start", "Reference call", "Pilot proposal"] }
+  ]
+}

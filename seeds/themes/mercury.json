@@ -1,0 +1,24 @@
+{
+  "name": "Mercury",
+  "colors": {
+    "primary":    "#1A1A1A",
+    "secondary":  "#2A2A2A",
+    "accent":     "#8A8A8A",
+    "background": "#F0F0F0",
+    "text":       "#2A2A2A",
+    "surface":    "#E5E5E5",
+    "muted":      "#707070"
+  },
+  "fonts": {
+    "heading": { "family": "Inter Tight, Inter, sans-serif", "size": 56, "weight": 700 },
+    "body":    { "family": "Inter, sans-serif", "size": 22, "weight": 400 },
+    "caption": { "family": "Inter, sans-serif", "size": 14, "weight": 500 }
+  },
+  "tokens": {
+    "style":             "minimal-mono",
+    "illustration_mood": "monochrome grayscale, soft silver, subtle neutral tones, refined minimal",
+    "heading_size":      60,
+    "card_radius":       16,
+    "use_serif_quotes":  false
+  }
+}

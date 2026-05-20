@@ -1,0 +1,22 @@
+{
+  "name": "Quarterly Business Review",
+  "description": "10-slide QBR for leadership. KPIs, wins, lessons, next-quarter priorities.",
+  "category": "Business Review",
+  "tags": ["QBR", "Leadership", "Data"],
+  "theme_name": "Gamma Slate",
+  "thumbnail_url": "",
+  "is_active": true,
+  "metadata": { "total_slides": 10, "audience": "Executive team", "tone": "balanced, data-first, honest" },
+  "slides": [
+    { "order": 1,  "type": "title",      "title": "Q[X] [YYYY] Business Review",      "body": ["[Team or org name]"] },
+    { "order": 2,  "type": "agenda",     "title": "Agenda",                            "body": ["Headline numbers", "What worked", "What didn't", "Next quarter focus"] },
+    { "order": 3,  "type": "stats",      "title": "The Headline Numbers",              "body": ["Revenue, growth, key efficiency metric, customer health"] },
+    { "order": 4,  "type": "chart",      "title": "Revenue Trajectory",                "body": ["Quarterly trend with target overlay"] },
+    { "order": 5,  "type": "content",    "title": "Wins This Quarter",                 "body": ["Deal/customer wins", "Product milestones hit", "Team accomplishments"] },
+    { "order": 6,  "type": "content",    "title": "What Didn't Land",                  "body": ["Goals we missed and why", "Surprises in the market", "Internal friction"] },
+    { "order": 7,  "type": "comparison", "title": "Plan vs. Actual",                   "body": ["Targets set at start of Q", "What we actually delivered"] },
+    { "order": 8,  "type": "content",    "title": "Lessons Learned",                   "body": ["What we'll do more of", "What we'll stop doing", "What we'll start trying"] },
+    { "order": 9,  "type": "roadmap",    "title": "Q[X+1] Priorities",                 "body": ["Top 3 outcomes", "Owners", "Dates"] },
+    { "order": 10, "type": "closing",    "title": "Open Questions",                    "body": ["What we need from leadership", "Decisions blocking us"] }
+  ]
+}

@@ -338,8 +338,12 @@ async def generate_sync(
         contents.append(dict(empty))
     contents = contents[: len(outline)]
 
-    # 4. Load default theme (first theme in DB)
-    theme = (await db.execute(select(Theme))).scalars().first()
+    # 4. Load default theme — prefer "Gamma Dark" for premium look.
+    theme = (
+        await db.execute(select(Theme).where(Theme.name == "Gamma Dark"))
+    ).scalars().first()
+    if theme is None:
+        theme = (await db.execute(select(Theme))).scalars().first()
     if not theme:
         raise HTTPException(status_code=500, detail="No theme found in database")
 
@@ -351,7 +355,20 @@ async def generate_sync(
     # 6. Render slides locally — pure Python layout engine
     mapping = TemplateMappingResult(template=template, theme=theme)
     agent = SlideGeneratorAgent()
-    slides = agent._build_slides(outline, contents, mapping, logo_url="")
+
+    # Pre-warm editor backdrops in parallel so attach is ~free.
+    import asyncio
+    from app.config import settings as _settings
+    from app.services import backdrop_service as _bs
+    from app.agents.generation.slide_generator_agent import _backdrop_variant
+    backdrop_tasks: dict[str, asyncio.Task[str]] = {}
+    if _settings.EDITOR_BACKDROPS_ENABLED:
+        for variant in {_backdrop_variant(item.get("type", "content")) for item in outline}:
+            backdrop_tasks[variant] = asyncio.create_task(
+                _bs.get_backdrop(theme.colors, variant)
+            )
+
+    slides = await agent._build_slides(outline, contents, mapping, logo_url="", backdrop_tasks=backdrop_tasks)
 
     theme_dict = {
         "id": str(theme.id),

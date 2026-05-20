@@ -1,0 +1,24 @@
+{
+  "name": "Stratos",
+  "colors": {
+    "primary":    "#0F1626",
+    "secondary":  "#1F2A40",
+    "accent":     "#6B8AC4",
+    "background": "#0F1626",
+    "text":       "#9BA5B8",
+    "surface":    "#1F2A40",
+    "muted":      "#6B7588"
+  },
+  "fonts": {
+    "heading": { "family": "Inter Tight, Inter, sans-serif", "size": 56, "weight": 700 },
+    "body":    { "family": "Inter, sans-serif", "size": 22, "weight": 400 },
+    "caption": { "family": "Inter, sans-serif", "size": 14, "weight": 500 }
+  },
+  "tokens": {
+    "style":             "corporate-deep",
+    "illustration_mood": "deep navy, soft slate blue, atmospheric depth, subtle gradient layers",
+    "heading_size":      60,
+    "card_radius":       16,
+    "use_serif_quotes":  false
+  }
+}

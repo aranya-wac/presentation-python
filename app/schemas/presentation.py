@@ -46,10 +46,18 @@ class SlideBackgroundSchema(BaseModel):
     value: str = "#ffffff"
 
 
+class EditorBackgroundSchema(BaseModel):
+    """Editor-only backdrop image. Exporters ignore this field by design —
+    PPTX/PDF/HTML output continues to use `background` (color/gradient)."""
+    image: str = ""
+    overlay: Optional[str] = None
+
+
 class SlideSchema(BaseModel):
     order: int
     type: str
     background: Optional[SlideBackgroundSchema] = None
+    editor_background: Optional[EditorBackgroundSchema] = None
     blocks: list[BlockSchema] = []
     notes: str = ""
 

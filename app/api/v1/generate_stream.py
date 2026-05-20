@@ -44,6 +44,7 @@ async def _stream_generation(
     db: AsyncSession,
     level: str = "simple",
     user_outline: list[dict] | None = None,
+    theme_id: str | None = None,
 ) -> AsyncIterator[str]:
     """Drive generation step-by-step, emitting SSE events as work progresses."""
     from app.agents.generation.preview_generator_agent import _build_outline
@@ -130,8 +131,37 @@ async def _stream_generation(
         outline = _build_outline(analysis, target_slide_count=slide_count)
     yield _sse("outline", {"slide_count": len(outline), "titles": [o.get("title", "") for o in outline]})
 
-    # Theme: load default
-    theme = (await db.execute(select(Theme))).scalars().first()
+    # Theme selection priority:
+    #   1. User-selected theme_id (UUID or display name from frontend picker)
+    #   2. "Gamma Dark" (premium dark default)
+    #   3. First theme in DB (dev/fallback)
+    #
+    # The frontend ThemePicker uses preset ids like "gamma-dark" while the DB
+    # stores names like "Gamma Dark" and UUID ids. Try both lookups so either
+    # source-of-truth works.
+    theme = None
+    if theme_id:
+        # 1a. UUID match
+        try:
+            theme = (
+                await db.execute(select(Theme).where(Theme.id == theme_id))
+            ).scalars().first()
+        except Exception:
+            pass
+        # 1b. Name match (case-insensitive, dash → space → title-case)
+        if theme is None:
+            normalized = theme_id.replace("-", " ").replace("_", " ").strip().title()
+            theme = (
+                await db.execute(select(Theme).where(Theme.name == normalized))
+            ).scalars().first()
+        if theme is None:
+            logger.info(f"theme_id={theme_id!r} not found, falling back to default")
+    if theme is None:
+        theme = (
+            await db.execute(select(Theme).where(Theme.name == "Gamma Dark"))
+        ).scalars().first()
+    if theme is None:
+        theme = (await db.execute(select(Theme))).scalars().first()
     if not theme:
         yield _sse("error", {"message": "No theme found"})
         return
@@ -179,11 +209,25 @@ async def _stream_generation(
     # but only one image actually contacts Gemini at a time.
     MAX_IMAGES_PER_DECK = 5
     _image_semaphore = asyncio.Semaphore(1)
-    IMAGE_STYLE_SUFFIX = (
-        ". Editorial photograph, soft natural light, shallow depth of field, "
-        "muted desaturated palette, clean composition, professional, no text overlay."
+    # Gamma-style illustration prompt — theme-aware. The illustration palette
+    # adapts to the selected theme's `illustration_mood` token so the artwork
+    # feels native to the deck instead of generic. Falls back to a deep-blue
+    # palette if the theme doesn't declare a mood.
+    theme_tokens = (theme.fonts or {}).get("_tokens", {}) if theme else {}
+    illustration_mood = theme_tokens.get(
+        "illustration_mood",
+        "deep blues and indigo, modern minimal abstract",
     )
-    image_tasks: list[tuple[int, asyncio.Task]] = []  # (slide_idx, asyncio Task → str | None)
+    IMAGE_STYLE_SUFFIX = (
+        ". Style: clean professional editorial illustration like Gamma presentation decks, "
+        "vector flat design with subtle gradients on shapes, "
+        f"palette: {illustration_mood}, "
+        "minimalist, restrained, sophisticated, abstract metaphor not literal depiction, "
+        "NO neon glow, NO holographic effect, NO futuristic cyberpunk, NO sci-fi aesthetic, "
+        "NO photography, NO realistic people faces, NO text, NO logos, "
+        "16:9 widescreen, museum-quality clean editorial design."
+    )
+    image_tasks: list[tuple[int, str, asyncio.Task]] = []  # (slide_idx, slide_type, asyncio Task → str | None)
 
     # Lazy imports — only paid if advanced mode actually asks for images.
     async def _spawn_image_task(idx: int, prompt_text: str) -> asyncio.Task:
@@ -213,12 +257,34 @@ async def _stream_generation(
                 return f"/generated/{fname}"
         return asyncio.create_task(_one())
 
-    def _image_block(slide_idx: int, url: str) -> dict:
+    def _image_block(slide_idx: int, url: str, slide_type: str = "title") -> dict:
+        # Title/closing slides get the atmospheric full-bleed backdrop (Gamma
+        # "Industry Benchmark"-style). Other slides with their own per-slide
+        # image_prompt keep the right-side composition.
+        if slide_type in ("title", "closing"):
+            pos = {"x": 0, "y": 0, "w": 1280, "h": 720}
+        else:
+            pos = {"x": 720, "y": 180, "w": 500, "h": 460}
         return {
             "id": f"img-{slide_idx}",
             "type": "image",
             "content": url,
-            "position": {"x": 720, "y": 180, "w": 500, "h": 460},
+            "position": pos,
+            "styling": {
+                "font_family": "", "font_size": 0, "font_weight": 0,
+                "color": "transparent", "background_color": "transparent", "text_align": "left",
+            },
+        }
+
+    def _deck_bg_block(slide_idx: int, url: str) -> dict:
+        """Re-use the title's full-bleed atmospheric image as a deck-wide
+        backdrop on every other slide. Frontend renders this with a stronger
+        dark/light overlay so cards/text stay readable on top."""
+        return {
+            "id": f"deck-bg-{slide_idx}",
+            "type": "image",
+            "content": url,
+            "position": {"x": 0, "y": 0, "w": 1280, "h": 720},
             "styling": {
                 "font_family": "", "font_size": 0, "font_weight": 0,
                 "color": "transparent", "background_color": "transparent", "text_align": "left",
@@ -227,6 +293,26 @@ async def _stream_generation(
 
     theme_colors = theme.colors
     theme_fonts = theme.fonts
+
+    # Kick off editor-backdrop fetches concurrently with the per-slide loop.
+    # By the time we attach `editor_background` to each slide, the backdrop
+    # tasks have mostly resolved — adds ~0s to wall-clock.
+    from app.config import settings as _settings
+    from app.services import backdrop_service as _bs
+    from app.agents.generation.slide_generator_agent import _backdrop_variant
+    backdrop_tasks: dict[str, asyncio.Task[str]] = {}
+    if _settings.EDITOR_BACKDROPS_ENABLED:
+        # Drop None variants (title/closing) — those get a card-based layout
+        # instead of a full-bleed backdrop.
+        needed_variants = {
+            v for v in (_backdrop_variant(o.get("type", "content")) for o in outline) if v
+        }
+        for variant in needed_variants:
+            backdrop_tasks[variant] = asyncio.create_task(
+                _bs.get_backdrop(theme_colors, variant)
+            )
+        logger.info(f"Backdrop tasks started for variants: {sorted(needed_variants)}")
+
     content_idx = 0
     for i, (outline_item, slide_content) in enumerate(zip(outline, contents)):
         try:
@@ -274,6 +360,24 @@ async def _stream_generation(
                 "blocks": blocks,
                 "notes": str(slide_content.get("notes") or "").strip(),
             }
+
+            # Editor-only backdrop — exporters never read this field.
+            # Title/closing return None → skip backdrop attach so the
+            # split-card layout (text left, AI image right) reads cleanly.
+            if backdrop_tasks:
+                variant = _backdrop_variant(slide_type)
+                task = backdrop_tasks.get(variant) if variant else None
+                if task is not None:
+                    try:
+                        image_url = await task
+                    except Exception as exc:
+                        logger.warning(f"Backdrop task {variant} failed: {exc}")
+                        image_url = ""
+                    if image_url:
+                        slide["editor_background"] = {
+                            "image": image_url,
+                            "overlay": _bs.overlay_for(variant),
+                        }
         except Exception as exc:
             # One bad slide should not kill the whole stream. Emit a minimal
             # placeholder so the deck still completes; log for debugging.
@@ -297,49 +401,100 @@ async def _stream_generation(
             }
         yield _sse("slide", {"index": i, "total": len(outline), "slide": slide})
 
-        # Spawn an image generation task immediately if this slide asked for one
-        # (advanced mode only, capped). The task runs while subsequent slides
-        # stream — we drain completed images after the loop ends.
-        if normalized_level == "advanced" and len(image_tasks) < MAX_IMAGES_PER_DECK:
-            img_prompt = str(slide_content.get("image_prompt") or "").strip()
-            # Force a hero image on the title slide for advanced decks if
-            # Gemini didn't already provide one — biggest visible quality lift.
+        # Spawn the title's atmospheric backdrop generation regardless of
+        # simple/advanced level — every deck deserves the deck-wide bg, not
+        # just advanced ones. Per-slide illustrations are still disabled
+        # (Gamma reference decks don't decorate individual slides).
+        if len(image_tasks) < MAX_IMAGES_PER_DECK:
+            img_prompt = ""
             if not img_prompt and i == 0 and slide_type == "title":
-                # Use the deck title/heading as the basis for the hero image.
+                # Generate the deck's atmospheric full-bleed backdrop (same
+                # style as template previews). The title slide gets this as
+                # its own background, and the same image is re-used as a
+                # deck-wide backdrop on every other slide.
                 heading_text = str(slide_content.get("heading") or analysis.get("title") or "").strip()
                 if heading_text:
-                    img_prompt = f"A striking hero image illustrating: {heading_text}"
+                    # Detect theme luminance so the bg matches: dark themes get
+                    # a dark moody texture, light themes get a soft airy one.
+                    _bg_hex = (theme.colors or {}).get("background", "#09090B").lstrip("#")
+                    try:
+                        _r = int(_bg_hex[0:2], 16); _g = int(_bg_hex[2:4], 16); _b = int(_bg_hex[4:6], 16)
+                        _theme_dark = (0.2126*_r + 0.7152*_g + 0.0722*_b) / 255 < 0.5
+                    except Exception:
+                        _theme_dark = True
+                    if _theme_dark:
+                        _mood = "very dark and moody, deep shadows"
+                        _overlay_note = "BACKDROP for WHITE overlay text — overall darkness 7/10."
+                    else:
+                        _mood = "soft, warm, light and airy, cream/paper toned"
+                        _overlay_note = "BACKDROP for DARK overlay text — overall brightness 7/10."
+                    _theme_bg = (theme.colors or {}).get("background", "#09090B")
+                    img_prompt = (
+                        f"Abstract atmospheric photograph for a presentation title-slide BACKGROUND. "
+                        f"Subject: organic flowing textured surfaces — choose ONE: layered curved sand "
+                        f"dunes; smooth wave-like architectural folds; stone or marble with subtle "
+                        f"ridges; flowing fabric folds; abstract topographic ripples. "
+                        f"PALETTE: dominantly {_theme_bg} tones, {_mood}. Soft directional grazing "
+                        f"light revealing texture. Mood: refined, minimal, editorial. "
+                        f"{_overlay_note} "
+                        f"NO people, NO faces, NO illustrations, NO buildings, NO cities, NO logos, "
+                        f"NO text, NO words, NO charts, NO icons, NO neon, NO futuristic, "
+                        f"NO oversaturated colors. Premium magazine photography quality, like Gamma's "
+                        f"flagship editorial title decks. 16:9 landscape full-bleed."
+                    )
             if img_prompt:
                 task = await _spawn_image_task(i, img_prompt)
-                image_tasks.append((i, task))
+                image_tasks.append((i, slide_type, task))
 
         # Drain any completed image tasks between slide yields — this lets
         # users see the image appear within the same flow, not after.
-        for slide_idx, task in image_tasks:
+        for slide_idx, slide_type_for_img, task in image_tasks:
             if task.done() and not getattr(task, "_drained", False):
                 task._drained = True  # mark so we don't double-emit
                 url = await task
                 if url:
-                    yield _sse("slide_image", {"index": slide_idx, "block": _image_block(slide_idx, url)})
+                    yield _sse("slide_image", {
+                        "index": slide_idx,
+                        "block": _image_block(slide_idx, url, slide_type_for_img),
+                    })
+                    # If this was the title's atmospheric backdrop, broadcast
+                    # the same image as a deck-wide bg to every other slide
+                    # so the whole deck shares one cohesive atmosphere.
+                    if slide_idx == 0 and slide_type_for_img == "title":
+                        for other_idx in range(1, len(outline)):
+                            yield _sse("slide_image", {
+                                "index": other_idx,
+                                "block": _deck_bg_block(other_idx, url),
+                            })
 
         # tiny pause so the browser actually flushes between events
         await asyncio.sleep(0.02)
 
     # After all slides have streamed, drain any still-running image tasks.
     # Poll-wait so each image yields as soon as IT finishes, not the slowest.
-    pending = [(idx, t) for idx, t in image_tasks if not getattr(t, "_drained", False)]
+    pending = [(idx, st, t) for idx, st, t in image_tasks if not getattr(t, "_drained", False)]
     if pending:
         yield _sse("status", {"step": "imaging", "message": f"Finalizing {len(pending)} image(s)…"})
         while pending:
-            done_now = [(idx, t) for idx, t in pending if t.done()]
+            done_now = [(idx, st, t) for idx, st, t in pending if t.done()]
             if done_now:
-                for slide_idx, t in done_now:
+                for slide_idx, st, t in done_now:
                     t._drained = True
                     url = await t
                     if url:
-                        yield _sse("slide_image", {"index": slide_idx, "block": _image_block(slide_idx, url)})
+                        yield _sse("slide_image", {
+                            "index": slide_idx,
+                            "block": _image_block(slide_idx, url, st),
+                        })
+                        # Title backdrop → broadcast as deck-wide bg.
+                        if slide_idx == 0 and st == "title":
+                            for other_idx in range(1, len(outline)):
+                                yield _sse("slide_image", {
+                                    "index": other_idx,
+                                    "block": _deck_bg_block(other_idx, url),
+                                })
                         await asyncio.sleep(0.02)
-                pending = [(idx, t) for idx, t in pending if not getattr(t, "_drained", False)]
+                pending = [(idx, st, t) for idx, st, t in pending if not getattr(t, "_drained", False)]
             else:
                 # No image ready yet — wait a beat without burning CPU.
                 await asyncio.sleep(0.25)
@@ -364,6 +519,7 @@ async def generate_stream(
     images: list[UploadFile] = File(default=[]),
     level: str = Form("simple"),
     outline_json: str = Form(""),
+    theme_id: Optional[str] = Form(None),
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ) -> StreamingResponse:
@@ -434,7 +590,7 @@ async def generate_stream(
             logger.warning(f"outline_json was not valid JSON ({exc}); ignoring")
 
     return StreamingResponse(
-        _stream_generation(prompt, slide_count, file_text, url_text, image_payloads, db, level, user_outline),
+        _stream_generation(prompt, slide_count, file_text, url_text, image_payloads, db, level, user_outline, theme_id),
         media_type="text/event-stream",
         headers={
             "Cache-Control": "no-cache",
@@ -670,7 +826,11 @@ async def regenerate_slide(
     if not isinstance(slide_content, dict):
         raise HTTPException(status_code=502, detail="LLM returned non-dict slide content")
 
-    theme = (await db.execute(select(Theme))).scalars().first()
+    theme = (
+        await db.execute(select(Theme).where(Theme.name == "Gamma Dark"))
+    ).scalars().first()
+    if theme is None:
+        theme = (await db.execute(select(Theme))).scalars().first()
     if not theme:
         raise HTTPException(status_code=500, detail="No theme found")
 
@@ -680,13 +840,28 @@ async def regenerate_slide(
     blocks = _layout_blocks(slide_type, slide_layout, gen_blocks, theme.colors, theme.fonts)
     background = _slide_background(slide_type, slide_layout, "", theme.colors)
 
+    # Editor-only backdrop. Exporters ignore.
+    editor_bg = None
+    from app.config import settings as _settings
+    if _settings.EDITOR_BACKDROPS_ENABLED:
+        from app.services import backdrop_service as _bs
+        from app.agents.generation.slide_generator_agent import _backdrop_variant
+        variant = _backdrop_variant(slide_type)
+        if variant:
+            try:
+                image_url = await _bs.get_backdrop(theme.colors, variant)
+                if image_url:
+                    editor_bg = {"image": image_url, "overlay": _bs.overlay_for(variant)}
+            except Exception as exc:
+                logger.warning(f"Slide-regen backdrop failed: {exc}")
+
     usage = gemini_client.last_token_usage or {}
-    return {
-        "slide": {
-            "type": slide_type,
-            "background": background,
-            "blocks": blocks,
-            "notes": str(slide_content.get("notes") or "").strip(),
-        },
-        "token_count": usage.get("total", 0),
+    slide_out: dict = {
+        "type": slide_type,
+        "background": background,
+        "blocks": blocks,
+        "notes": str(slide_content.get("notes") or "").strip(),
     }
+    if editor_bg:
+        slide_out["editor_background"] = editor_bg
+    return {"slide": slide_out, "token_count": usage.get("total", 0)}

@@ -19,7 +19,6 @@ async def _run_export(export_job_id: str):
     from app.core.database import _session_factory
     from app.models.export_job import ExportJob
     from app.models.presentation import Presentation
-    from app.models.theme import Theme
 
     async with _session_factory() as db:
         job = (
@@ -48,12 +47,20 @@ async def _run_export(export_job_id: str):
                 await fail("Presentation not found")
                 return
 
-            theme = (
-                await db.execute(select(Theme).where(Theme.id == presentation.theme_id))
-            ).scalar_one_or_none()
-            if not theme:
-                await fail("Theme not found")
-                return
+            # The presentation's theme_id may be a stale preset slug from older
+            # client builds that wrote slugs directly. Try resolving (UUID, name,
+            # slug) and fall back to the default theme so exports never block.
+            from app.services import theme_service
+            theme = await theme_service.resolve_theme(db, presentation.theme_id)
+            if theme is None:
+                theme = await theme_service.get_default_theme(db)
+                if theme is None:
+                    await fail("No themes available")
+                    return
+                logger.info(
+                    f"Export {export_job_id}: presentation.theme_id={presentation.theme_id!r} "
+                    f"unresolved, falling back to {theme.name!r}"
+                )
 
             job.progress = 30
             await db.commit()

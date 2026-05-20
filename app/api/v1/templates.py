@@ -19,6 +19,17 @@ from app.models.template import Template
 from app.models.theme import Theme
 from app.models.user import User
 from app.schemas.presentation import PresentationDetail
+from app.utils.logger import get_logger
+
+logger = get_logger(__name__)
+
+# Single-flight cache for template-preview generation. When N concurrent
+# requests hit the same template's preview endpoint with no cached preview,
+# only the FIRST request actually generates; the others await the same
+# Future. Prevents wasted Gemini calls and duplicate-row races.
+import asyncio as _asyncio
+_preview_inflight: dict[str, "_asyncio.Future"] = {}
+_preview_inflight_lock = _asyncio.Lock()
 from app.schemas.template import (
     GenerateFromSimpleTemplateRequest,
     PreviewResponse,
@@ -129,6 +140,7 @@ async def generate_simple(
 @router.get("/{template_id}/preview", response_model=PreviewResponse)
 async def get_template_preview(
     template_id: str,
+    refresh: bool = False,
     _user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ) -> PreviewResponse:
@@ -151,27 +163,80 @@ async def get_template_preview(
     if not theme:
         raise HTTPException(status_code=404, detail=f"Theme {template.theme_id} not found")
 
-    # Check for existing cached preview
-    existing = (
+    # Check for existing cached preview. Use `.first()` (not
+    # `.scalar_one_or_none()`) because concurrent clicks on the same template
+    # can race and create multiple preview rows. Keep the newest, drop the
+    # rest so the DB doesn't accumulate duplicates.
+    from sqlalchemy import delete as _delete
+    existing_rows = (
         await db.execute(
             select(Presentation).where(
                 Presentation.template_id == template_id,
                 Presentation.is_preview == True,  # noqa: E712
-            )
+            ).order_by(Presentation.created_at.desc())
         )
-    ).scalar_one_or_none()
+    ).scalars().all()
+
+    existing = existing_rows[0] if existing_rows else None
+    if len(existing_rows) > 1:
+        # Dedupe: delete all but the newest preview.
+        stale_ids = [p.id for p in existing_rows[1:]]
+        await db.execute(_delete(Presentation).where(Presentation.id.in_(stale_ids)))
+        await db.commit()
+        logger.info(
+            f"Cleaned up {len(stale_ids)} duplicate preview rows for template {template_id}"
+        )
+
+    if refresh and existing_rows:
+        # Force regeneration: delete all cached previews for this template.
+        all_ids = [p.id for p in existing_rows]
+        await db.execute(_delete(Presentation).where(Presentation.id.in_(all_ids)))
+        await db.commit()
+        logger.info(
+            f"Refresh requested: deleted {len(all_ids)} cached preview(s) for template {template_id}"
+        )
+        existing = None
 
     if existing:
         slides = existing.slides or []
     else:
-        from app.agents.generation.preview_generator_agent import PreviewGeneratorAgent
+        # Single-flight coalescing — only ONE generation runs per template at
+        # a time. Concurrent requests await the same future.
+        async with _preview_inflight_lock:
+            inflight = _preview_inflight.get(template_id)
+            if inflight is None:
+                # We're the first; create the future and run.
+                inflight = _asyncio.get_event_loop().create_future()
+                _preview_inflight[template_id] = inflight
+                am_leader = True
+            else:
+                am_leader = False
 
-        agent = PreviewGeneratorAgent()
-        try:
-            preview = await agent.run(template, theme)
-        except Exception as exc:
-            raise HTTPException(status_code=500, detail=f"Preview generation failed: {exc}") from exc
-        slides = preview.slides or []
+        if am_leader:
+            logger.info(f"Preview generation [leader] for template {template_id}")
+            try:
+                from app.agents.generation.preview_generator_agent import PreviewGeneratorAgent
+                agent = PreviewGeneratorAgent()
+                preview = await agent.run(template, theme)
+                slides = preview.slides or []
+                inflight.set_result(slides)
+            except Exception as exc:
+                inflight.set_exception(exc)
+                raise HTTPException(
+                    status_code=500, detail=f"Preview generation failed: {exc}"
+                ) from exc
+            finally:
+                async with _preview_inflight_lock:
+                    _preview_inflight.pop(template_id, None)
+        else:
+            # We're a follower; wait for the leader's result.
+            logger.info(f"Preview generation [follower] awaiting leader for template {template_id}")
+            try:
+                slides = await inflight
+            except Exception as exc:
+                raise HTTPException(
+                    status_code=500, detail=f"Preview generation failed: {exc}"
+                ) from exc
 
     theme_dict = {
         "id": str(theme.id),
@@ -186,6 +251,12 @@ async def get_template_preview(
 class GenerateFromPromptRequest(BaseModel):
     prompt: str
     title: Optional[str] = None
+    # Optional cap on the number of slides in the generated deck. The template
+    # ships with a fixed set of preview slides; this trims the result to the
+    # first N when the user wants a shorter deck. Asking for more than the
+    # template offers falls back to the template's full count — synthesising
+    # new slides would break the design coherence the template provides.
+    slide_count: Optional[int] = None
 
 
 def _block_has_placeholder(block: dict) -> bool:
@@ -256,6 +327,20 @@ async def generate_from_prompt(
     # deck visually matches what they saw.
     slides: list[dict[str, Any]] = await _get_or_create_preview_slides(db, template, theme)
 
+    # Honour the user-supplied slide_count by trimming the template's preview
+    # slides to the first N. We don't extend beyond the template's count — the
+    # template's slide design is curated and synthesising extra slides would
+    # break its narrative. The trim happens before the AI rewrite so we don't
+    # pay for tokens on slides we're about to drop. Re-number `order` so the
+    # slot keys downstream stay consistent and the saved deck doesn't have
+    # gaps.
+    if req.slide_count is not None:
+        requested = max(1, int(req.slide_count))
+        if requested < len(slides):
+            slides = slides[:requested]
+            for i, s in enumerate(slides, start=1):
+                s["order"] = i
+
     # Collect every text-bearing block. We rewrite text only — never positions,
     # styling, slide order, block IDs, or block types.
     slots: list[dict[str, Any]] = []
@@ -275,9 +360,15 @@ async def generate_from_prompt(
             if btype and btype not in text_block_types and not _block_has_placeholder(block):
                 # unknown block types — skip unless they have placeholder markers
                 continue
+            # Block IDs from the preview generator are NOT unique across
+             # slides (every slide has e.g. "heading-0", every stats slide
+             # has "stat-0".."stat-2"). Send the AI a slide-scoped key so
+             # each block gets its own replacement instead of every block
+             # with the same raw id sharing one.
+            slot_key = f"s{slide.get('order', 0)}-{block.get('id', '')}"
             slots.append(
                 {
-                    "id": block.get("id", ""),
+                    "id": slot_key,
                     "slide_order": slide.get("order", 0),
                     "slide_type": slide_type,
                     "block_type": block.get("type", "text"),
@@ -342,10 +433,12 @@ Return ONLY valid JSON. No markdown fences, no commentary."""
         replacements = {}
 
     for slide in slides:
+        slot_prefix = f"s{slide.get('order', 0)}-"
         for block in slide.get("blocks", []):
             bid = block.get("id", "")
-            if bid in replacements and isinstance(replacements[bid], str):
-                block["content"] = replacements[bid]
+            slot_key = f"{slot_prefix}{bid}"
+            if slot_key in replacements and isinstance(replacements[slot_key], str):
+                block["content"] = replacements[slot_key]
             # Safety net: strip any remaining "[PLACEHOLDER...]" markers.
             content = block.get("content", "")
             if isinstance(content, str) and "[PLACEHOLDER" in content.upper():

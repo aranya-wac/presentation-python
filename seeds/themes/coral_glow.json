@@ -1,0 +1,24 @@
+{
+  "name": "Coral Glow",
+  "colors": {
+    "primary":    "#3A2418",
+    "secondary":  "#4D3525",
+    "accent":     "#D67A5C",
+    "background": "#F5E0D5",
+    "text":       "#4D3525",
+    "surface":    "#ECD0BF",
+    "muted":      "#8C6852"
+  },
+  "fonts": {
+    "heading": { "family": "Inter Tight, Inter, sans-serif", "size": 56, "weight": 700 },
+    "body":    { "family": "Inter, sans-serif", "size": 22, "weight": 400 },
+    "caption": { "family": "Inter, sans-serif", "size": 14, "weight": 500 }
+  },
+  "tokens": {
+    "style":             "editorial-soft",
+    "illustration_mood": "soft coral, muted peach, warm blush tones, gentle organic forms",
+    "heading_size":      60,
+    "card_radius":       16,
+    "use_serif_quotes":  true
+  }
+}

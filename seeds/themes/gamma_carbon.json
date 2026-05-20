@@ -1,0 +1,24 @@
+{
+  "name": "Gamma Carbon",
+  "colors": {
+    "primary":    "#0A0A0A",
+    "secondary":  "#1A1A1A",
+    "accent":     "#00E5FF",
+    "background": "#000000",
+    "text":       "#F0F0F0",
+    "surface":    "#1A1A1A",
+    "muted":      "#666666"
+  },
+  "fonts": {
+    "heading": { "family": "Inter Tight, Inter, sans-serif", "size": 56, "weight": 900 },
+    "body":    { "family": "Inter, sans-serif", "size": 22, "weight": 400 },
+    "caption": { "family": "JetBrains Mono, monospace", "size": 13, "weight": 500 }
+  },
+  "tokens": {
+    "style":             "minimal-technical",
+    "illustration_mood": "pure black background, refined cyan accent, clean technical illustration, minimalist line work",
+    "heading_size":      60,
+    "card_radius":       8,
+    "use_serif_quotes":  false
+  }
+}
