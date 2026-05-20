@@ -209,7 +209,10 @@ async def update_presentation(
     if req.logo_url is not None:
         p.logo_url = req.logo_url
     if req.theme_id is not None:
-        p.theme_id = req.theme_id
+        from app.services import theme_service
+        resolved = await theme_service.resolve_theme_id(db, req.theme_id)
+        if resolved is not None:
+            p.theme_id = resolved
     if req.slides is not None:
         p.slides = [_slide_to_dict(s) for s in req.slides]
     if req.layouts is not None:
@@ -237,6 +240,17 @@ async def create_presentation(
 
     slides_data = [_slide_to_dict(s) for s in req.slides]
 
+    # Resolve theme_id: the frontend may send a preset slug ('gamma-midnight')
+    # instead of the DB UUID. Map it to the real Theme row, or fall back to the
+    # default so we never persist a dangling FK that breaks export later.
+    from app.services import theme_service
+    resolved_theme_id = await theme_service.resolve_theme_id(db, req.theme_id)
+    if resolved_theme_id is None:
+        default_theme = await theme_service.get_default_theme(db)
+        if default_theme is None:
+            raise NotFoundError("No themes available")
+        resolved_theme_id = str(default_theme.id)
+
     # If the user has a brand kit and provided no logo, default to it.
     logo_url = req.logo_url
     if not logo_url:
@@ -248,7 +262,7 @@ async def create_presentation(
     presentation = Presentation(
         user_id=str(user.id),
         template_id=template_id,
-        theme_id=req.theme_id,
+        theme_id=resolved_theme_id,
         title=req.title,
         description=req.description,
         logo_url=logo_url,

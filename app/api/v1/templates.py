@@ -251,6 +251,12 @@ async def get_template_preview(
 class GenerateFromPromptRequest(BaseModel):
     prompt: str
     title: Optional[str] = None
+    # Optional cap on the number of slides in the generated deck. The template
+    # ships with a fixed set of preview slides; this trims the result to the
+    # first N when the user wants a shorter deck. Asking for more than the
+    # template offers falls back to the template's full count — synthesising
+    # new slides would break the design coherence the template provides.
+    slide_count: Optional[int] = None
 
 
 def _block_has_placeholder(block: dict) -> bool:
@@ -320,6 +326,20 @@ async def generate_from_prompt(
     # Use the SAME slides shown to the user in the preview so the generated
     # deck visually matches what they saw.
     slides: list[dict[str, Any]] = await _get_or_create_preview_slides(db, template, theme)
+
+    # Honour the user-supplied slide_count by trimming the template's preview
+    # slides to the first N. We don't extend beyond the template's count — the
+    # template's slide design is curated and synthesising extra slides would
+    # break its narrative. The trim happens before the AI rewrite so we don't
+    # pay for tokens on slides we're about to drop. Re-number `order` so the
+    # slot keys downstream stay consistent and the saved deck doesn't have
+    # gaps.
+    if req.slide_count is not None:
+        requested = max(1, int(req.slide_count))
+        if requested < len(slides):
+            slides = slides[:requested]
+            for i, s in enumerate(slides, start=1):
+                s["order"] = i
 
     # Collect every text-bearing block. We rewrite text only — never positions,
     # styling, slide order, block IDs, or block types.
