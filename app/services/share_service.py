@@ -7,6 +7,7 @@ from app.agents.export.html_export_agent import HtmlExportAgent
 from app.core.exceptions import NotFoundError
 from app.models.presentation import Presentation
 from app.models.theme import Theme
+from app.services.flow_renderer import render_deck_html
 
 
 async def render_shared_html(db: AsyncSession, presentation_id: str) -> str:
@@ -21,6 +22,14 @@ async def render_shared_html(db: AsyncSession, presentation_id: str) -> str:
     ).scalar_one_or_none()
     if not theme:
         raise NotFoundError("Theme not found")
+
+    slides = presentation.slides or []
+    is_flow = bool(slides) and isinstance(slides[0], dict) and "root" in slides[0]
+    if is_flow:
+        theme_dict: dict = {}
+        if theme:
+            theme_dict = {"colors": theme.colors or {}, "fonts": theme.fonts or {}}
+        return render_deck_html(slides, theme_dict, presentation.title or "Presentation")
 
     agent = HtmlExportAgent()
     template = agent._env.get_template("reveal.html.j2")

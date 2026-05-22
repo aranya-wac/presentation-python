@@ -7,6 +7,7 @@ from jinja2 import Environment, FileSystemLoader
 from app.core.storage import export_path
 from app.models.presentation import Presentation
 from app.models.theme import Theme
+from app.services.flow_renderer import render_deck_html
 from app.utils.logger import get_logger
 
 logger = get_logger(__name__)
@@ -26,6 +27,15 @@ class HtmlExportAgent:
 
         colors = theme.colors  # dict: {primary, secondary, accent, background, text}
         fonts = theme.fonts    # dict: {heading, body, caption} each {family, size, weight}
+
+        slides = presentation.slides or []
+        if slides and isinstance(slides[0], dict) and "root" in slides[0]:
+            theme_dict = {"colors": theme.colors or {}, "fonts": theme.fonts or {}}
+            flow_html = render_deck_html(slides, theme_dict, presentation.title or "Presentation")
+            out_path = export_path(str(presentation.id), "html")
+            out_path.write_text(flow_html, encoding="utf-8")
+            logger.info(f"HTML export (flow) saved to {out_path}")
+            return out_path
 
         slides_data = []
         for slide in sorted(presentation.slides or [], key=lambda s: s.get("order", 0)):

@@ -68,6 +68,13 @@ class DeckLayoutSchema(BaseModel):
     blocks: list[BlockSchema] = []
 
 
+class ThemeSchema(BaseModel):
+    id: str
+    name: str
+    colors: dict[str, Any] = {}
+    fonts: dict[str, Any] = {}
+
+
 class PresentationListItem(BaseModel):
     id: str
     title: str
@@ -81,13 +88,21 @@ class PresentationListItem(BaseModel):
     token_count: int = 0
     created_at: str
     updated_at: str = ""
-    preview_slide: Optional[SlideSchema] = None
+    # "slides" = legacy absolute-positioned deck; "flow" = Gamma flow deck.
+    format: str = "slides"
+    # A legacy SlideSchema OR a flow Card dict, depending on `format`.
+    preview_slide: Optional[Any] = None
 
 
 class PresentationDetail(PresentationListItem):
-    slides: list[SlideSchema]
+    # Legacy decks: list of SlideSchema-shaped dicts. Flow decks: list of flow
+    # Card dicts. Typed loosely so both round-trip without coercion.
+    slides: list[Any]
     logo_url: str
-    layouts: list[DeckLayoutSchema] = []
+    layouts: list[Any] = []
+    # The deck's resolved theme (colors + fonts) so the flow editor can render
+    # and re-theme without a second request. None when the theme row is gone.
+    theme: Optional[ThemeSchema] = None
 
 
 class UpdatePresentationRequest(BaseModel):
@@ -108,3 +123,19 @@ class CreatePresentationRequest(BaseModel):
     template_id: str = ""
     logo_url: str = ""
     token_count: int = 0
+
+
+class CreateFlowPresentationRequest(BaseModel):
+    """Save a generated Gamma flow deck. `cards` is a list of flow `Card` dicts."""
+    title: str
+    cards: list[dict[str, Any]]
+    theme_id: Optional[str] = None
+    token_count: int = 0
+
+
+class UpdateFlowPresentationRequest(BaseModel):
+    """Persist content edits to a saved Gamma flow deck."""
+    cards: list[dict[str, Any]]
+    title: Optional[str] = None
+    theme_id: Optional[str] = None
+    layouts: Optional[list[dict[str, Any]]] = None

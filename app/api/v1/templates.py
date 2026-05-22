@@ -347,6 +347,12 @@ async def generate_from_prompt(
     text_block_types = {
         "title", "subtitle", "heading", "caption", "text", "bullet", "bullets",
         "body", "quote", "stat", "stats", "swot", "persona", "label",
+        # Layout-specific text blocks emitted by the slide generator. These
+        # carry the real body content of visual slides (the cards on a
+        # "Key Insights" slide, roadmap phases, kanban items, funnel stages).
+        # Omitting them left that content un-rewritten — the deck kept the
+        # template's generic placeholder copy instead of the user's topic.
+        "card", "roadmap_step", "kanban_item", "funnel_stage", "process_circle",
     }
     for slide in slides:
         slide_type = slide.get("type", "content")
@@ -377,39 +383,53 @@ async def generate_from_prompt(
             )
 
     if slots:
-        ai_prompt = f"""You are rewriting the text content of an existing presentation so it matches a new topic.
+        ai_prompt = f"""You are an expert presentation writer rewriting an existing deck so every word is about a NEW topic.
 
-The user described what the presentation should be about:
+TOPIC the new deck must be about:
 \"\"\"{prompt_text}\"\"\"
 
 Template: {template.name}
 Template description: {template.description or ''}
 
-Below is a JSON list of text blocks from the presentation. Each block has:
-- "id": the block id (echo this exact id in your response)
+Below is a JSON list of text blocks from the deck. Each block has:
+- "id": the block id — echo this EXACT id in your response
 - "slide_order": which slide it lives on (1-indexed)
 - "slide_type": the slide's role (title, agenda, content, stats, closing, etc.)
-- "block_type": the block role (title, subtitle, heading, bullets, stat, caption, etc.)
-- "current": the current text in that block
+- "block_type": the block role (title, heading, card, bullets, stat, roadmap_step, etc.)
+- "current": the existing text — treat this ONLY as a structural skeleton, NOT as
+  content worth keeping
 
-Rewrite the "current" text of every block so the whole deck tells a coherent
-story about the user's prompt. Hard rules:
-- Keep approximately the same length, line count, and structure as the current text.
-- If the current text uses bullets / multiple lines / labels (e.g. "STRENGTHS\\n..."),
-  keep that exact shape — same number of bullets, same labels.
-- Replace any bracketed placeholder markers like [PLACEHOLDER: ...], [your_email],
-  [Channel 1], [$XXX,XXX], [LOGO_PLACEHOLDER], [Name], [Author], etc. with concrete
-  content relevant to the user's prompt. Do NOT keep brackets in the output.
-- Keep proper nouns / company names from the prompt; invent plausible numbers and
-  details only when the prompt does not provide them.
-- Do NOT add or remove blocks. Do NOT change slide order.
+Rewrite the text of EVERY block so the whole deck is a coherent, substantive,
+expert-level presentation about the TOPIC above.
+
+CONTENT QUALITY — write like a domain expert, Gamma-tier:
+- Every block must be 100% about the new topic. Leave NO generic business phrasing
+  and NO leftover wording from the old deck.
+- Be specific and concrete: real terminology, named concepts, realistic figures,
+  concrete examples a knowledgeable audience would expect. No vague filler.
+- Use your own expert knowledge of the topic to write accurate, informative copy.
+  When the topic implies numbers (metrics, dates, percentages), supply realistic,
+  representative ones.
+- Replace EVERY bracketed placeholder — anything in [square brackets] such as
+  [Product A], [Platform X], [Q3], [Name], [PLACEHOLDER: ...] — with real content.
+  The output must contain NO square brackets at all.
+
+STRUCTURE — match the skeleton so the layout still fits:
+- Keep the same number of blocks, the same slide order, the same bullet/line count.
+- If "current" has multiple lines or labels (e.g. "STRENGTHS\\n..."), keep that shape.
+- For "card" blocks: ALWAYS return TWO lines — a short bold title (2-5 words), then a
+  literal \\n, then a concrete 1-2 sentence description (15-30 words). Cards are the
+  heart of the deck — make every card genuinely informative, never a bare label.
+- Keep each block roughly the same length as "current" so it fits its space — richer
+  wording, not longer wording. Do NOT add or remove blocks or change slide order.
 
 Blocks:
 {json.dumps(slots, ensure_ascii=False)}
 
-Return a JSON object with a single key "replacements" mapping block id to the
-new text. Every input id must appear in the output. Example:
-{{"replacements": {{"s1-title": "Acme Corp Growth Strategy", "s1-subtitle": "..."}}}}
+Return a JSON object with a single key "replacements" mapping block id to the new
+text. Every input id MUST appear in the output. Newlines inside a value must be the
+two-character escape \\n. Example:
+{{"replacements": {{"s1-title": "Wildlife of the Serengeti", "s2-card-0": "Habitat Loss\\nUrban expansion has cut native woodland cover by roughly 40% since 2000, fragmenting key migration corridors."}}}}
 
 Return ONLY valid JSON. No markdown fences, no commentary."""
 

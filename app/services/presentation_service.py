@@ -18,12 +18,19 @@ from app.schemas.presentation import (
     PresentationListItem,
     SlideBackgroundSchema,
     SlideSchema,
+    ThemeSchema,
     UpdatePresentationRequest,
 )
 
 
 def _slide_count(p: Presentation) -> int:
     return len(p.slides) if p.slides else 0
+
+
+def _is_flow_deck(slides: list | None) -> bool:
+    """A flow (Gamma) deck stores flow `Card` dicts — each has a `root` block.
+    A legacy slide has `blocks`. This shape check tells the two apart."""
+    return bool(slides) and isinstance(slides[0], dict) and "root" in slides[0]
 
 
 def _token_count(p: Presentation) -> int:
@@ -41,7 +48,12 @@ def _token_count(p: Presentation) -> int:
 
 def _to_list_item(p: Presentation, template_name: str = "") -> PresentationListItem:
     count = _slide_count(p)
-    first_slide_schemas = _slide_dicts_to_schemas(p.slides[:1]) if p.slides else []
+    is_flow = _is_flow_deck(p.slides)
+    if is_flow:
+        preview = p.slides[0] if p.slides else None
+    else:
+        first_slide_schemas = _slide_dicts_to_schemas(p.slides[:1]) if p.slides else []
+        preview = first_slide_schemas[0] if first_slide_schemas else None
     return PresentationListItem(
         id=str(p.id),
         title=p.title,
@@ -55,7 +67,8 @@ def _to_list_item(p: Presentation, template_name: str = "") -> PresentationListI
         token_count=_token_count(p),
         created_at=p.created_at.isoformat() if p.created_at else "",
         updated_at=p.updated_at.isoformat() if p.updated_at else "",
-        preview_slide=first_slide_schemas[0] if first_slide_schemas else None,
+        format="flow" if is_flow else "slides",
+        preview_slide=preview,
     )
 
 
@@ -127,9 +140,22 @@ def _layout_to_dict(layout) -> dict:
     }
 
 
-def _to_detail(p: Presentation, template_name: str = "") -> PresentationDetail:
-    slides = _slide_dicts_to_schemas(p.slides)
+async def _resolve_theme(db: AsyncSession, theme_id) -> Optional[ThemeSchema]:
+    """Load the deck's theme row as a ThemeSchema, or None when it's missing."""
+    if not theme_id:
+        return None
+    t = (await db.execute(select(Theme).where(Theme.id == theme_id))).scalar_one_or_none()
+    if not t:
+        return None
+    return ThemeSchema(id=str(t.id), name=t.name, colors=t.colors or {}, fonts=t.fonts or {})
+
+
+async def _to_detail(db: AsyncSession, p: Presentation, template_name: str = "") -> PresentationDetail:
+    # Flow (Gamma) decks store flow Card dicts — pass them through untouched.
+    # Coercing them to the legacy SlideSchema would drop the `root` block tree.
+    slides = p.slides if _is_flow_deck(p.slides) else _slide_dicts_to_schemas(p.slides)
     count = _slide_count(p)
+    theme = await _resolve_theme(db, p.theme_id)
     return PresentationDetail(
         id=str(p.id),
         title=p.title,
@@ -146,6 +172,7 @@ def _to_detail(p: Presentation, template_name: str = "") -> PresentationDetail:
         slides=slides,
         logo_url=p.logo_url or "",
         layouts=p.layouts or [],
+        theme=theme,
     )
 
 
@@ -182,7 +209,7 @@ async def get_presentation(
     if p.user_id and str(p.user_id) != str(user.id) and user.role != "admin":
         raise ForbiddenError()
     tname = await _get_template_name(db, p.template_id)
-    return _to_detail(p, tname)
+    return await _to_detail(db, p, tname)
 
 
 async def update_presentation(
@@ -223,7 +250,7 @@ async def update_presentation(
     await db.commit()
     await db.refresh(p)
     tname = await _get_template_name(db, p.template_id)
-    return _to_detail(p, tname)
+    return await _to_detail(db, p, tname)
 
 
 async def create_presentation(
@@ -275,7 +302,84 @@ async def create_presentation(
     await db.commit()
     await db.refresh(presentation)
     tname = await _get_template_name(db, template_id)
-    return _to_detail(presentation, tname)
+    return await _to_detail(db, presentation, tname)
+
+
+async def create_flow_presentation(
+    db: AsyncSession,
+    user: User,
+    title: str,
+    cards: list[dict],
+    theme_id: str | None = None,
+    token_count: int = 0,
+) -> PresentationDetail:
+    """Persist a generated Gamma flow deck.
+
+    `cards` are flow `Card` dicts, stored as-is in the `slides` JSON column.
+    `theme_id` is the deck's chosen theme (validated against the themes table);
+    `template_id` is a NOT-NULL FK flow decks don't use, pointed at any row.
+    """
+    first_template = (await db.execute(select(Template))).scalars().first()
+    if not first_template:
+        raise NotFoundError("No templates found in database")
+
+    # The frontend may send a preset slug ('gamma-midnight') or a real UUID.
+    # resolve_theme_id maps either to a real row; fall back to the default.
+    from app.services import theme_service
+    resolved_theme_id = await theme_service.resolve_theme_id(db, theme_id)
+    if resolved_theme_id is None:
+        default_theme = await theme_service.get_default_theme(db)
+        if default_theme is None:
+            raise NotFoundError("No themes available")
+        resolved_theme_id = str(default_theme.id)
+
+    presentation = Presentation(
+        user_id=str(user.id),
+        template_id=str(first_template.id),
+        theme_id=resolved_theme_id,
+        title=title or "Untitled deck",
+        description="",
+        logo_url="",
+        slides=cards,
+        is_preview=False,
+        layouts=[],
+        token_count=max(0, int(token_count or 0)),
+    )
+    db.add(presentation)
+    await db.commit()
+    await db.refresh(presentation)
+    return await _to_detail(db, presentation, first_template.name)
+
+
+async def update_flow_presentation(
+    db: AsyncSession,
+    user: User,
+    presentation_id: str,
+    cards: list[dict],
+    title: str | None = None,
+    theme_id: str | None = None,
+    layouts: list[dict] | None = None,
+) -> PresentationDetail:
+    """Persist content edits (and an optional theme change) to a saved flow deck."""
+    p = (
+        await db.execute(select(Presentation).where(Presentation.id == presentation_id))
+    ).scalar_one_or_none()
+    if not p:
+        raise NotFoundError(f"Presentation {presentation_id} not found")
+    if p.user_id and str(p.user_id) != str(user.id) and user.role != "admin":
+        raise ForbiddenError()
+    p.slides = cards
+    if title is not None and title.strip():
+        p.title = title.strip()
+    if theme_id:
+        t = (await db.execute(select(Theme).where(Theme.id == theme_id))).scalar_one_or_none()
+        if t:
+            p.theme_id = str(t.id)
+    if layouts is not None:
+        p.layouts = layouts
+    await db.commit()
+    await db.refresh(p)
+    return await _to_detail(db, p, await _get_template_name(db, p.template_id))
 
 
 async def delete_presentation(db: AsyncSession, user: User, presentation_id: str) -> None:
