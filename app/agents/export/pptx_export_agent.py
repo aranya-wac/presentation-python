@@ -9,6 +9,7 @@ from app.core.storage import export_path
 from app.models.presentation import Presentation
 from app.models.theme import Theme
 from app.utils.logger import get_logger
+from app.agents.export.flow_card_images import render_card_images
 
 logger = get_logger(__name__)
 
@@ -100,6 +101,28 @@ def _resolve_image(url: str) -> io.BytesIO | None:
     return None
 
 
+def _export_flow_pptx(presentation, cards: list, theme, out_path):
+    """Flow decks export as one full-bleed card image per slide."""
+    from io import BytesIO
+    from pptx import Presentation as PptxPresentation
+    from pptx.util import Inches
+
+    theme_dict = {"colors": getattr(theme, "colors", None) or {}, "fonts": getattr(theme, "fonts", None) or {}}
+    images = render_card_images(cards, theme_dict)
+
+    prs = PptxPresentation()
+    prs.slide_width = Inches(13.333)
+    prs.slide_height = Inches(7.5)
+    blank = prs.slide_layouts[6]  # blank layout
+    for png in images:
+        slide = prs.slides.add_slide(blank)
+        slide.shapes.add_picture(
+            BytesIO(png), 0, 0, width=prs.slide_width, height=prs.slide_height,
+        )
+    prs.save(str(out_path))
+    return out_path
+
+
 class PptxExportAgent:
     async def run(self, presentation: Presentation, theme: Theme) -> Path:
         from pptx import Presentation as PptxPresentation
@@ -121,6 +144,11 @@ class PptxExportAgent:
             "right":   PP_ALIGN.RIGHT,
             "justify": PP_ALIGN.JUSTIFY,
         }
+
+        slides = presentation.slides or []
+        if slides and isinstance(slides[0], dict) and "root" in slides[0]:
+            out_path = export_path(str(presentation.id), "pptx")
+            return _export_flow_pptx(presentation, slides, theme, out_path)
 
         for slide_data in sorted(presentation.slides or [], key=lambda s: s.get("order", 0)):
             pptx_slide = prs.slides.add_slide(blank_layout)

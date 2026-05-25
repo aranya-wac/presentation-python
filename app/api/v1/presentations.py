@@ -14,10 +14,12 @@ from app.core.exceptions import ForbiddenError, NotFoundError
 from app.models.presentation import Presentation
 from app.models.user import User
 from app.schemas.presentation import (
+    CreateFlowPresentationRequest,
     CreatePresentationRequest,
     PresentationDetail,
     PresentationListItem,
     SlideSchema,
+    UpdateFlowPresentationRequest,
     UpdatePresentationRequest,
 )
 from app.services import presentation_service, version_service
@@ -42,6 +44,31 @@ async def create_presentation(
     db: AsyncSession = Depends(get_db),
 ) -> PresentationDetail:
     return await presentation_service.create_presentation(db, current_user, req)
+
+
+@router.post("/flow", response_model=PresentationDetail, status_code=status.HTTP_201_CREATED)
+async def create_flow_presentation(
+    req: CreateFlowPresentationRequest,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+) -> PresentationDetail:
+    """Save a generated Gamma flow deck as a first-class presentation."""
+    return await presentation_service.create_flow_presentation(
+        db, current_user, req.title, req.cards, req.theme_id, req.token_count
+    )
+
+
+@router.patch("/{presentation_id}/flow", response_model=PresentationDetail)
+async def patch_flow_presentation(
+    presentation_id: str,
+    req: UpdateFlowPresentationRequest,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+) -> PresentationDetail:
+    """Save content edits to a flow deck."""
+    return await presentation_service.update_flow_presentation(
+        db, current_user, presentation_id, req.cards, req.title, req.theme_id, req.layouts
+    )
 
 
 @router.get("/{presentation_id}", response_model=PresentationDetail)

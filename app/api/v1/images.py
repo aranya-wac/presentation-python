@@ -14,6 +14,7 @@ from app.core.exceptions import GeminiError
 from app.core.rate_limit import limiter
 from app.core.storage import BASE_DIR
 from app.models.user import User
+from app.services import stock_photo_service
 from app.utils.logger import get_logger
 
 router = APIRouter(prefix="/images", tags=["images"])
@@ -70,3 +71,53 @@ async def generate_image(
     dest.write_bytes(image_bytes)
 
     return GenerateImageResponse(url=f"/generated/{filename}", mime_type=mime)
+
+
+class StockPhotoItem(BaseModel):
+    id: str
+    thumb_url: str
+    full_url: str
+    alt: str
+    author: str
+
+
+class StockSearchResponse(BaseModel):
+    results: list[StockPhotoItem]
+
+
+@router.get("/stock/search", response_model=StockSearchResponse)
+@limiter.limit("120/minute")
+async def search_stock_photos(
+    request: Request,
+    q: str,
+    current_user: User = Depends(get_current_user),
+) -> StockSearchResponse:
+    """Search Unsplash stock photos for the editor image picker.
+
+    Returns an empty list (not an error) when no Unsplash key is configured
+    or the query yields nothing — the picker shows "no results".
+    """
+    query = (q or "").strip()
+    if not query:
+        raise HTTPException(status_code=400, detail="Search query is required.")
+    if len(query) > 200:
+        raise HTTPException(status_code=400, detail="Search query is too long.")
+
+    try:
+        photos = await stock_photo_service.search_photos(query)
+    except Exception as exc:
+        logger.exception("Stock photo search failed")
+        raise HTTPException(status_code=502, detail=f"Stock photo search failed: {exc}")
+
+    return StockSearchResponse(
+        results=[
+            StockPhotoItem(
+                id=p.id,
+                thumb_url=p.thumb_url,
+                full_url=p.full_url,
+                alt=p.alt,
+                author=p.author,
+            )
+            for p in photos
+        ]
+    )

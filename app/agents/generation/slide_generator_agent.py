@@ -493,6 +493,12 @@ def _layout_blocks(
         card_w, card_h = 570, 210
 
         for idx, btext in enumerate(bullets_raw[:4]):
+            # Split "Label: detail" bullets into a card title + description so
+            # the renderer shows a bold title line over body text (Gamma-style),
+            # mirroring the split_panel card layout.
+            parts = btext.split(": ", 1) if ": " in btext else [btext, ""]
+            content_str = f"{parts[0]}\n{parts[1]}" if len(parts) > 1 and parts[1] else parts[0]
+
             col = idx % 2
             row = idx // 2
             cx  = 60  + col * (card_w + 40)
@@ -503,8 +509,8 @@ def _layout_blocks(
             card_text = dark_card_text if is_dark else light_card_text
 
             blocks_out.append({
-                "id": f"card-{idx}", "type": "card", "content": btext,
-                "icon": _pick_card_icon(btext),  # Gamma-style icon per card
+                "id": f"card-{idx}", "type": "card", "content": content_str,
+                "icon": _pick_card_icon(content_str),  # Gamma-style icon per card
                 "position": {"x": cx, "y": cy, "w": card_w, "h": card_h},
                 "styling": {
                     "font_family": hfam, "font_size": 20, "font_weight": 700,
@@ -1185,10 +1191,12 @@ def _trim_bullet(text: str, max_words: int) -> str:
     return kept.rstrip(",;: ") + "…"
 
 
-# Bullet density caps: keep slides scannable, not paragraphs.
-# 16 words ≈ one full speaker-paced line at our default body font, which is
-# what Gamma-quality decks tend to hit. Anything longer wraps awkwardly.
-_BULLET_MAX_WORDS = 12  # Gamma-tight. Was 16; cut to enforce editorial voice.
+# Bullet density caps. The generation prompt asks for substantive "Label:
+# detail" bullets of 12-22 words (the card layouts render them as a bold
+# label + a descriptive sentence). This ceiling is a safety net set well
+# above that range, so real content is never truncated mid-sentence with an
+# ellipsis — only genuinely runaway bullets get trimmed.
+_BULLET_MAX_WORDS = 32
 _BULLET_MAX_COUNT = 6
 
 

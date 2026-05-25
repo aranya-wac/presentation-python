@@ -7,6 +7,7 @@ from jinja2 import Environment, FileSystemLoader
 from app.core.storage import export_path
 from app.models.presentation import Presentation
 from app.models.theme import Theme
+from app.services.flow_renderer import render_deck_html
 from app.utils.logger import get_logger
 
 logger = get_logger(__name__)
@@ -22,6 +23,31 @@ class PdfExportAgent:
         )
 
     async def run(self, presentation: Presentation, theme: Theme) -> Path:
+        slides = presentation.slides or []
+        is_flow = bool(slides) and isinstance(slides[0], dict) and "root" in slides[0]
+
+        if is_flow:
+            theme_dict = {"colors": theme.colors or {}, "fonts": theme.fonts or {}}
+            html_content = render_deck_html(
+                slides,
+                theme_dict,
+                presentation.title or "Presentation",
+            )
+            tmp_html = export_path(str(presentation.id), "pdf").with_suffix(".tmp.html")
+            tmp_html.write_text(html_content, encoding="utf-8")
+            out_path = export_path(str(presentation.id), "pdf")
+            try:
+                from weasyprint import HTML
+                HTML(filename=str(tmp_html)).write_pdf(str(out_path))
+                logger.info(f"PDF export (flow) saved to {out_path}")
+            except Exception as exc:
+                logger.info(f"WeasyPrint failed (flow): {exc}. Saving HTML as fallback.")
+                import shutil
+                shutil.copy(str(tmp_html), str(out_path))
+            finally:
+                tmp_html.unlink(missing_ok=True)
+            return out_path
+
         template = self._env.get_template("pdf.html.j2")
 
         slides_data = []
